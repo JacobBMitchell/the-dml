@@ -1,5 +1,6 @@
 package dml.data;
 
+import dml.data.mappers.PlayerCharacterMapper;
 import dml.models.PlayerCharacter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -17,7 +18,13 @@ public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
 
     @Override
     public PlayerCharacter findById(int characterId) {
-        return null;
+
+        final String sql = "select * from characters where characterId = ?;";
+
+        PlayerCharacter character = jdbcTemplate.query(sql, new PlayerCharacterMapper(), characterId).stream()
+                .findFirst().orElse(null);
+
+        return character;
     }
 
     @Override
