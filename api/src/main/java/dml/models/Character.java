@@ -6,6 +6,7 @@ public class Character {
     private Integer id;
     private String name;
     private Integer userId;
+    private Integer campaignId;
     private Integer currentHealth;
     private Integer maxHealth;
     private DndClass dndClass;
@@ -380,6 +381,14 @@ public class Character {
 
     public void setSurvival(Boolean survival) {
         this.survival = survival;
+    }
+
+    public Integer getCampaignId() {
+        return campaignId;
+    }
+
+    public void setCampaignId(Integer campaignId) {
+        this.campaignId = campaignId;
     }
     //TODO: Store list of spell and weapon indexes, and also features
 
