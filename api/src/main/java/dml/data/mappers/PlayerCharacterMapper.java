@@ -19,8 +19,8 @@ public class PlayerCharacterMapper implements RowMapper<PlayerCharacter> {
         character.setCampaignId(resultSet.getInt("campaignId"));
         character.setCurrentHealth(resultSet.getInt("currentHealth"));
         character.setMaxHealth(resultSet.getInt("maxHealth"));
-        character.setDndClass(DndClass.valueOf(resultSet.getString("dndClass")));
-        character.setRace(Race.valueOf(resultSet.getString("race")));
+        character.setDndClass(DndClass.readIndex(resultSet.getString("dndClass")));
+        character.setRace(Race.readIndex(resultSet.getString("race")));
         character.setCharacterLevel(resultSet.getInt("characterLevel"));
         character.setArmorClass(resultSet.getInt("armorClass"));
         character.setSpeed(resultSet.getInt("speed"));
