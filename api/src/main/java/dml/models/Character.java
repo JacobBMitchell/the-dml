@@ -1,5 +1,7 @@
 package dml.models;
 
+import java.util.List;
+
 public class Character {
     private Integer id;
     private String name;
@@ -8,7 +10,6 @@ public class Character {
     private Integer maxHealth;
     private DndClass dndClass;
     private Race race;
-    private String alignment;
     private Integer characterLevel;
     private Integer armorClass;
     private Integer speed;
@@ -24,7 +25,7 @@ public class Character {
     boolean savingIntel;
     boolean savingWis;
     boolean savingCha;
-    Boolean acrobatics;
+    Boolean acrobatics; //be careful to never accidentally set this to true or false if null
     Boolean animalHandling;
     Boolean arcana;
     Boolean athletics;
@@ -42,6 +43,24 @@ public class Character {
     Boolean sleightOfHand;
     Boolean stealth;
     Boolean survival;
+    List<String> spells;
+    List<String> weapons;
+
+    public List<String> getSpells() {
+        return spells;
+    }
+
+    public void setSpells(List<String> spells) {
+        this.spells = spells;
+    }
+
+    public List<String> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(List<String> weapons) {
+        this.weapons = weapons;
+    }
 
     public Integer getId() {
         return id;
@@ -97,14 +116,6 @@ public class Character {
 
     public void setRace(Race race) {
         this.race = race;
-    }
-
-    public String getAlignment() {
-        return alignment;
-    }
-
-    public void setAlignment(String alignment) {
-        this.alignment = alignment;
     }
 
     public Integer getCharacterLevel() {
