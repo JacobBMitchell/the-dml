@@ -10,4 +10,9 @@ public class UserDbRepo implements UserRepo{
     public AppUser findByUsername(String username) {
         return null;
     }
+
+    @Override
+    public AppUser create(String username, String password, String email) {
+        return null;
+    }
 }

@@ -28,4 +28,8 @@ public class UserService implements UserDetailsService {
         }
         return user;
     }
+
+    public AppUser create(String username, String password){
+        return null;
+    }
 }
