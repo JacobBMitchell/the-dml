@@ -2,7 +2,7 @@ package dml.models;
 
 import java.util.List;
 
-public class Character {
+public class PlayerCharacter {
     private Integer id;
     private String name;
     private Integer userId;
