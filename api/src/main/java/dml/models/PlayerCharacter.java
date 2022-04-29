@@ -402,6 +402,5 @@ public class PlayerCharacter {
     public void setCampaignId(Integer campaignId) {
         this.campaignId = campaignId;
     }
-    //TODO: Store list of spell and weapon indexes, and also features
 
 }

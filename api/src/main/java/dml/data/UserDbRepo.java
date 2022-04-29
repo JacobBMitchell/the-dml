@@ -12,6 +12,11 @@ public class UserDbRepo implements UserRepo{
     }
 
     @Override
+    public AppUser findById(Integer id) {
+        return null;
+    }
+
+    @Override
     public AppUser create(String username, String password, String email) {
         return null;
     }
