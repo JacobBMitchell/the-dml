@@ -18,7 +18,7 @@ public class PlayerCharacterService {
 
     //TODO: ADD OTHER REPOS TO CHECK FOR USER AND CAMPAIGN IDS
     //TODO: ADD USER VALIDATION TO CHECK A USER CAN ACCESS THIS DATA
-    
+
     public Result<PlayerCharacter> findById(Integer id) {
         Result<PlayerCharacter> result = new Result<>();
         if (id == null || id <= 0){
@@ -94,19 +94,48 @@ public class PlayerCharacterService {
             result.addMessage("Valid max health required", ResultType.INVALID);
         }
 
+        //TODO: add way to convert from string to enum type to check for class and race
+
+        if (pc.getCharacterLevel() == null || pc.getCharacterLevel() < 1 || pc.getCharacterLevel() >20){
+            result.addMessage("Valid character level required", ResultType.INVALID);
+        }
+
+        if (pc.getArmorClass() == null || pc.getArmorClass() < 5 || pc.getArmorClass() >50){
+            result.addMessage("Valid armor class required", ResultType.INVALID);
+        }
+
+        if (pc.getGold() == null || pc.getGold().compareTo(BigDecimal.ZERO) < 0){
+            result.addMessage("Valid gold is required", ResultType.INVALID);
+        }
+
+        if (pc.getSpeed() == null || pc.getSpeed() <0){
+            result.addMessage("Valid speed is required", ResultType.INVALID);
+        }
+
+        if (pc.getStr() == null || pc.getStr() < 0 || pc.getStr() >40){
+            result.addMessage("Valid strength score is required", ResultType.INVALID);
+        }
+
+        if (pc.getDex() == null || pc.getDex() < 0 || pc.getDex() >40){
+            result.addMessage("Valid dexterity score is required", ResultType.INVALID);
+        }
+        if (pc.getCon() == null || pc.getCon() < 0 || pc.getCon() >40){
+            result.addMessage("Valid constitution score is required", ResultType.INVALID);
+        }
+        if (pc.getIntel() == null || pc.getIntel() < 0 || pc.getIntel() >40){
+            result.addMessage("Valid intelligence score is required", ResultType.INVALID);
+        }
+        if (pc.getWis() == null || pc.getWis() < 0 || pc.getWis() >40){
+            result.addMessage("Valid wisdom score is required", ResultType.INVALID);
+        }
+        if (pc.getCha() == null || pc.getCha() < 0 || pc.getCha() >40){
+            result.addMessage("Valid charisma score is required", ResultType.INVALID);
+        }
 
         return result;
     }
 
 }
-
-//    private DndClass dndClass;
-//    private Race race;
-//    private Integer characterLevel;
-//    private Integer armorClass;
-//    private BigDecimal gold;
-//    private Integer speed;
-//    private Integer str;
 //    private Integer dex;
 //    private Integer con;
 //    private Integer intel;
@@ -140,3 +169,5 @@ public class PlayerCharacterService {
 //    List<String> weapons;
 //    private Integer userId;
 //    private Integer campaignId;
+//    private DndClass dndClass;
+//    private Race race;
