@@ -5,6 +5,7 @@ import dml.models.PlayerCharacter;
 import dml.models.Race;
 import org.springframework.jdbc.core.RowMapper;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -23,6 +24,7 @@ public class PlayerCharacterMapper implements RowMapper<PlayerCharacter> {
         character.setRace(Race.readIndex(resultSet.getString("race")));
         character.setCharacterLevel(resultSet.getInt("characterLevel"));
         character.setArmorClass(resultSet.getInt("armorClass"));
+        character.setGold(new BigDecimal(resultSet.getInt("gold")));
         character.setSpeed(resultSet.getInt("speed"));
         character.setStr(resultSet.getInt("str"));
         character.setDex(resultSet.getInt("dex"));
