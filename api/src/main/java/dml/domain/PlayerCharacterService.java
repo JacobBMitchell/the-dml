@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -18,11 +19,10 @@ public class PlayerCharacterService {
     PlayerCharacterRepo repo;
     @Autowired
     UserRepo userRepo;
-
-    //TODO: ADD OTHER REPOS TO CHECK FOR USER AND CAMPAIGN IDS
+    
     //TODO: ADD USER VALIDATION TO CHECK A USER CAN ACCESS THIS DATA
 
-    public Result<PlayerCharacter> findById(Integer id) {
+    public Result<PlayerCharacter> findById(Integer id, Principal user) {
         Result<PlayerCharacter> result = new Result<>();
         if (id == null || id <= 0){
             result.addMessage("Needs valid id", ResultType.INVALID);
@@ -36,7 +36,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<List<PlayerCharacter>> findByUser(Integer userId){
+    public Result<List<PlayerCharacter>> findByUser(Integer userId , Principal user){
         Result<List<PlayerCharacter>> result = new Result<>();
 
         if (userId == null || userId <= 0){
@@ -51,7 +51,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<List<PlayerCharacter>> findByCampaign(Integer campaignId){
+    public Result<List<PlayerCharacter>> findByCampaign(Integer campaignId , Principal user){
         Result<List<PlayerCharacter>> result = new Result<>();
 
         if (campaignId == null || campaignId <= 0){
@@ -68,7 +68,7 @@ public class PlayerCharacterService {
 
     //TODO: Fill in the rest of the service layer components add update and delete
 
-    public Result<PlayerCharacter> addPC(PlayerCharacter pc){
+    public Result<PlayerCharacter> addPC(PlayerCharacter pc, Principal user){
         Result<PlayerCharacter> result = new Result<>();
         if (pc == null) {
             result.addMessage("Requires data object", ResultType.INVALID);
@@ -83,7 +83,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<PlayerCharacter> update(PlayerCharacter pc) {
+    public Result<PlayerCharacter> update(PlayerCharacter pc, Principal user) {
         Result<PlayerCharacter> result = new Result<>();
         if (pc == null) {
             result.addMessage("Requires data object", ResultType.INVALID);
@@ -107,7 +107,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<Boolean> delete(Integer id){
+    public Result<Boolean> delete(Integer id, Principal user){
         Result<Boolean> result = new Result<>();
         //TODO: Check authorization of delete
         result.setPayload(repo.deleteById(id));
