@@ -1,6 +1,7 @@
 package dml.domain;
 
 import dml.data.PlayerCharacterRepo;
+import dml.data.UserRepo;
 import dml.models.DndClass;
 import dml.models.PlayerCharacter;
 import dml.models.Race;
@@ -15,6 +16,8 @@ public class PlayerCharacterService {
 
     @Autowired
     PlayerCharacterRepo repo;
+    @Autowired
+    UserRepo userRepo;
 
     //TODO: ADD OTHER REPOS TO CHECK FOR USER AND CAMPAIGN IDS
     //TODO: ADD USER VALIDATION TO CHECK A USER CAN ACCESS THIS DATA
@@ -86,6 +89,8 @@ public class PlayerCharacterService {
             result.addMessage("Requires data object", ResultType.INVALID);
             return result;
         }
+
+        //TODO: Check authorization of update
 
         if(repo.findById(pc.getId())==null){
             result.addMessage("Could not find character", ResultType.NOT_FOUND);
