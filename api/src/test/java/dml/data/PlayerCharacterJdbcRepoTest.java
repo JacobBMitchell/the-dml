@@ -14,6 +14,14 @@ class PlayerCharacterJdbcRepoTest {
     @Autowired
     PlayerCharacterRepo repo;
 
+    @Autowired
+    KnownGoodState knownGoodState;
+
+    @BeforeEach
+    void setup() {
+        knownGoodState.set();
+    }
+
     @Test
     void shouldFindById() {
         PlayerCharacter character = repo.findById(1);
