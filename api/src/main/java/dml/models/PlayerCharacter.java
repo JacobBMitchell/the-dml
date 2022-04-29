@@ -49,6 +49,16 @@ public class PlayerCharacter {
     List<String> spells;
     List<String> weapons;
 
+
+    public BigDecimal getGold() {
+        return gold;
+    }
+
+    public void setGold(BigDecimal gold) {
+        this.gold = gold;
+    }
+
+
     public List<String> getSpells() {
         return spells;
     }
