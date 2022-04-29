@@ -73,8 +73,39 @@ public class PlayerCharacterService {
         }
         result = validate(pc);
 
+        if (result.isSuccess()){
+            result.setPayload(repo.add(pc));
+        }
+
+        return result;
+    }
+
+    public Result<PlayerCharacter> update(PlayerCharacter pc) {
+        Result<PlayerCharacter> result = new Result<>();
+        if (pc == null) {
+            result.addMessage("Requires data object", ResultType.INVALID);
+            return result;
+        }
+
+        if(repo.findById(pc.getId())==null){
+            result.addMessage("Could not find character", ResultType.NOT_FOUND);
+        }
+
+        result = validate(pc);
 
 
+        if (result.isSuccess()){
+            repo.update(pc);
+            result.setPayload(pc);
+        }
+
+        return result;
+    }
+
+    public Result<Boolean> delete(Integer id){
+        Result<Boolean> result = new Result<>();
+        //TODO: Check authorization of delete
+        result.setPayload(repo.deleteById(id));
         return result;
     }
 
@@ -119,55 +150,33 @@ public class PlayerCharacterService {
         if (pc.getDex() == null || pc.getDex() < 0 || pc.getDex() >40){
             result.addMessage("Valid dexterity score is required", ResultType.INVALID);
         }
+
         if (pc.getCon() == null || pc.getCon() < 0 || pc.getCon() >40){
             result.addMessage("Valid constitution score is required", ResultType.INVALID);
         }
+
         if (pc.getIntel() == null || pc.getIntel() < 0 || pc.getIntel() >40){
             result.addMessage("Valid intelligence score is required", ResultType.INVALID);
         }
+
         if (pc.getWis() == null || pc.getWis() < 0 || pc.getWis() >40){
             result.addMessage("Valid wisdom score is required", ResultType.INVALID);
         }
-        if (pc.getCha() == null || pc.getCha() < 0 || pc.getCha() >40){
+
+        if (pc.getCha() == null || pc.getCha() < 0 || pc.getCha() >40) {
             result.addMessage("Valid charisma score is required", ResultType.INVALID);
         }
+
+        //TODO: Check to make sure spells and weapons are in db
 
         return result;
     }
 
 }
-//    private Integer dex;
-//    private Integer con;
-//    private Integer intel;
-//    private Integer wis;
-//    private Integer cha;
-//    boolean savingStr;
-//    boolean savingDex;
-//    boolean savingCon;
-//    boolean savingIntel;
-//    boolean savingWis;
-//    boolean savingCha;
-//    Boolean acrobatics; //be careful to never accidentally set this to true or false if null
-//    Boolean animalHandling;
-//    Boolean arcana;
-//    Boolean athletics;
-//    Boolean deception;
-//    Boolean history;
-//    Boolean insight;
-//    Boolean intimidation;
-//    Boolean investigation;
-//    Boolean medicine;
-//    Boolean nature;
-//    Boolean perception;
-//    Boolean performance;
-//    Boolean persuasion;
-//    Boolean religion;
-//    Boolean sleightOfHand;
-//    Boolean stealth;
-//    Boolean survival;
+
 //    List<String> spells;
 //    List<String> weapons;
-//    private Integer userId;
+//    private Integer userId; not null
 //    private Integer campaignId;
-//    private DndClass dndClass;
-//    private Race race;
+//    private DndClass dndClass; not null
+//    private Race race; not null
