@@ -58,7 +58,6 @@ public class PlayerCharacter {
         this.gold = gold;
     }
 
-
     public List<String> getSpells() {
         return spells;
     }

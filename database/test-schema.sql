@@ -101,13 +101,13 @@ begin
 		(1, 'Vox Machina'),
         (5, null);
 	
-    insert into characters (characterName, userId, campaignId, currentHealth, maxHealth, dndClass, race, characterLevel, armorClass, speed,
+    insert into characters (characterName, userId, campaignId, currentHealth, maxHealth, dndClass, race, characterLevel, armorClass, gold, speed,
 							str, dex, con, intel, wis, cha, savingStr, savingDex, savingCon, savingIntel, savingWis, savingCha)
 		values
-		('Keyleth', 2, 1, 63, 70, 'druid', 'half-elf', 9, 17, 30, 14, 15, 14, 15, 22, 10, 0, 0, 0, 1, 1, 0),
-        ('Scanlan Shorthalt', 3, 1, 51, 58, 'Bard', 'gnome', 9, 17, 25, 13, 11, 15, 14, 7, 20, 0, 1, 0, 0, 0, 1),
-        ('Grog Strongjaw', 4, 1, 116, 116, 'barbarian', 'goliath', 9, 19, 50, 19, 15, 20, 6, 10, 13, 1, 0, 1, 0, 0, 0),
-        ("Vex'ahlia", 5, 1, 62, 71, 'ranger', 'half-elf', 9, 19, 30, 7, 20, 10, 14, 14, 17, 1, 1, 0, 0, 0, 0);
+		('Keyleth', 2, 1, 63, 70, 'druid', 'half-elf', 9, 17, 10000, 30, 14, 15, 14, 15, 22, 10, 0, 0, 0, 1, 1, 0),
+        ('Scanlan Shorthalt', 3, 1, 51, 58, 'Bard', 'gnome', 9, 17, 10000, 25, 13, 11, 15, 14, 7, 20, 0, 1, 0, 0, 0, 1),
+        ('Grog Strongjaw', 4, 1, 116, 116, 'barbarian', 'goliath', 9, 19, 10000, 50, 19, 15, 20, 6, 10, 13, 1, 0, 1, 0, 0, 0),
+        ("Vex'ahlia", 5, 1, 62, 71, 'ranger', 'half-elf', 9, 19, 10000, 30, 7, 20, 10, 14, 14, 17, 1, 1, 0, 0, 0, 0);
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
