@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
@@ -29,7 +30,13 @@ public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
 
     @Override
     public List<PlayerCharacter> findByPlayer(int userId) {
-        return null;
+
+        final String sql = "select * from characters where userId = ?;";
+
+        List<PlayerCharacter> characters = jdbcTemplate.query(sql, new PlayerCharacterMapper(), userId)
+                .stream().collect(Collectors.toList());
+
+        return characters;
     }
 
     @Override

@@ -107,7 +107,8 @@ begin
 		('Keyleth', 2, 1, 63, 70, 'druid', 'half-elf', 9, 17, 10000, 30, 14, 15, 14, 15, 22, 10, 0, 0, 0, 1, 1, 0),
         ('Scanlan Shorthalt', 3, 1, 51, 58, 'Bard', 'gnome', 9, 17, 10000, 25, 13, 11, 15, 14, 7, 20, 0, 1, 0, 0, 0, 1),
         ('Grog Strongjaw', 4, 1, 116, 116, 'barbarian', 'goliath', 9, 19, 10000, 50, 19, 15, 20, 6, 10, 13, 1, 0, 1, 0, 0, 0),
-        ("Vex'ahlia", 5, 1, 62, 71, 'ranger', 'half-elf', 9, 19, 10000, 30, 7, 20, 10, 14, 14, 17, 1, 1, 0, 0, 0, 0);
+        ("Vex'ahlia", 5, 1, 62, 71, 'ranger', 'half-elf', 9, 19, 10000, 30, 7, 20, 10, 14, 14, 17, 1, 1, 0, 0, 0, 0),
+		('Keyleth the Second', 2, 2, 63, 70, 'druid', 'half-elf', 9, 17, 10000, 30, 14, 15, 14, 15, 22, 10, 0, 0, 0, 1, 1, 0);
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
