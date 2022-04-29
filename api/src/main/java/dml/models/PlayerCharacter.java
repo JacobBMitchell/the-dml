@@ -1,5 +1,6 @@
 package dml.models;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class PlayerCharacter {
@@ -13,6 +14,7 @@ public class PlayerCharacter {
     private Race race;
     private Integer characterLevel;
     private Integer armorClass;
+    private BigDecimal gold;
     private Integer speed;
     private Integer str;
     private Integer dex;
