@@ -48,6 +48,7 @@ create table characters (
     race varchar(20) not null,
     characterLevel int not null,
     armorClass int not null,
+    gold int not null,
     speed int not null,
     str int not null,
     dex int not null,
