@@ -41,7 +41,7 @@ create table characters (
 	characterId int primary key auto_increment,
     characterName varchar(50) not null,
     userId int not null,
-    campaignId int not null,
+    campaignId int null,
     currentHealth int not null,
     maxHealth int not null,
     dndClass varchar(20) not null,
