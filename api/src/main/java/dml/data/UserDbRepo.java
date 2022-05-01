@@ -17,7 +17,7 @@ public class UserDbRepo implements UserRepo{
 
     @Override
     public AppUser findByUsername(String username) {
-        String sql = "select userId, username, password from users where username = ?;";
+        String sql = "select userId, username, password, email from users where username = ?;";
         return template.query(sql,
                         new UserMapper(findRolesByUsername(username)),
                         username)

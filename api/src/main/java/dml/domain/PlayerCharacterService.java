@@ -28,6 +28,11 @@ public class PlayerCharacterService {
 
         AppUser requester = userRepo.findByUsername(user.getName());
 
+        if (requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
+
         if (id == null || id <= 0){
             result.addMessage("Needs valid id", ResultType.INVALID);
             return result;
@@ -36,6 +41,10 @@ public class PlayerCharacterService {
         if (character == null){
             result.addMessage("Character not found", ResultType.NOT_FOUND);
         }
+
+        // TODO: userids or role dm to campaign_id or all admin
+//        if (requester.getUserId() != character.getUserId()){
+//        }
         result.setPayload(character);
         return result;
     }
