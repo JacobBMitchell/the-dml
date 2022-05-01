@@ -2,6 +2,7 @@ package dml.domain;
 
 import dml.data.PlayerCharacterRepo;
 import dml.data.UserRepo;
+import dml.models.AppUser;
 import dml.models.DndClass;
 import dml.models.PlayerCharacter;
 import dml.models.Race;
@@ -24,6 +25,9 @@ public class PlayerCharacterService {
 
     public Result<PlayerCharacter> findById(Integer id, Principal user) {
         Result<PlayerCharacter> result = new Result<>();
+
+        AppUser requester = userRepo.findByUsername(user.getName());
+
         if (id == null || id <= 0){
             result.addMessage("Needs valid id", ResultType.INVALID);
             return result;
