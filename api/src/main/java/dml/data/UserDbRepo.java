@@ -24,6 +24,23 @@ public class UserDbRepo implements UserRepo{
                 .stream().findAny().orElse(null);
     }
 
+    @Override
+    public AppUser findById(Integer id) {
+
+        final String sql = "select * from users where userId = ?;";
+
+
+        return template.query(sql,
+                        new UserMapper(findRolesById(id)),
+                        id)
+                .stream().findAny().orElse(null);
+    }
+
+    @Override
+    public AppUser create(String username, String password, String email) {
+        return null;
+    }
+
     private Set<String> findRolesByUsername(String username) {
         String sql = "select roleName from users u " +
                 "inner join user_role ur on ur.userId = u.userId " +
@@ -35,13 +52,14 @@ public class UserDbRepo implements UserRepo{
                 .stream().collect(Collectors.toSet());
     }
 
-    @Override
-    public AppUser findById(Integer id) {
-        return null;
-    }
-
-    @Override
-    public AppUser create(String username, String password, String email) {
-        return null;
+    private Set<String> findRolesById(int id) {
+        String sql = "select roleName from users u " +
+                "inner join user_role ur on ur.userId = u.userId " +
+                "inner join roles r on ur.roleId = r.roleId " +
+                "where u.userId = ?;";
+        return template.query(sql,
+                        (rowData, RowNum) -> rowData.getString("roleName"),
+                        id)
+                .stream().collect(Collectors.toSet());
     }
 }

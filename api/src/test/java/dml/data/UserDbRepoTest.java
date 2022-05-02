@@ -30,8 +30,21 @@ class UserDbRepoTest {
     }
 
     @Test
-    void shouldNotFindNonExisting() {
+    void shouldNotFindNonExistingUsername() {
         AppUser user = repo.findByUsername("fake@email.com");
+        assertNull(user);
+    }
+
+    @Test
+    void shouldFindById() {
+        AppUser user = repo.findById(1);
+        assertNotNull(user);
+        assertEquals("matthew@mercer.com", user.getEmail());
+    }
+
+    @Test
+    void shouldNotFindNonExistingId() {
+        AppUser user = repo.findById(100);
         assertNull(user);
     }
 }
