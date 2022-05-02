@@ -8,4 +8,6 @@ public interface UserRepo {
     AppUser findById(Integer id);
 
     AppUser create(AppUser user);
+
+    void update(AppUser user);
 }

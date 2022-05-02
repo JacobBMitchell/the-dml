@@ -20,4 +20,9 @@ public class MockUserRepo implements UserRepo {
     public AppUser create(AppUser user) {
         return null;
     }
+
+    @Override
+    public void update(AppUser user) {
+
+    }
 }
