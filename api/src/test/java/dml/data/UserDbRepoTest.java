@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -46,5 +49,17 @@ class UserDbRepoTest {
     void shouldNotFindNonExistingId() {
         AppUser user = repo.findById(100);
         assertNull(user);
+    }
+
+    @Test
+    void shouldAddUser() {
+        Set<String> roles = new HashSet<>();
+        roles.add("PLAYER");
+        String email = "test@email.com";
+        AppUser user = new AppUser(email, "password", roles, email, 0, "first", "last");
+
+        user = repo.create(user);
+
+        assertNotEquals(0, user.getUserId());
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.PreparedStatement;
 import java.sql.Statement;
@@ -19,6 +20,7 @@ public class UserDbRepo implements UserRepo{
     JdbcTemplate template;
 
     @Override
+    @Transactional
     public AppUser findByUsername(String username) {
         String sql = "select * from users where email = ?;";
         return template.query(sql,
@@ -28,6 +30,7 @@ public class UserDbRepo implements UserRepo{
     }
 
     @Override
+    @Transactional
     public AppUser findById(Integer id) {
 
         final String sql = "select * from users where userId = ?;";
@@ -40,6 +43,7 @@ public class UserDbRepo implements UserRepo{
     }
 
     @Override
+    @Transactional
     public AppUser create(AppUser user) {
 
         final String sql = "insert into users (firstName, lastName, email, password_hash) values (?, ?, ?, ?);";
@@ -66,7 +70,19 @@ public class UserDbRepo implements UserRepo{
     }
 
     private void updateRoles(AppUser user) {
-        
+        template.update("delete from user_role where userId = ?;", user.getUserId());
+
+        Set<String> roles = user.getRoles();
+
+        if(roles == null || roles.isEmpty()) {
+            return;
+        }
+
+        for (String role : roles) {
+            String sql = "insert into user_role (userId, roleId) " +
+                    "select ?, roleId from roles where roleName = ?;";
+            template.update(sql, user.getUserId(), role);
+        }
     }
 
     private Set<String> findRolesByUsername(String username) {
