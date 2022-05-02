@@ -23,7 +23,7 @@ class PlayerCharacterServiceTest {
 
     @Test
     void findById() {
-
+        System.out.println("hi");
     }
 
     @Test
