@@ -4,14 +4,11 @@ import dml.data.CampaignRepo;
 import dml.data.PlayerCharacterRepo;
 import dml.data.UserRepo;
 import dml.models.AppUser;
-import dml.models.DndClass;
 import dml.models.PlayerCharacter;
-import dml.models.Race;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.security.Principal;
 import java.util.List;
 
 @Service
@@ -49,7 +46,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (requester.getUserId() == character.getUserId() ||
+        if (requester.getUserId().equals(character.getUserId()) ||
                 (requester.getRoles().contains("DM") &&
                         campRepo.findByUserId(requester.getUserId()).stream().anyMatch(a -> a.getPlayerIds().contains(character.getUserId())) ) ||
             requester.getRoles().contains("ADMIN")){
@@ -80,7 +77,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (userId != requester.getUserId() || !requester.getRoles().contains("ADMIN")){
+        if (!userId.equals(requester.getUserId()) || !requester.getRoles().contains("ADMIN")){
             result.addMessage("You cannot request to see this users details", ResultType.INVALID);
             return result;
         }
@@ -118,7 +115,7 @@ public class PlayerCharacterService {
 
         List<PlayerCharacter> characters = repo.findByCampaign(campaignId);
 
-        if (campRepo.findById(campaignId).getUserId() != requester.getUserId()){
+        if (!campRepo.findById(campaignId).getUserId().equals(requester.getUserId())){
             result.addMessage("You do not have access to this campaign",ResultType.INVALID);
         }
 
@@ -132,7 +129,6 @@ public class PlayerCharacterService {
         return result;
     }
 
-    //TODO: Fill in the rest of the service layer components add update and delete
 
     public Result<PlayerCharacter> addPC(PlayerCharacter pc, String username){
         Result<PlayerCharacter> result = new Result<>();
@@ -172,10 +168,10 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (requester.getUserId() != pc.getUserId() ||
+        if (!requester.getUserId().equals(pc.getUserId()) ||
                 !(requester.getRoles().contains("DM") &&
                         campRepo.findById(pc.getCampaignId()) != null &&
-                        campRepo.findById(pc.getCampaignId()).getUserId() == requester.getUserId()) ||
+                        campRepo.findById(pc.getCampaignId()).getUserId().equals(requester.getUserId())) ||
                 !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access", ResultType.INVALID);
         }
@@ -205,7 +201,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (!requester.getRoles().contains("ADMIN") || requester.getUserId() != repo.findById(id).getUserId()){
+        if (!requester.getRoles().contains("ADMIN") || !requester.getUserId().equals(repo.findById(id).getUserId())){
             result.addMessage("You don't have permission to delete", ResultType.INVALID);
         }
         if (result.isSuccess()){
