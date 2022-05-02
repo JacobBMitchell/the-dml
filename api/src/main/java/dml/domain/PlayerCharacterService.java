@@ -220,7 +220,13 @@ public class PlayerCharacterService {
             result.addMessage("Name is required", ResultType.INVALID);
         }
 
-        //TODO: import user and dm repos to check if userId and CampaignId are valid
+        if (pc.getUserId() == null || userRepo.findById(pc.getUserId()) == null){
+            result.addMessage("Invalid user",ResultType.INVALID);
+        }
+
+        if (pc.getCampaignId() != null && campRepo.findById(pc.getCampaignId()) == null){
+            result.addMessage("That campaign does not exist", ResultType.INVALID);
+        }
 
         if (pc.getCurrentHealth() == null || pc.getCurrentHealth() <0 || pc.getCurrentHealth()>pc.getMaxHealth()){
             result.addMessage("Valid current health required", ResultType.INVALID);
@@ -281,7 +287,5 @@ public class PlayerCharacterService {
 
 //    List<String> spells;
 //    List<String> weapons;
-//    private Integer userId; not null
-//    private Integer campaignId;
 //    private DndClass dndClass; not null
 //    private Race race; not null
