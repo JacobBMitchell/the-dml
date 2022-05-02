@@ -28,7 +28,7 @@ public class CampaignService {
         }
 
         Campaign campaign = repo.findById(id);
-        if (!campaign.getUserId().equals(requester.getUserId())){
+        if (!campaign.getDmId().equals(requester.getUserId())){
             result.addMessage("You cannot see this campaign", ResultType.INVALID);
         }
 

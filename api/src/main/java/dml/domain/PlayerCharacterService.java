@@ -115,7 +115,7 @@ public class PlayerCharacterService {
 
         List<PlayerCharacter> characters = repo.findByCampaign(campaignId);
 
-        if (!campRepo.findById(campaignId).getUserId().equals(requester.getUserId())){
+        if (!campRepo.findById(campaignId).getDmId().equals(requester.getUserId())){
             result.addMessage("You do not have access to this campaign",ResultType.INVALID);
         }
 
@@ -171,7 +171,7 @@ public class PlayerCharacterService {
         if (!requester.getUserId().equals(pc.getUserId()) ||
                 !(requester.getRoles().contains("DM") &&
                         campRepo.findById(pc.getCampaignId()) != null &&
-                        campRepo.findById(pc.getCampaignId()).getUserId().equals(requester.getUserId())) ||
+                        campRepo.findById(pc.getCampaignId()).getDmId().equals(requester.getUserId())) ||
                 !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access", ResultType.INVALID);
         }
