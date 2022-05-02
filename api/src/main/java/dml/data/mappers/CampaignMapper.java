@@ -11,6 +11,10 @@ public class CampaignMapper implements RowMapper<Campaign> {
 
     List<Integer> playerIds;
 
+    public CampaignMapper() {
+        playerIds = null;
+    }
+
     public CampaignMapper(List<Integer> playerIds) {
         this.playerIds = playerIds;
     }

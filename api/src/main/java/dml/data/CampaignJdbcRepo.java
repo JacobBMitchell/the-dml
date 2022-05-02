@@ -34,7 +34,20 @@ public class CampaignJdbcRepo implements CampaignRepo{
 
     @Override
     public List<Campaign> findByUserId(Integer id) {
-        return null;
+
+        final String sql = "select * from campaigns where dmId = ?;";
+
+        List<Campaign> campaigns = jdbcTemplate.query(sql,
+                        new CampaignMapper(),
+                        id)
+                .stream().collect(Collectors.toList());
+
+        //add players for each campaign
+        for(Campaign campaign : campaigns){
+            campaign.setPlayerIds(findPlayersByCampaignId(campaign.getCampaignId()));
+        }
+
+        return campaigns;
     }
 
     private List<Integer> findPlayersByCampaignId(int id) {
@@ -43,4 +56,5 @@ public class CampaignJdbcRepo implements CampaignRepo{
         return jdbcTemplate.query(sql, new PlayerCharacterMapper(), id)
                 .stream().map(PlayerCharacter::getId).collect(Collectors.toList());
     }
+
 }

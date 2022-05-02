@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -33,5 +35,19 @@ class CampaignJdbcRepoTest {
     @Test
     void shouldNotFindNonExistingCampaign() {
         assertNull(repo.findById(100));
+    }
+
+    @Test
+    void shouldFindByDmId() {
+        List<Campaign> campaigns = repo.findByUserId(1);
+        assertEquals(1, campaigns.size());
+        Campaign campaign = campaigns.get(0);
+        assertEquals(1, campaign.getDmId());
+        assertEquals(4, campaign.getPlayerIds().size());
+    }
+
+    @Test
+    void shouldNotFindNonExistingDmId() {
+        assertEquals(0, repo.findByUserId(100).size());
     }
 }
