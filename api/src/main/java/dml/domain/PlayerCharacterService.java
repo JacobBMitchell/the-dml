@@ -18,11 +18,12 @@ import java.util.List;
 public class PlayerCharacterService {
 
     @Autowired
-    PlayerCharacterRepo repo;
+    private PlayerCharacterRepo repo;
     @Autowired
-    UserRepo userRepo;
+    private UserRepo userRepo;
     @Autowired
-    CampaignRepo campRepo;
+    private CampaignRepo campRepo;
+
 
     //TODO: ADD USER VALIDATION TO CHECK A USER CAN ACCESS THIS DATA
 
