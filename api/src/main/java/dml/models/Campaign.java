@@ -3,7 +3,7 @@ package dml.models;
 import java.util.List;
 
 public class Campaign {
-    private Integer userId;
+    private Integer userId; //owner of campaign
     private String dmNotes;
     private List<Integer> playerIds;
 
