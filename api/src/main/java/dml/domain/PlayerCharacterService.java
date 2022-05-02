@@ -56,6 +56,9 @@ public class PlayerCharacterService {
                 result.setPayload(character);
             }
         }
+        else{
+            result.addMessage("ACCESS DENIED", ResultType.INVALID);
+        }
 
 
         return result;
