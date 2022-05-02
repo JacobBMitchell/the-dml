@@ -8,4 +8,8 @@ public interface CampaignRepo {
     Campaign findById(Integer id);
 
     List<Campaign> findByUserId(Integer id);
+
+    Campaign add(Campaign campaign);
+
+    boolean updateNotes(Campaign campaign);
 }
