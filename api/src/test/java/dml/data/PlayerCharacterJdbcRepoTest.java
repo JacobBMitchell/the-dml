@@ -59,11 +59,52 @@ class PlayerCharacterJdbcRepoTest {
     }
 
     @Test
+    void shouldFindByCampaign() {
+        List<PlayerCharacter> characters = repo.findByCampaign(1);
+        assertNotNull(characters);
+        assertEquals(4, characters.size());
+    }
+
+    @Test
+    void shouldNotFindByCampaign() {
+        //campaign doesn't exist
+        List<PlayerCharacter> characters = repo.findByCampaign(100);
+        assertEquals(0, characters.size());
+    }
+
+    @Test
     void shouldAddNewCharacter() {
         PlayerCharacter character = makeCharacter();
         PlayerCharacter result = repo.add(character);
         assertNotNull(result);
         assertEquals(6, result.getId());
+    }
+
+    @Test
+    void shouldUpdateCharacter() {
+        PlayerCharacter character = makeCharacter();
+        character.setId(4);
+        Boolean result = repo.update(character);
+        assertTrue(result);
+        assertEquals("New Character", repo.findById(4).getName());
+    }
+
+    @Test
+    void shouldNotUpdateNonExisting() {
+        PlayerCharacter character = makeCharacter();
+        character.setId(100);
+        Boolean result = repo.update(character);
+        assertFalse(result);
+    }
+
+    @Test
+    void shouldDeleteById() {
+        assertTrue(repo.deleteById(5));
+    }
+
+    @Test
+    void shouldNotDeleteNonExisting() {
+        assertFalse(repo.deleteById(100));
     }
 
     private PlayerCharacter makeCharacter() {

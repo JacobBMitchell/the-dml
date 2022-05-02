@@ -1,12 +1,16 @@
 package dml.data;
 
 import dml.data.mappers.PlayerCharacterMapper;
+import dml.models.DndClass;
 import dml.models.PlayerCharacter;
+import dml.models.Race;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.Types;
@@ -46,8 +50,13 @@ public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
 
     @Override
     public List<PlayerCharacter> findByCampaign(int campaignId) {
-        //TODO: complete
-        return null;
+
+        final String sql = "select * from characters where campaignId = ?;";
+
+        List<PlayerCharacter> characters = jdbcTemplate.query(sql, new PlayerCharacterMapper(), campaignId)
+                .stream().collect(Collectors.toList());
+
+        return characters;
     }
 
     @Override
@@ -190,11 +199,98 @@ public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
 
     @Override
     public boolean update(PlayerCharacter character) {
-        return false;
+        
+        final String sql = "update characters set " +
+                "characterName = ?, " +
+                "userId = ?, " +
+                "campaignId = ?, " +
+                "currentHealth = ?, " +
+                "maxHealth = ?, " +
+                "dndClass = ?, " +
+                "race = ?, " +
+                "characterLevel = ?, " +
+                "armorClass = ?, " +
+                "gold = ?, " +
+                "speed = ?, " +
+                "str = ?, " +
+                "dex = ?, " +
+                "con = ?, " +
+                "intel = ?, " +
+                "wis = ?, " +
+                "cha = ?, " +
+                "savingStr = ?, " +
+                "savingDex = ?, " +
+                "savingCon = ?, " +
+                "savingIntel = ?, " +
+                "savingWis = ?, " +
+                "savingCha = ?, " +
+                "acrobatics = ?, " +
+                "animalHandling = ?, " +
+                "arcana = ?, " +
+                "athletics = ?, " +
+                "deception = ?, " +
+                "history = ?, " +
+                "insight = ?, " +
+                "intimidation = ?, " +
+                "investigation = ?, " +
+                "medicine = ?, " +
+                "nature = ?, " +
+                "perception = ?, " +
+                "performance = ?, " +
+                "persuasion = ?, " +
+                "religion = ?, " +
+                "sleightOfHand = ?, " +
+                "stealth = ?, " +
+                "survival = ? " +
+                "where characterId = ?;";
+
+        return jdbcTemplate.update(sql,
+                character.getName(),
+                character.getUserId(),
+                character.getCampaignId(),
+                character.getCurrentHealth(),
+                character.getMaxHealth(),
+                character.getDndClass().index,
+                character.getRace().index,
+                character.getCharacterLevel(),
+                character.getArmorClass(),
+                character.getGold(),
+                character.getSpeed(),
+                character.getStr(),
+                character.getDex(),
+                character.getCon(),
+                character.getIntel(),
+                character.getWis(),
+                character.getCha(),
+                character.isSavingStr(),
+                character.isSavingDex(),
+                character.isSavingCon(),
+                character.isSavingIntel(),
+                character.isSavingWis(),
+                character.isSavingCha(),
+                character.getAcrobatics(),
+                character.getAnimalHandling(),
+                character.getArcana(),
+                character.getAthletics(),
+                character.getDeception(),
+                character.getHistory(),
+                character.getInsight(),
+                character.getIntimidation(),
+                character.getInvestigation(),
+                character.getMedicine(),
+                character.getNature(),
+                character.getPerception(),
+                character.getPerformance(),
+                character.getPersuasion(),
+                character.getReligion(),
+                character.getSleightOfHand(),
+                character.getStealth(),
+                character.getSurvival(),
+                character.getId()) > 0;
     }
 
     @Override
     public boolean deleteById(int characterId) {
-        return false;
+        return jdbcTemplate.update("delete from characters where characterId = ?;", characterId) > 0;
     }
 }
