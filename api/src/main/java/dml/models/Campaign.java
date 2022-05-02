@@ -3,16 +3,25 @@ package dml.models;
 import java.util.List;
 
 public class Campaign {
-    private Integer userId; //owner of campaign
+    private int campaignId;
+    private Integer dmId; //owner of campaign
     private String dmNotes;
     private List<Integer> playerIds;
 
-    public Integer getUserId() {
-        return userId;
+    public int getCampaignId() {
+        return campaignId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setCampaignId(int campaignId) {
+        this.campaignId = campaignId;
+    }
+
+    public Integer getDmId() {
+        return dmId;
+    }
+
+    public void setDmId(Integer dmId) {
+        this.dmId = dmId;
     }
 
     public String getDmNotes() {

@@ -18,4 +18,14 @@ public class MockCampaignRepo implements CampaignRepo {
     public List<Campaign> findByUserId(Integer id) {
         return null;
     }
+
+    @Override
+    public Campaign add(Campaign campaign) {
+        return null;
+    }
+
+    @Override
+    public boolean updateNotes(Campaign campaign) {
+        return false;
+    }
 }
