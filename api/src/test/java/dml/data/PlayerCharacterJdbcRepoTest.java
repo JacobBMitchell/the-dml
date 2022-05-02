@@ -59,6 +59,20 @@ class PlayerCharacterJdbcRepoTest {
     }
 
     @Test
+    void shouldFindByCampaign() {
+        List<PlayerCharacter> characters = repo.findByCampaign(1);
+        assertNotNull(characters);
+        assertEquals(4, characters.size());
+    }
+
+    @Test
+    void shouldNotFindByCampaign() {
+        //campaign doesn't exist
+        List<PlayerCharacter> characters = repo.findByCampaign(100);
+        assertEquals(0, characters.size());
+    }
+
+    @Test
     void shouldAddNewCharacter() {
         PlayerCharacter character = makeCharacter();
         PlayerCharacter result = repo.add(character);

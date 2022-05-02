@@ -46,8 +46,13 @@ public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
 
     @Override
     public List<PlayerCharacter> findByCampaign(int campaignId) {
-        //TODO: complete
-        return null;
+
+        final String sql = "select * from characters where campaignId = ?;";
+
+        List<PlayerCharacter> characters = jdbcTemplate.query(sql, new PlayerCharacterMapper(), campaignId)
+                .stream().collect(Collectors.toList());
+
+        return characters;
     }
 
     @Override
