@@ -80,6 +80,23 @@ class PlayerCharacterJdbcRepoTest {
         assertEquals(6, result.getId());
     }
 
+    @Test
+    void shouldUpdateCharacter() {
+        PlayerCharacter character = makeCharacter();
+        character.setId(5);
+        Boolean result = repo.update(character);
+        assertTrue(result);
+        assertEquals("New Character", repo.findById(5).getName());
+    }
+
+    @Test
+    void shouldNotUpdateNonExisting() {
+        PlayerCharacter character = makeCharacter();
+        character.setId(100);
+        Boolean result = repo.update(character);
+        assertFalse(result);
+    }
+
     private PlayerCharacter makeCharacter() {
         PlayerCharacter character = new PlayerCharacter();
 
