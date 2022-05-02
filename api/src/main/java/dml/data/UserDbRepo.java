@@ -35,7 +35,6 @@ public class UserDbRepo implements UserRepo{
 
         final String sql = "select * from users where userId = ?;";
 
-
         return template.query(sql,
                         new UserMapper(findRolesById(id)),
                         id)
@@ -67,6 +66,23 @@ public class UserDbRepo implements UserRepo{
         updateRoles(user);
 
         return user;
+    }
+
+    @Override
+    @Transactional
+    public void update(AppUser user) {
+
+        final String sql = "update users set " +
+                "firstName = ?, " +
+                "lastName = ?, " +
+                "email = ?, " +
+                "password_hash = ? " +
+                "where userId = ?;";
+
+        template.update(sql,
+                user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.getUserId());
+
+        updateRoles(user);
     }
 
     private void updateRoles(AppUser user) {

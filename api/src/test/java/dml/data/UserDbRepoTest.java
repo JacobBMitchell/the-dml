@@ -62,4 +62,18 @@ class UserDbRepoTest {
 
         assertNotEquals(0, user.getUserId());
     }
+
+    @Test
+    void shouldUpdateUser() {
+        String username = "matthew@mercer.com";
+        AppUser user = repo.findByUsername(username);
+        user.setFirstName("updated");
+        Set<String> roles = user.getRoles();
+        roles.add("PLAYER");
+        user.setRoles(roles);
+        repo.update(user);
+
+        assertEquals("updated", repo.findByUsername(username).getFirstName());
+    }
+
 }
