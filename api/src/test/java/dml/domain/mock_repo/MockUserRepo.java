@@ -15,7 +15,7 @@ public class MockUserRepo implements UserRepo {
     }
 
     @Override
-    public AppUser create(String username, String password, String email) {
+    public AppUser create(AppUser user) {
         return null;
     }
 }
