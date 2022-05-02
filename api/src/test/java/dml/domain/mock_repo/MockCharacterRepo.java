@@ -3,11 +3,12 @@ package dml.domain.mock_repo;
 import dml.data.PlayerCharacterRepo;
 import dml.models.PlayerCharacter;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@MockBean
+
 public class MockCharacterRepo implements PlayerCharacterRepo {
     @Override
     public PlayerCharacter findById(int characterId) {
