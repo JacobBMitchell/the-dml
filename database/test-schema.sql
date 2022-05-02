@@ -96,6 +96,29 @@ begin
     alter table characters auto_increment = 1;
     delete from campaigns;
     alter table campaigns auto_increment = 1;
+    delete from user_role;
+    delete from users;
+    alter table users auto_increment = 1;
+    
+    	-- passwords are their first name
+	insert into users (firstName, lastName, email, password_hash) values
+		('Matthew', 'Mercer', 'matthew@mercer.com', '$2a$12$FIBjdgcIFhDMrDv1prxKh.YNHRCi7rrUu4Hl/.CuGCpp1IiQ5pXrW'),
+		('Marisha', 'Ray', 'marisha@ray.com', '$2a$12$wavM41roYWyNGU0hop7RBu8LQTxYd4I.5TLIF1ETNahf5VnhXFC4u'),
+		('Sam', 'Riegel', 'sam@riegel.com', '$2a$12$XoKVrsIGj6LYxMypBeBbcOTus3gDDz6.wNLHJeS65cEwUniqslhC2'),
+		('Travis', 'Willingham', 'travis@willingham.com', '$2a$12$EnFO/PefJW8XdKJqtO0w7.ixGnn0ZgAfWVfccY//DZpnYJJJvhskG'),
+		('Laura', 'Bailey', 'laura@bailey.com', '$2a$12$4QlUZ6Ce85O59Pj3fPRrJ.UeGS8lvHiHCt2a2xgilpWBqbMT4j9sC'),
+		('Jacob', 'Mitchell', 'jacob@mitchell.com', '$2a$12$EesJBFiDeI2Qoer1BkDzq.IChVQchyFnZpa5GZqZNZ5H0lTIVyTZO'),
+		('Tyler', 'Litz', 'tyler@litz.com', '$2a$12$Ny8Grucg/zR63BQtCcEOWuFC.Z3EdAc0LbqYashfK58wFDVoRl5/G');
+		
+	insert into user_role (userId, roleId) values
+		( 1, 2),
+		( 2, 1),
+		( 3, 1),
+		( 4, 1),
+		( 5, 1),
+		( 6, 3),
+		( 7, 3),
+		( 5, 2);
     
     insert into campaigns (dmId, notes) values
 		(1, 'Vox Machina'),
@@ -109,6 +132,8 @@ begin
         ('Grog Strongjaw', 4, 1, 116, 116, 'barbarian', 'goliath', 9, 19, 10000, 50, 19, 15, 20, 6, 10, 13, 1, 0, 1, 0, 0, 0),
         ("Vex'ahlia", 5, 1, 62, 71, 'ranger', 'half-elf', 9, 19, 10000, 30, 7, 20, 10, 14, 14, 17, 1, 1, 0, 0, 0, 0),
 		('Keyleth the Second', 2, 2, 63, 70, 'druid', 'half-elf', 9, 17, 10000, 30, 14, 15, 14, 15, 22, 10, 0, 0, 0, 1, 1, 0);
+
+
 end //
 -- 4. Change the statement terminator back to the original.
 delimiter ;
@@ -117,23 +142,3 @@ insert into roles (roleName) values
 	('PLAYER'),
     ('DM'),
     ('ADMIN');
-
--- passwords are their first name
-insert into users (firstName, lastName, email, password_hash) values
-	('Matthew', 'Mercer', 'matthew@mercer.com', '$2a$12$FIBjdgcIFhDMrDv1prxKh.YNHRCi7rrUu4Hl/.CuGCpp1IiQ5pXrW'),
-    ('Marisha', 'Ray', 'marisha@ray.com', '$2a$12$wavM41roYWyNGU0hop7RBu8LQTxYd4I.5TLIF1ETNahf5VnhXFC4u'),
-    ('Sam', 'Riegel', 'sam@riegel.com', '$2a$12$XoKVrsIGj6LYxMypBeBbcOTus3gDDz6.wNLHJeS65cEwUniqslhC2'),
-    ('Travis', 'Willingham', 'travis@willingham.com', '$2a$12$EnFO/PefJW8XdKJqtO0w7.ixGnn0ZgAfWVfccY//DZpnYJJJvhskG'),
-    ('Laura', 'Bailey', 'laura@bailey.com', '$2a$12$4QlUZ6Ce85O59Pj3fPRrJ.UeGS8lvHiHCt2a2xgilpWBqbMT4j9sC'),
-    ('Jacob', 'Mitchell', 'jacob@mitchell.com', '$2a$12$EesJBFiDeI2Qoer1BkDzq.IChVQchyFnZpa5GZqZNZ5H0lTIVyTZO'),
-    ('Tyler', 'Litz', 'tyler@litz.com', '$2a$12$Ny8Grucg/zR63BQtCcEOWuFC.Z3EdAc0LbqYashfK58wFDVoRl5/G');
-    
-insert into user_role (userId, roleId) values
-	( 1, 2),
-    ( 2, 1),
-    ( 3, 1),
-    ( 4, 1),
-    ( 5, 1),
-    ( 6, 3),
-    ( 7, 3),
-    ( 5, 2);
