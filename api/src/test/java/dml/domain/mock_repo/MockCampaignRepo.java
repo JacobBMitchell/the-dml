@@ -22,4 +22,9 @@ public class MockCampaignRepo implements CampaignRepo {
     public Campaign add(Campaign campaign) {
         return null;
     }
+
+    @Override
+    public boolean updateNotes(Campaign campaign) {
+        return false;
+    }
 }

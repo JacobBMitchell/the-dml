@@ -10,4 +10,6 @@ public interface CampaignRepo {
     List<Campaign> findByUserId(Integer id);
 
     Campaign add(Campaign campaign);
+
+    boolean updateNotes(Campaign campaign);
 }

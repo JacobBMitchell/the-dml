@@ -75,6 +75,16 @@ public class CampaignJdbcRepo implements CampaignRepo{
         return campaign;
     }
 
+    @Override
+    public boolean updateNotes(Campaign campaign) {
+
+        final String sql = "update campaigns set " +
+                "notes = ? " +
+                "where campaignId = ?;";
+
+        return jdbcTemplate.update( sql, campaign.getDmNotes(), campaign.getCampaignId()) > 0;
+    }
+
     private List<Integer> findPlayersByCampaignId(int id) {
 
         final String sql = "select * from characters where campaignId = ?;";

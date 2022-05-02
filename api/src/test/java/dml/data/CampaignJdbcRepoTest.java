@@ -58,4 +58,21 @@ class CampaignJdbcRepoTest {
         campaign = repo.add(campaign);
         assertEquals(3, campaign.getCampaignId());
     }
+
+    @Test
+    void shouldUpdateNotes() {
+        String notes = "updated";
+        Campaign campaign = new Campaign();
+        campaign.setCampaignId(2);
+        campaign.setDmNotes(notes);
+        assertTrue(repo.updateNotes(campaign));
+        assertEquals(notes, repo.findById(2).getDmNotes());
+    }
+
+    @Test
+    void shouldNotUpdateNotFound() {
+        Campaign campaign = new Campaign();
+        campaign.setCampaignId(100);
+        assertFalse(repo.updateNotes(campaign));
+    }
 }
