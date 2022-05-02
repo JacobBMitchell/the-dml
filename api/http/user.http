@@ -2,6 +2,6 @@ Post http://localhost:8080/api/security/login
 Content-Type: application/json
 
 {
-    "username" : "tyler@email.com",
-    "password" : "tyler" 
+    "username" : "tyler@litz.com",
+    "password" : "Tyler" 
 }
