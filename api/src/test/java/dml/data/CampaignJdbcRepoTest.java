@@ -50,4 +50,12 @@ class CampaignJdbcRepoTest {
     void shouldNotFindNonExistingDmId() {
         assertEquals(0, repo.findByUserId(100).size());
     }
+
+    @Test
+    void shouldAdd() {
+        Campaign campaign = new Campaign();
+        campaign.setDmId(1);
+        campaign = repo.add(campaign);
+        assertEquals(3, campaign.getCampaignId());
+    }
 }

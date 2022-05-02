@@ -6,8 +6,11 @@ import dml.data.mappers.UserMapper;
 import dml.models.Campaign;
 import dml.models.PlayerCharacter;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +51,28 @@ public class CampaignJdbcRepo implements CampaignRepo{
         }
 
         return campaigns;
+    }
+
+    @Override
+    public Campaign add(Campaign campaign) {
+
+        final String sql = "insert into campaigns (dmId, notes) values (?, ?);";
+
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowsAffected = jdbcTemplate.update(connection -> {
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, campaign.getDmId());
+            ps.setString(2, campaign.getDmNotes());
+            return ps;
+        }, keyHolder);
+
+        if (rowsAffected <= 0) {
+            return null;
+        }
+
+        campaign.setCampaignId(keyHolder.getKey().intValue());
+
+        return campaign;
     }
 
     private List<Integer> findPlayersByCampaignId(int id) {
