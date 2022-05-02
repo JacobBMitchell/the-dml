@@ -4,7 +4,7 @@ import dml.data.UserRepo;
 import dml.models.AppUser;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-@MockBean
+
 public class MockUserRepo implements UserRepo {
     @Override
     public AppUser findByUsername(String username) {

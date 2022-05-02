@@ -27,10 +27,10 @@ public class PlayerCharacterService {
 
     //TODO: ADD USER VALIDATION TO CHECK A USER CAN ACCESS THIS DATA
 
-    public Result<PlayerCharacter> findById(Integer id, Principal user) {
+    public Result<PlayerCharacter> findById(Integer id, String username) {
         Result<PlayerCharacter> result = new Result<>();
 
-        AppUser requester = userRepo.findByUsername(user.getName());
+        AppUser requester = userRepo.findByUsername(username);
 
         if (requester.getRoles().isEmpty()){
             result.addMessage("Need to login", ResultType.INVALID);
@@ -65,7 +65,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<List<PlayerCharacter>> findByUser(Integer userId , Principal user){
+    public Result<List<PlayerCharacter>> findByUser(Integer userId , String username){
         Result<List<PlayerCharacter>> result = new Result<>();
 
         if (userId == null || userId <= 0){
@@ -80,7 +80,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<List<PlayerCharacter>> findByCampaign(Integer campaignId , Principal user){
+    public Result<List<PlayerCharacter>> findByCampaign(Integer campaignId , String username){
         Result<List<PlayerCharacter>> result = new Result<>();
 
         if (campaignId == null || campaignId <= 0){
@@ -97,7 +97,7 @@ public class PlayerCharacterService {
 
     //TODO: Fill in the rest of the service layer components add update and delete
 
-    public Result<PlayerCharacter> addPC(PlayerCharacter pc, Principal user){
+    public Result<PlayerCharacter> addPC(PlayerCharacter pc, String username){
         Result<PlayerCharacter> result = new Result<>();
         if (pc == null) {
             result.addMessage("Requires data object", ResultType.INVALID);
@@ -112,7 +112,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<PlayerCharacter> update(PlayerCharacter pc, Principal user) {
+    public Result<PlayerCharacter> update(PlayerCharacter pc, String username) {
         Result<PlayerCharacter> result = new Result<>();
         if (pc == null) {
             result.addMessage("Requires data object", ResultType.INVALID);
@@ -136,7 +136,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<Boolean> delete(Integer id, Principal user){
+    public Result<Boolean> delete(Integer id, String username){
         Result<Boolean> result = new Result<>();
         //TODO: Check authorization of delete
         result.setPayload(repo.deleteById(id));

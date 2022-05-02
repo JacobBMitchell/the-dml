@@ -1,20 +1,20 @@
 package dml.domain;
 
-import dml.domain.mock_repo.MockCampaignRepo;
-import dml.domain.mock_repo.MockCharacterRepo;
-import dml.domain.mock_repo.MockUserRepo;
+import dml.models.PlayerCharacter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.security.Principal;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class PlayerCharacterServiceTest {
 
-    @Mock
+    @Autowired
     PlayerCharacterService service;
 
     @BeforeEach
@@ -23,7 +23,10 @@ class PlayerCharacterServiceTest {
 
     @Test
     void findById() {
-        System.out.println("hi");
+        Set<String> roles = new HashSet<>();
+        roles.add("ADMIN");
+        Result<PlayerCharacter> result = service.findById(1, "jacob");
+        assertTrue(result.isSuccess());
     }
 
     @Test
