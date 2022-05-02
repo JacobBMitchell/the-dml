@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -290,6 +291,6 @@ public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
 
     @Override
     public boolean deleteById(int characterId) {
-        return false;
+        return jdbcTemplate.update("delete from characters where characterId = ?;", characterId) > 0;
     }
 }

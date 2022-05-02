@@ -83,10 +83,10 @@ class PlayerCharacterJdbcRepoTest {
     @Test
     void shouldUpdateCharacter() {
         PlayerCharacter character = makeCharacter();
-        character.setId(5);
+        character.setId(4);
         Boolean result = repo.update(character);
         assertTrue(result);
-        assertEquals("New Character", repo.findById(5).getName());
+        assertEquals("New Character", repo.findById(4).getName());
     }
 
     @Test
@@ -95,6 +95,16 @@ class PlayerCharacterJdbcRepoTest {
         character.setId(100);
         Boolean result = repo.update(character);
         assertFalse(result);
+    }
+
+    @Test
+    void shouldDeleteById() {
+        assertTrue(repo.deleteById(5));
+    }
+
+    @Test
+    void shouldNotDeleteNonExisting() {
+        assertFalse(repo.deleteById(100));
     }
 
     private PlayerCharacter makeCharacter() {
