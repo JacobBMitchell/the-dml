@@ -7,5 +7,5 @@ public interface UserRepo {
 
     AppUser findById(Integer id);
 
-    AppUser create(String username, String password, String email);
+    AppUser create(AppUser user);
 }

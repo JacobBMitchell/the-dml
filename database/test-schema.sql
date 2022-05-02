@@ -100,7 +100,7 @@ begin
     delete from users;
     alter table users auto_increment = 1;
     
-    	-- passwords are their first name
+    	-- passwords are their first name (ex: 'Matthew')
 	insert into users (firstName, lastName, email, password_hash) values
 		('Matthew', 'Mercer', 'matthew@mercer.com', '$2a$12$FIBjdgcIFhDMrDv1prxKh.YNHRCi7rrUu4Hl/.CuGCpp1IiQ5pXrW'),
 		('Marisha', 'Ray', 'marisha@ray.com', '$2a$12$wavM41roYWyNGU0hop7RBu8LQTxYd4I.5TLIF1ETNahf5VnhXFC4u'),
