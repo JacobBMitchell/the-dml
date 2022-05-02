@@ -1,5 +1,6 @@
 package dml.domain;
 
+import dml.data.CampaignRepo;
 import dml.data.PlayerCharacterRepo;
 import dml.data.UserRepo;
 import dml.models.AppUser;
@@ -20,6 +21,8 @@ public class PlayerCharacterService {
     PlayerCharacterRepo repo;
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    CampaignRepo campRepo;
 
     //TODO: ADD USER VALIDATION TO CHECK A USER CAN ACCESS THIS DATA
 
@@ -37,15 +40,24 @@ public class PlayerCharacterService {
             result.addMessage("Needs valid id", ResultType.INVALID);
             return result;
         }
+
         PlayerCharacter character = repo.findById(id);
+
         if (character == null){
             result.addMessage("Character not found", ResultType.NOT_FOUND);
+            return result;
         }
 
-        // TODO: userids or role dm to campaign_id or all admin
-//        if (requester.getUserId() != character.getUserId()){
-//        }
-        result.setPayload(character);
+        if (requester.getUserId() == character.getUserId() ||
+                (requester.getRoles().contains("DM") &&
+                        campRepo.findByUserId(requester.getUserId()).stream().anyMatch(a -> a.getPlayerIds().contains(character.getUserId())) ) ||
+            requester.getRoles().contains("ADMIN")){
+            if (result.isSuccess()){
+                result.setPayload(character);
+            }
+        }
+
+
         return result;
     }
 
