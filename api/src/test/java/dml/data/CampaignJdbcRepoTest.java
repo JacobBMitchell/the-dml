@@ -54,7 +54,7 @@ class CampaignJdbcRepoTest {
     @Test
     void shouldAdd() {
         Campaign campaign = new Campaign();
-        campaign.setDmId(1);
+        campaign.setDmId(5);
         campaign = repo.add(campaign);
         assertEquals(3, campaign.getCampaignId());
     }
