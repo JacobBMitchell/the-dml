@@ -32,7 +32,7 @@ public class PlayerCharacterService {
 
         AppUser requester = userRepo.findByUsername(username);
 
-        if (requester.getRoles().isEmpty()){
+        if (requester == null || requester.getRoles().isEmpty()){
             result.addMessage("Need to login", ResultType.INVALID);
             return result;
         }
@@ -68,11 +68,26 @@ public class PlayerCharacterService {
     public Result<List<PlayerCharacter>> findByUser(Integer userId , String username){
         Result<List<PlayerCharacter>> result = new Result<>();
 
+        AppUser requester = userRepo.findByUsername(username);
+
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
+
         if (userId == null || userId <= 0){
             result.addMessage("Needs valid id", ResultType.INVALID);
             return result;
         }
+
+        if (userId != requester.getUserId() || !requester.getRoles().contains("ADMIN")){
+            result.addMessage("You cannot request to see this users details", ResultType.INVALID);
+            return result;
+        }
+
         List<PlayerCharacter> characters = repo.findByPlayer(userId);
+
+
         if (characters == null){
             result.addMessage("Character not found", ResultType.NOT_FOUND);
         }
@@ -83,14 +98,30 @@ public class PlayerCharacterService {
     public Result<List<PlayerCharacter>> findByCampaign(Integer campaignId , String username){
         Result<List<PlayerCharacter>> result = new Result<>();
 
+        AppUser requester = userRepo.findByUsername(username);
+
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
+
         if (campaignId == null || campaignId <= 0){
             result.addMessage("Needs valid id", ResultType.INVALID);
             return result;
         }
+
+        if (!requester.getRoles().contains("DM") || !requester.getRoles().contains("ADMIN")){
+            result.addMessage("Only DM and Admin Access", ResultType.INVALID);
+        }
+
         List<PlayerCharacter> characters = repo.findByCampaign(campaignId);
+
+       // if (campRepo.findByUserId(requester.getUserId()))
+
         if (characters == null){
             result.addMessage("Character not found", ResultType.NOT_FOUND);
         }
+
         result.setPayload(characters);
         return result;
     }
