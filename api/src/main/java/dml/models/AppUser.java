@@ -10,15 +10,20 @@ import java.util.stream.Collectors;
 public class AppUser extends User {
     Set<String> roles;
     Integer userId;
+    String firstName;
+    String lastName;
     String email;
 
-    public AppUser(String username, String password, Set<String> roles, String email, Integer userId) {
+    public AppUser(String username, String password, Set<String> roles, String email, Integer userId,
+                   String firstName, String lastName) {
         super(username, password, roles.stream()
                 .map(r -> new SimpleGrantedAuthority("ROLE_" + r))
                 .collect(Collectors.toList()));
         this.userId = userId;
         this.roles = roles;
         this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public Set<String> getRoles() {
@@ -35,6 +40,22 @@ public class AppUser extends User {
 
     public void setUserId(Integer userId) {
         this.userId = userId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
