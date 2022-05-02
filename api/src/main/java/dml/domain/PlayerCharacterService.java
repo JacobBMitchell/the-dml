@@ -91,7 +91,9 @@ public class PlayerCharacterService {
         if (characters == null){
             result.addMessage("Character not found", ResultType.NOT_FOUND);
         }
-        result.setPayload(characters);
+        if (result.isSuccess()){
+            result.setPayload(characters);
+        }
         return result;
     }
 
@@ -116,13 +118,17 @@ public class PlayerCharacterService {
 
         List<PlayerCharacter> characters = repo.findByCampaign(campaignId);
 
-       // if (campRepo.findByUserId(requester.getUserId()))
+        if (campRepo.findById(campaignId).getUserId() != requester.getUserId()){
+            result.addMessage("You do not have access to this campaign",ResultType.INVALID);
+        }
 
         if (characters == null){
             result.addMessage("Character not found", ResultType.NOT_FOUND);
         }
 
-        result.setPayload(characters);
+        if (result.isSuccess()){
+            result.setPayload(characters);
+        }
         return result;
     }
 
@@ -134,6 +140,14 @@ public class PlayerCharacterService {
             result.addMessage("Requires data object", ResultType.INVALID);
             return result;
         }
+
+        AppUser requester = userRepo.findByUsername(username);
+
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
+
         result = validate(pc);
 
         if (result.isSuccess()){
@@ -145,12 +159,26 @@ public class PlayerCharacterService {
 
     public Result<PlayerCharacter> update(PlayerCharacter pc, String username) {
         Result<PlayerCharacter> result = new Result<>();
+
         if (pc == null) {
             result.addMessage("Requires data object", ResultType.INVALID);
             return result;
         }
 
-        //TODO: Check authorization of update
+        AppUser requester = userRepo.findByUsername(username);
+
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
+
+        if (requester.getUserId() != pc.getUserId() ||
+                !(requester.getRoles().contains("DM") &&
+                        campRepo.findById(pc.getCampaignId()) != null &&
+                        campRepo.findById(pc.getCampaignId()).getUserId() == requester.getUserId()) ||
+                !requester.getRoles().contains("ADMIN")){
+            result.addMessage("You do not have access", ResultType.INVALID);
+        }
 
         if(repo.findById(pc.getId())==null){
             result.addMessage("Could not find character", ResultType.NOT_FOUND);
@@ -169,8 +197,20 @@ public class PlayerCharacterService {
 
     public Result<Boolean> delete(Integer id, String username){
         Result<Boolean> result = new Result<>();
-        //TODO: Check authorization of delete
-        result.setPayload(repo.deleteById(id));
+
+        AppUser requester = userRepo.findByUsername(username);
+
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
+
+        if (!requester.getRoles().contains("ADMIN") || requester.getUserId() != repo.findById(id).getUserId()){
+            result.addMessage("You don't have permission to delete", ResultType.INVALID);
+        }
+        if (result.isSuccess()){
+            result.setPayload(repo.deleteById(id));
+        }
         return result;
     }
 
