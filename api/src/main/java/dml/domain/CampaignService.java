@@ -29,7 +29,7 @@ public class CampaignService {
 
         Campaign campaign = repo.findById(id);
 
-        if (!campaign.getDmId().equals(requester.getUserId()) || !requester.getRoles().contains("ADMIN")){
+        if (!campaign.getDmId().equals(requester.getUserId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You cannot see this campaign", ResultType.INVALID);
         }
 
@@ -50,7 +50,7 @@ public class CampaignService {
             return result;
         }
 
-        if (!requester.getUserId().equals(uId) || !requester.getRoles().contains("ADMIN")){
+        if (!requester.getUserId().equals(uId) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access to this data", ResultType.INVALID);
         }
 
@@ -98,13 +98,13 @@ public class CampaignService {
     public Result<Boolean> deleteById(Integer id,  String username){
         AppUser requester = userRepo.findByUsername(username);
         Result<Boolean> result = new Result<>();
-        
+
         if (requester == null || requester.getRoles().isEmpty()){
             result.addMessage("Need to login", ResultType.INVALID);
             return result;
         }
 
-        if (!requester.getUserId().equals(id) || !requester.getRoles().contains("ADMIN")){
+        if (!requester.getUserId().equals(id) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have permission for this action", ResultType.INVALID);
         }
 
@@ -120,7 +120,7 @@ public class CampaignService {
         if (campaign.getDmId() == null || !requester.getUserId().equals(campaign.getDmId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access to this feature", ResultType.INVALID);
         }
-        if (campaign.getPlayerIds() != null && campaign.getPlayerIds().stream().anyMatch(a -> userRepo.findById(a) == null)){
+        if (campaign.getPlayerIds() != null && campaign.getPlayerIds().stream().noneMatch(a -> userRepo.findById(a) == null)){
             result.addMessage("Invalid player",ResultType.INVALID);
         }
         if (campaign.getDmNotes() != null && campaign.getDmNotes().length() > 20000) {

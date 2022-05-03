@@ -22,7 +22,6 @@ public class PlayerCharacterService {
     private CampaignRepo campRepo;
 
 
-    //TODO: ADD USER VALIDATION TO CHECK A USER CAN ACCESS THIS DATA
 
     public Result<PlayerCharacter> findById(Integer id, String username) {
         Result<PlayerCharacter> result = new Result<>();
@@ -106,6 +105,11 @@ public class PlayerCharacterService {
 
         if (campaignId == null || campaignId <= 0){
             result.addMessage("Needs valid id", ResultType.INVALID);
+            return result;
+        }
+
+        if (campRepo.findById(campaignId) == null){
+            result.addMessage("That campaign doesn't exist",ResultType.NOT_FOUND);
             return result;
         }
 
@@ -201,7 +205,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (!requester.getRoles().contains("ADMIN") || !requester.getUserId().equals(repo.findById(id).getUserId())){
+        if (!requester.getRoles().contains("ADMIN") && !requester.getUserId().equals(repo.findById(id).getUserId())){
             result.addMessage("You don't have permission to delete", ResultType.INVALID);
         }
         if (result.isSuccess()){
