@@ -47,6 +47,7 @@ class PlayerCharacterServiceTest {
         when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
         when(charRepo.findById(character.getId())).thenReturn(character);
         Result<PlayerCharacter> result = service.findById(1, user.getUsername());
+        assertTrue(result.isSuccess());
 
         //when dm look for campaign's character
         Set<String> dmRoles = new HashSet<>();
@@ -56,7 +57,22 @@ class PlayerCharacterServiceTest {
         dm.setUserId(2);
         dm.setEmail("DM");
         when(userRepo.findByUsername(dm.getEmail())).thenReturn(dm);
-        when(campRepo.findByUserId(dm.getUserId())).thenReturn(null);
+        List<Campaign> campaigns = new ArrayList<>();
+        campaigns.add(makeCampaign());
+        when(campRepo.findByUserId(dm.getUserId())).thenReturn(campaigns);
+        result = service.findById(1, dm.getEmail());
+        assertTrue(result.isSuccess());
+
+        //when requester is admin
+        Set<String> adminRoles = new HashSet<>();
+        adminRoles.add("ADMIN");
+        AppUser admin = makeUser();
+        admin.setRoles(adminRoles);
+        admin.setUserId(3);
+        admin.setEmail("admin");
+        when(userRepo.findByUsername(admin.getEmail())).thenReturn(admin);
+        result = service.findById(1, admin.getEmail());
+        assertTrue(result.isSuccess());
     }
 
     @Test
@@ -110,7 +126,11 @@ class PlayerCharacterServiceTest {
 
     private Campaign makeCampaign() {
         List<Integer> playerIds = new ArrayList<>();
-
-        return null;
+        playerIds.add(1);
+        Campaign campaign = new Campaign();
+        campaign.setCampaignId(1);
+        campaign.setDmId(2);
+        campaign.setPlayerIds(playerIds);
+        return campaign;
     }
 }
