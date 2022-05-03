@@ -1,0 +1,12 @@
+POST http://localhost:8080/api/security/login
+Content-Type: application/json
+
+{
+    "username": "tyler@litz.com",
+    "password": "Tyler"
+}
+
+###
+
+GET http://localhost:8080/api/character/100 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkbWwtYXBwIiwic3ViIjoidHlsZXJAbGl0ei5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJleHAiOjE2NTE2MjQ0OTR9.5YZCb-tE7-sL4dSwhhQIUxwUFL4QoVT2_u5BOAv2zq0
