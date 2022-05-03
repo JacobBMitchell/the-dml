@@ -29,7 +29,7 @@ public class CampaignService {
 
         Campaign campaign = repo.findById(id);
 
-        if (!campaign.getDmId().equals(requester.getUserId()) || !requester.getRoles().contains("ADMIN")){
+        if (!campaign.getDmId().equals(requester.getUserId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You cannot see this campaign", ResultType.INVALID);
         }
 
@@ -50,7 +50,7 @@ public class CampaignService {
             return result;
         }
 
-        if (!requester.getUserId().equals(uId) || !requester.getRoles().contains("ADMIN")){
+        if (!requester.getUserId().equals(uId) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access to this data", ResultType.INVALID);
         }
 
@@ -104,7 +104,7 @@ public class CampaignService {
             return result;
         }
 
-        if (!requester.getUserId().equals(id) || !requester.getRoles().contains("ADMIN")){
+        if (!requester.getUserId().equals(id) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have permission for this action", ResultType.INVALID);
         }
 
