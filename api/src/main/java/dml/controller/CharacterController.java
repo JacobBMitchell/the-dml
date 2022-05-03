@@ -30,7 +30,7 @@ public class CharacterController {
 
     @GetMapping("/campaign/{id}")
     public ResponseEntity getCharactersByCampaignId(@PathVariable Integer id, Principal user){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return ResponseEntity.ok(service.findByCampaign(id, user.getName()));
     }
 
     @PostMapping

@@ -109,13 +109,13 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (!requester.getRoles().contains("DM") || !requester.getRoles().contains("ADMIN")){
+        if (!requester.getRoles().contains("DM") && !requester.getRoles().contains("ADMIN")){
             result.addMessage("Only DM and Admin Access", ResultType.INVALID);
         }
 
         List<PlayerCharacter> characters = repo.findByCampaign(campaignId);
 
-        if (!campRepo.findById(campaignId).getDmId().equals(requester.getUserId())){
+        if (!campRepo.findById(campaignId).getDmId().equals(requester.getUserId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access to this campaign",ResultType.INVALID);
         }
 
