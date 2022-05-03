@@ -1,6 +1,7 @@
 package dml.controller;
 
 import dml.domain.PlayerCharacterService;
+import dml.domain.Result;
 import dml.models.PlayerCharacter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,22 +19,22 @@ public class CharacterController {
     PlayerCharacterService service;
 
     @GetMapping("/{id}")
-    public ResponseEntity getCharacterById(@PathVariable Integer id, Principal User){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity getCharacterById(@PathVariable Integer id, Principal user){
+        return ResponseEntity.ok(service.findById(id, user.getName()));
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity getCharactersByUserId(@PathVariable Integer id, Principal User){
+    public ResponseEntity getCharactersByUserId(@PathVariable Integer id, Principal user){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @GetMapping("/campaign/{id}")
-    public ResponseEntity getCharactersByCampaignId(@PathVariable Integer id, Principal User){
+    public ResponseEntity getCharactersByCampaignId(@PathVariable Integer id, Principal user){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PostMapping
-    public ResponseEntity addCharacter(@RequestBody PlayerCharacter character, Principal User){
+    public ResponseEntity addCharacter(@RequestBody PlayerCharacter character, Principal user){
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
