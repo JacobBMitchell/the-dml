@@ -49,7 +49,7 @@ function Login(){
             }
         }).then(data => {
             localStorage.setItem("userId", data.userId);
-        }).catch(rejection => alert(rejection));
+        }).catch(rejection => console.log(rejection));
     }
 
     return(<>
