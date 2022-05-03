@@ -77,7 +77,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (!userId.equals(requester.getUserId()) || !requester.getRoles().contains("ADMIN")){
+        if (!userId.equals(requester.getUserId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You cannot request to see this users details", ResultType.INVALID);
             return result;
         }
