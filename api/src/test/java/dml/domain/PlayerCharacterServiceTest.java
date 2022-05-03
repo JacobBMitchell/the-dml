@@ -171,15 +171,107 @@ class PlayerCharacterServiceTest {
     }
 
     @Test
+    void shouldNotFindByCamp() {
+        Result<List<PlayerCharacter>> result = service.findByCampaign(1, null);
+        assertFalse(result.isSuccess());
+
+        //invalid id
+        AppUser user = makeUser();
+        when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
+        result = service.findByCampaign(0, user.getUsername());
+        assertFalse(result.isSuccess());
+
+        //character not found
+        Campaign campaign = makeCampaign();
+        when(campRepo.findById(2)).thenReturn(campaign);
+        when(charRepo.findById(100)).thenReturn(null);
+        result = service.findByCampaign(100, user.getUsername());
+        assertFalse(result.isSuccess());
+
+        //access denied
+        PlayerCharacter character = makeCharacter();
+        character.setUserId(3);
+        when(charRepo.findById(2)).thenReturn(character);
+        result = service.findByCampaign(3, user.getUsername());
+        assertFalse(result.isSuccess());
+
+    }
+
+    @Test
     void addPC() {
+        AppUser user = makeUser();
+        PlayerCharacter character = makeCharacter();
+        when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
+        when(userRepo.findById(user.getUserId())).thenReturn(user);
+        when(campRepo.findById(character.getCampaignId())).thenReturn(makeCampaign());
+        when(charRepo.add(character)).thenReturn(character);
+        Result<PlayerCharacter> result = service.addPC(character, user.getUsername());
+        assertTrue(result.isSuccess());
+
+    }
+
+    @Test
+    void shouldNotAdd() {
+        AppUser user = makeUser();
+        PlayerCharacter character = makeCharacter();
+        when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
+        when(userRepo.findById(user.getUserId())).thenReturn(user);
+        when(campRepo.findById(character.getCampaignId())).thenReturn(null);
+        when(charRepo.add(character)).thenReturn(character);
+        Result<PlayerCharacter> result = service.addPC(character, user.getUsername());
+        assertFalse(result.isSuccess());
     }
 
     @Test
     void update() {
+        AppUser user = makeUser();
+        PlayerCharacter character = makeCharacter();
+        when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
+        when(userRepo.findById(user.getUserId())).thenReturn(user);
+        when(campRepo.findById(character.getCampaignId())).thenReturn(makeCampaign());
+        when(charRepo.add(character)).thenReturn(character);
+        Result<PlayerCharacter> result = service.update(character, user.getUsername());
+        assertTrue(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotUpdate() {
+        AppUser user = makeUser();
+        PlayerCharacter character = makeCharacter();
+        when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
+        when(userRepo.findById(user.getUserId())).thenReturn(user);
+        when(campRepo.findById(character.getCampaignId())).thenReturn(null);
+        when(charRepo.add(character)).thenReturn(character);
+        Result<PlayerCharacter> result = service.update(character, user.getUsername());
+        assertFalse(result.isSuccess());
     }
 
     @Test
     void delete() {
+        //when requester looks at their character
+        AppUser user = makeUser();
+        PlayerCharacter character = makeCharacter();
+        when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
+        when(charRepo.findById(character.getId())).thenReturn(character);
+        Result<Boolean> result = service.delete(1, user.getUsername());
+        assertTrue(result.isSuccess());
+
+
+        //when requester is admin
+        Set<String> adminRoles = new HashSet<>();
+        adminRoles.add("ADMIN");
+        AppUser admin = makeUser();
+        admin.setRoles(adminRoles);
+        admin.setUserId(3);
+        admin.setEmail("admin");
+        when(userRepo.findByUsername(admin.getEmail())).thenReturn(admin);
+        result = service.delete(1, admin.getEmail());
+        assertTrue(result.isSuccess());
+    }
+
+    @Test
+    void shouldNotDelete() {
+
     }
 
     private AppUser makeUser() {

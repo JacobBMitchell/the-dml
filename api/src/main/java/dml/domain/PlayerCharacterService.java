@@ -108,6 +108,11 @@ public class PlayerCharacterService {
             return result;
         }
 
+        if (campRepo.findById(campaignId) == null){
+            result.addMessage("That campaign doesn't exist",ResultType.NOT_FOUND);
+            return result;
+        }
+
         if (!requester.getRoles().contains("DM") && !requester.getRoles().contains("ADMIN")){
             result.addMessage("Only DM and Admin Access", ResultType.INVALID);
         }
@@ -200,7 +205,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (!requester.getRoles().contains("ADMIN") || !requester.getUserId().equals(repo.findById(id).getUserId())){
+        if (!requester.getRoles().contains("ADMIN") && !requester.getUserId().equals(repo.findById(id).getUserId())){
             result.addMessage("You don't have permission to delete", ResultType.INVALID);
         }
         if (result.isSuccess()){
