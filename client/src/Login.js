@@ -34,7 +34,22 @@ function Login(){
                 navigate("/");
             })
             .catch(rejection => alert(rejection));
-
+        
+        fetch("http://localhost:8080/api/user/" + username,{
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                alert("User wasn't found.");
+            }
+        }).then(data => {
+            localStorage.setItem("userId", data.userId);
+        }).catch(rejection => alert(rejection));
     }
 
     return(<>

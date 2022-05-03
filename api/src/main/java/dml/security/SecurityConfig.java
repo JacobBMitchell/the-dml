@@ -28,6 +28,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( HttpMethod.GET, "/api/character/*" ).authenticated()
                 .antMatchers( HttpMethod.GET, "/api/character/user/*" ).authenticated()
                 .antMatchers( HttpMethod.GET, "/api/character/campaign/*" ).authenticated()
+                .antMatchers( HttpMethod.GET, "/api/user/*").authenticated()
                 .antMatchers("/**").denyAll()
                 .and()
                 .addFilter(new JwtRequestFilter(authenticationManager(), converter))

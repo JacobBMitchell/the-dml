@@ -8,5 +8,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/character/campaign/1 HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkbWwtYXBwIiwic3ViIjoidHlsZXJAbGl0ei5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJleHAiOjE2NTE2MjU4NDN9.AYibU-36T8YxbTnPIEQ9YfrS6ZWQlqaHCbOWZVpfbFo
+GET http://localhost:8080/api/character/2 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkbWwtYXBwIiwic3ViIjoibWFyaXNoYUByYXkuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1BMQVlFUiIsImV4cCI6MTY1MTYzMDEzNn0.pMTOKrMvWmNc3FdIh1rAGd6Pn7hiqNtVN3pyxOcAtk8
