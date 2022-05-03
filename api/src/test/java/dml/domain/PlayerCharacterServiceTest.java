@@ -76,6 +76,36 @@ class PlayerCharacterServiceTest {
     }
 
     @Test
+    void shouldNotFindById() {
+        //when not logged in
+        Result<PlayerCharacter> result = service.findById(1, null);
+        assertFalse(result.isSuccess());
+        assertEquals("Need to login", result.getMessages().get(0));
+
+        //invalid id
+        AppUser user = makeUser();
+        when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
+        result = service.findById(0, user.getUsername());
+        assertFalse(result.isSuccess());
+        assertEquals("Needs valid id", result.getMessages().get(0));
+
+        //character not found
+        when(charRepo.findById(100)).thenReturn(null);
+        result = service.findById(100, user.getUsername());
+        assertFalse(result.isSuccess());
+        assertEquals("Character not found", result.getMessages().get(0));
+
+        //access denied
+        PlayerCharacter character = makeCharacter();
+        character.setUserId(2);
+        when(charRepo.findById(2)).thenReturn(character);
+        result = service.findById(2, user.getUsername());
+        assertFalse(result.isSuccess());
+        assertEquals("ACCESS DENIED", result.getMessages().get(0));
+
+    }
+
+    @Test
     void findByUser() {
     }
 
