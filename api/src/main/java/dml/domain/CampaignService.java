@@ -98,7 +98,7 @@ public class CampaignService {
     public Result<Boolean> deleteById(Integer id,  String username){
         AppUser requester = userRepo.findByUsername(username);
         Result<Boolean> result = new Result<>();
-        
+
         if (requester == null || requester.getRoles().isEmpty()){
             result.addMessage("Need to login", ResultType.INVALID);
             return result;

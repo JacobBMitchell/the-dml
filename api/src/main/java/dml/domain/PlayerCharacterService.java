@@ -22,7 +22,6 @@ public class PlayerCharacterService {
     private CampaignRepo campRepo;
 
 
-    //TODO: ADD USER VALIDATION TO CHECK A USER CAN ACCESS THIS DATA
 
     public Result<PlayerCharacter> findById(Integer id, String username) {
         Result<PlayerCharacter> result = new Result<>();
@@ -77,7 +76,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (!userId.equals(requester.getUserId()) || !requester.getRoles().contains("ADMIN")){
+        if (!userId.equals(requester.getUserId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You cannot request to see this users details", ResultType.INVALID);
             return result;
         }
@@ -109,7 +108,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        if (!requester.getRoles().contains("DM") || !requester.getRoles().contains("ADMIN")){
+        if (!requester.getRoles().contains("DM") && !requester.getRoles().contains("ADMIN")){
             result.addMessage("Only DM and Admin Access", ResultType.INVALID);
         }
 
