@@ -57,10 +57,46 @@ class CampaignServiceTest {
 
     @Test
     void getCampaignsByUser() {
+        //when dm look for campaign's character
+        Set<String> dmRoles = new HashSet<>();
+        dmRoles.add("DM");
+        AppUser dm = makeUser();
+        dm.setRoles(dmRoles);
+        dm.setUserId(2);
+        dm.setEmail("DM");
+        when(userRepo.findByUsername(dm.getEmail())).thenReturn(dm);
+        List<Campaign> campaigns = new ArrayList<>();
+        campaigns.add(makeCampaign());
+        when(campRepo.findByUserId(2)).thenReturn(campaigns);
+        Result<List<Campaign>> result = service.getCampaignsByUser(dm.getUserId(), dm.getEmail());
+        assertTrue(result.isSuccess());
+
+        //when requester is admin
+        Set<String> adminRoles = new HashSet<>();
+        adminRoles.add("ADMIN");
+        AppUser admin = makeUser();
+        admin.setRoles(adminRoles);
+        admin.setUserId(3);
+        admin.setEmail("admin");
+        when(userRepo.findByUsername(admin.getEmail())).thenReturn(admin);
+        result = service.getCampaignsByUser(2, admin.getEmail());
+        assertTrue(result.isSuccess());
     }
 
     @Test
     void addCampaign() {
+        Set<String> dmRoles = new HashSet<>();
+        dmRoles.add("DM");
+        AppUser dm = makeUser();
+        dm.setRoles(dmRoles);
+        dm.setUserId(2);
+        dm.setEmail("DM");
+        Campaign campaign = makeCampaign();
+        campaign.setCampaignId(null);
+        when(userRepo.findByUsername(dm.getUsername())).thenReturn(dm);
+        when(campRepo.add(makeCampaign())).thenReturn(campaign);
+        Result<Campaign> result = service.addCampaign(campaign,dm.getUsername());
+        assertTrue(result.isSuccess());
     }
 
     @Test

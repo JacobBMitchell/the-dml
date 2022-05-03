@@ -120,7 +120,7 @@ public class CampaignService {
         if (campaign.getDmId() == null || !requester.getUserId().equals(campaign.getDmId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access to this feature", ResultType.INVALID);
         }
-        if (campaign.getPlayerIds() != null && campaign.getPlayerIds().stream().anyMatch(a -> userRepo.findById(a) == null)){
+        if (campaign.getPlayerIds() != null && campaign.getPlayerIds().stream().noneMatch(a -> userRepo.findById(a) == null)){
             result.addMessage("Invalid player",ResultType.INVALID);
         }
         if (campaign.getDmNotes() != null && campaign.getDmNotes().length() > 20000) {
