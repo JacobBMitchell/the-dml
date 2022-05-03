@@ -25,12 +25,12 @@ public class CharacterController {
 
     @GetMapping("/user/{id}")
     public ResponseEntity getCharactersByUserId(@PathVariable Integer id, Principal user){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return ResponseEntity.ok(service.findByUser(id, user.getName()));
     }
 
     @GetMapping("/campaign/{id}")
     public ResponseEntity getCharactersByCampaignId(@PathVariable Integer id, Principal user){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        return ResponseEntity.ok(service.findByCampaign(id, user.getName()));
     }
 
     @PostMapping
