@@ -67,6 +67,10 @@ public class CampaignService {
         AppUser requester = userRepo.findByUsername(username);
         Result<Campaign> result = validate(campaign, requester);
 
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
         if (result.isSuccess()){
             result.setPayload(repo.add(campaign));
         }
@@ -76,15 +80,33 @@ public class CampaignService {
 
 
     public Result<Campaign> update(Campaign campaign,  String username){
-        Result<Campaign> result = new Result<>();
+        AppUser requester = userRepo.findByUsername(username);
+        Result<Campaign> result = validate(campaign, requester);
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
 
+        if (result.isSuccess()){
+            repo.updateNotes(campaign);
+        }
 
 
         return result;
     }
 
     public Result<Boolean> deleteById(Integer id,  String username){
+        AppUser requester = userRepo.findByUsername(username);
         Result<Boolean> result = new Result<>();
+        
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
+
+        if (!requester.getUserId().equals(id) || !requester.getRoles().contains("ADMIN")){
+            result.addMessage("You do not have permission for this action", ResultType.INVALID);
+        }
 
         return result;
     }
@@ -95,14 +117,15 @@ public class CampaignService {
             result.addMessage("Object Required", ResultType.INVALID);
             return result;
         }
-        if (campaign.getDmId() == null || !requester.getUserId().equals(campaign.getDmId()) || !requester.getRoles().contains("ADMIN")){
+        if (campaign.getDmId() == null || !requester.getUserId().equals(campaign.getDmId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access to this feature", ResultType.INVALID);
         }
         if (campaign.getPlayerIds() != null && campaign.getPlayerIds().stream().anyMatch(a -> userRepo.findById(a) == null)){
             result.addMessage("Invalid player",ResultType.INVALID);
         }
-
-
+        if (campaign.getDmNotes() != null && campaign.getDmNotes().length() > 20000) {
+            result.addMessage("Max character limit exceeded", ResultType.INVALID);
+        }
         return result;
     }
 
