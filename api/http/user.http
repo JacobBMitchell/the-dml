@@ -5,3 +5,7 @@ Content-Type: application/json
     "username" : "tyler@litz.com",
     "password" : "Tyler" 
 }
+
+###
+
+GET http://www.dnd5eapi.co/api/spells
