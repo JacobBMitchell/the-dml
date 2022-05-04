@@ -5,9 +5,9 @@ import AuthContext from './AuthContext';
 function Nav() {
     const [user, setUser] = useContext(AuthContext);
 
-    function handleLogout(){
-        localStorage.removeItem( "token" );
-        setUser( null );
+    function handleLogout() {
+        localStorage.removeItem("token");
+        setUser(null);
     }
 
     return (
@@ -37,7 +37,9 @@ function Nav() {
                         <Link to="/campaigns">Campaigns</Link>
                     </li>
                 ) : <></>}
+                <li>
                     <Link to="/resources">Resources</Link>
+                </li>
             </ul>
         </nav>
     )
