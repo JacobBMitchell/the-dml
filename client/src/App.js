@@ -6,6 +6,7 @@ import Nav from "./Nav";
 import Login from "./Login";
 import CharacterPage from "./CharacterPage";
 import CampaignPage from "./CampaignPage";
+import UsefulLinks from "./UsefulLinks";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -19,6 +20,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/characters" element={<CharacterPage/>}/>
             <Route path="/campaigns" element={<CampaignPage/>}/>
+            <Route path="/resources" element={<UsefulLinks/>}/>
           </Routes>
         </div>
       </AuthContext.Provider>

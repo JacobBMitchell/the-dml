@@ -11,7 +11,7 @@ function Nav() {
     }
 
     return (
-        <nav>
+        <nav className='nav'>
             <ul>
                 <li>
                     <Link to="/">Home</Link>
@@ -37,7 +37,7 @@ function Nav() {
                         <Link to="/campaigns">Campaigns</Link>
                     </li>
                 ) : <></>}
-
+                    <Link to="/resources">Resources</Link>
             </ul>
         </nav>
     )
