@@ -119,7 +119,7 @@ public class PlayerCharacterService {
 
         List<PlayerCharacter> characters = repo.findByCampaign(campaignId);
 
-        if (!campRepo.findById(campaignId).getDmId().equals(requester.getUserId())){
+        if (!campRepo.findById(campaignId).getDmId().equals(requester.getUserId()) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access to this campaign",ResultType.INVALID);
         }
 

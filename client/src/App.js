@@ -4,6 +4,7 @@ import AuthContext from "./AuthContext";
 import HomePage from "./HomePage";
 import Nav from "./Nav";
 import Login from "./Login";
+import CharacterPage from "./CharacterPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login/>}/>
+            <Route path="/characters" element={<CharacterPage/>}/>
           </Routes>
         </div>
       </AuthContext.Provider>

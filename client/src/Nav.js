@@ -21,6 +21,12 @@ function Nav() {
                     </li>
                 )}
 
+                {user?.user ? (
+                    <li>
+                        <Link to="/characters">Characters</Link>
+                    </li>
+                ) : <></>}
+
             </ul>
         </nav>
     )
