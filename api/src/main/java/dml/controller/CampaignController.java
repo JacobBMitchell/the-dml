@@ -49,7 +49,7 @@ public class CampaignController {
         return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity updateCampaign(@PathVariable Integer id,@RequestBody Campaign campaign ,Principal user){
         if (campaign == null){
             return new ResponseEntity<>("Cannot have null character",HttpStatus.BAD_REQUEST);
