@@ -101,6 +101,19 @@ class CampaignServiceTest {
 
     @Test
     void update() {
+        Set<String> dmRoles = new HashSet<>();
+        dmRoles.add("DM");
+        AppUser dm = makeUser();
+        dm.setRoles(dmRoles);
+        dm.setUserId(2);
+        dm.setEmail("DM");
+        Campaign campaign = makeCampaign();
+        campaign.setCampaignId(1);
+        when(userRepo.findByUsername(dm.getUsername())).thenReturn(dm);
+        when(campRepo.findById(campaign.getCampaignId())).thenReturn(campaign);
+        when(campRepo.add(makeCampaign())).thenReturn(campaign);
+        Result<Campaign> result = service.update(campaign,dm.getUsername());
+        assertTrue(result.isSuccess());
     }
 
     @Test

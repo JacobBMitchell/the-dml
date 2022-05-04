@@ -2,6 +2,7 @@ package dml.controller;
 
 import dml.domain.PlayerCharacterService;
 import dml.domain.Result;
+import dml.domain.ResultType;
 import dml.models.PlayerCharacter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,16 @@ public class CharacterController {
 
     @GetMapping("/{id}")
     public ResponseEntity getCharacterById(@PathVariable Integer id, Principal user){
-        return ResponseEntity.ok(service.findById(id, user.getName()));
+        Result<PlayerCharacter> result = service.findById(id, user.getName());
+        if (result.isSuccess()){
+            return ResponseEntity.ok(result.getPayload());
+        }
+        if (result.getType() == ResultType.INVALID){
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        if (result.getType() == ResultType.NOT_FOUND){
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping("/user/{id}")

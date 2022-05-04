@@ -67,10 +67,6 @@ public class CampaignService {
         AppUser requester = userRepo.findByUsername(username);
         Result<Campaign> result = validate(campaign, requester);
 
-        if (requester == null || requester.getRoles().isEmpty()){
-            result.addMessage("Need to login", ResultType.INVALID);
-            return result;
-        }
         if (result.isSuccess()){
             result.setPayload(repo.add(campaign));
         }
@@ -82,10 +78,11 @@ public class CampaignService {
     public Result<Campaign> update(Campaign campaign,  String username){
         AppUser requester = userRepo.findByUsername(username);
         Result<Campaign> result = validate(campaign, requester);
-        if (requester == null || requester.getRoles().isEmpty()){
-            result.addMessage("Need to login", ResultType.INVALID);
-            return result;
+
+        if (repo.findById(campaign.getCampaignId()) == null){
+            result.addMessage("Invalid campaign to update", ResultType.NOT_FOUND);
         }
+
 
         if (result.isSuccess()){
             repo.updateNotes(campaign);
@@ -113,6 +110,10 @@ public class CampaignService {
 
     private Result<Campaign> validate(Campaign campaign, AppUser requester) {
         Result<Campaign> result = new Result<>();
+        if (requester == null || requester.getRoles().isEmpty()){
+            result.addMessage("Need to login", ResultType.INVALID);
+            return result;
+        }
         if (campaign == null){
             result.addMessage("Object Required", ResultType.INVALID);
             return result;
