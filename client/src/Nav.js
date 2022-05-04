@@ -8,6 +8,7 @@ function Nav() {
     function handleLogout() {
         localStorage.removeItem("token");
         setUser(null);
+        navigate("/");
     }
 
     return (
