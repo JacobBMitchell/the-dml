@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
@@ -26,36 +27,79 @@ public class CharacterController {
             return ResponseEntity.ok(result.getPayload());
         }
         if (result.getType() == ResultType.INVALID){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
         }
-        if (result.getType() == ResultType.NOT_FOUND){
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
+
+        return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/user/{id}")
     public ResponseEntity getCharactersByUserId(@PathVariable Integer id, Principal user){
-        return ResponseEntity.ok(service.findByUser(id, user.getName()));
+        Result<List<PlayerCharacter>> result = service.findByUser(id, user.getName());
+        if (result.isSuccess()){
+            return ResponseEntity.ok(result.getPayload());
+        }
+        if (result.getType() == ResultType.INVALID){
+            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/campaign/{id}")
     public ResponseEntity getCharactersByCampaignId(@PathVariable Integer id, Principal user){
-        return ResponseEntity.ok(service.findByCampaign(id, user.getName()));
+        Result<List<PlayerCharacter>> result = service.findByCampaign(id, user.getName());
+        if (result.isSuccess()){
+            return ResponseEntity.ok(result.getPayload());
+        }
+        if (result.getType() == ResultType.INVALID){
+            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
     public ResponseEntity addCharacter(@RequestBody PlayerCharacter character, Principal user){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        if (character == null){
+            return new ResponseEntity<>("Cannot have null character",HttpStatus.BAD_REQUEST);
+        }
+        Result<PlayerCharacter> result = service.addPC(character, user.getName());
+        if (result.isSuccess()){
+            return ResponseEntity.ok(result.getPayload());
+        }
+        if (result.getType() == ResultType.INVALID){
+            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
     }
 
     @PutMapping("{id}")
     public ResponseEntity updateCharacter(@RequestBody PlayerCharacter character, @PathVariable Integer id, Principal user){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        if (character == null){
+            return new ResponseEntity<>("Cannot have null character",HttpStatus.BAD_REQUEST);
+        }
+        if (!character.getId().equals(id)){
+            return new ResponseEntity<>("Id must match character Id",HttpStatus.BAD_REQUEST);
+        }
+        Result<PlayerCharacter> result = service.update(character, user.getName());
+        if (result.isSuccess()){
+            return ResponseEntity.ok(result.getPayload());
+        }
+        if (result.getType() == ResultType.INVALID){
+            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity deleteCharacter(@PathVariable Integer id, Principal user){
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Result<Boolean> result = service.delete(id, user.getName());
+        if (result.isSuccess()){
+            return ResponseEntity.ok(result.getPayload());
+        }
+        if (result.getType() == ResultType.INVALID){
+            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
     }
 
 }
