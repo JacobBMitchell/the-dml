@@ -25,7 +25,7 @@ function CharacterPage() {
     }
 
     return (<>
-        <h1>CharacterPage</h1>
+        <h1>Character Page</h1>
         {characterFactory()}
     </>)
 }

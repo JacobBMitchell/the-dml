@@ -40,7 +40,7 @@ public class CampaignService {
         return result;
     }
 
-    public Result<List<Campaign>> getCampaignsByUser(Integer uId, String username){
+    public Result<List<Campaign>> getCampaignsByUser(String dmUsername, String username){
         Result<List<Campaign>> result = new Result<>();
 
         AppUser requester = userRepo.findByUsername(username);
@@ -49,6 +49,15 @@ public class CampaignService {
             result.addMessage("Need to login", ResultType.INVALID);
             return result;
         }
+
+        AppUser dm = userRepo.findByUsername(dmUsername);
+
+        if( dm == null ){
+            result.addMessage("User not found", ResultType.INVALID);
+            return result;
+        }
+
+        Integer uId = dm.getUserId();
 
         if (!requester.getUserId().equals(uId) && !requester.getRoles().contains("ADMIN")){
             result.addMessage("You do not have access to this data", ResultType.INVALID);

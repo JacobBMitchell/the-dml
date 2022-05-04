@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( HttpMethod.GET, "/api/character/user/*" ).authenticated()
                 .antMatchers( HttpMethod.GET, "/api/character/campaign/*" ).authenticated()
                 .antMatchers(HttpMethod.GET,"/api/campaign/*").authenticated()
+                .antMatchers(HttpMethod.GET,"/api/campaign/user/*").authenticated()
                 .antMatchers(HttpMethod.POST,"/api/campaign").authenticated()
                 .antMatchers(HttpMethod.PUT,"/api/campaign/*").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/api/campaign/*").authenticated()

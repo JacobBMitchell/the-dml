@@ -68,7 +68,7 @@ class CampaignServiceTest {
         List<Campaign> campaigns = new ArrayList<>();
         campaigns.add(makeCampaign());
         when(campRepo.findByUserId(2)).thenReturn(campaigns);
-        Result<List<Campaign>> result = service.getCampaignsByUser(dm.getUserId(), dm.getEmail());
+        Result<List<Campaign>> result = service.getCampaignsByUser(dm.getEmail(), dm.getEmail());
         assertTrue(result.isSuccess());
 
         //when requester is admin
@@ -79,7 +79,7 @@ class CampaignServiceTest {
         admin.setUserId(3);
         admin.setEmail("admin");
         when(userRepo.findByUsername(admin.getEmail())).thenReturn(admin);
-        result = service.getCampaignsByUser(2, admin.getEmail());
+        result = service.getCampaignsByUser(dm.getEmail(), admin.getEmail());
         assertTrue(result.isSuccess());
     }
 

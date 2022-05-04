@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:3000"})
 @RestController
@@ -24,6 +25,19 @@ public class CampaignController {
     @GetMapping("/{id}")
     public ResponseEntity getCampaignById(@PathVariable Integer id, Principal user){
         Result<Campaign> result = service.getCampaignById(id, user.getName());
+        if (result.isSuccess()){
+            return ResponseEntity.ok(result.getPayload());
+        }
+        if (result.getType() == ResultType.INVALID){
+            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/user/{username}")
+    public ResponseEntity getCampaignByUser(@PathVariable String username, Principal user){
+        Result<List<Campaign>> result = service.getCampaignsByUser(username, user.getName());
         if (result.isSuccess()){
             return ResponseEntity.ok(result.getPayload());
         }
