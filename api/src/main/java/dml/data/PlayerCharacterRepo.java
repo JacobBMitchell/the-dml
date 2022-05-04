@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface PlayerCharacterRepo {
 
+    List<PlayerCharacter> findAll();
+
     PlayerCharacter findById(int characterId);
 
     List<PlayerCharacter> findByPlayer(String username);

@@ -22,6 +22,9 @@ public class CampaignController {
     @Autowired
     CampaignService service;
 
+    @GetMapping
+    public List<Campaign> findAll() { return service.findAll(); }
+    
     @GetMapping("/{id}")
     public ResponseEntity getCampaignById(@PathVariable Integer id, Principal user){
         Result<Campaign> result = service.getCampaignById(id, user.getName());
