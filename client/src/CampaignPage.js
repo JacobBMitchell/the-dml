@@ -8,15 +8,27 @@ function CampaignPage() {
     const [user, setUser] = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/campaign/user/" + user.user.sub, {
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        })
-        .then(response => response.json())
-        .then(jsonData => setCampaigns(jsonData))
-        .catch(rejection => console.log(rejection));
+        if(user.user.authorities.includes("ADMIN")){
+            fetch("http://localhost:8080/api/campaign", {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
+            .then(response => response.json())
+            .then(jsonData => setCampaigns(jsonData))
+            .catch(rejection => console.log(rejection));
+        } else {
+            fetch("http://localhost:8080/api/campaign/user/" + user.user.sub, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
+            .then(response => response.json())
+            .then(jsonData => setCampaigns(jsonData))
+            .catch(rejection => console.log(rejection));
+        }
     }, []);
 
     function campaignFactory() {

@@ -26,7 +26,13 @@ public class CampaignJdbcRepo implements CampaignRepo{
 
     @Override
     public List<Campaign> findAll() {
-        return jdbcTemplate.query("select * from campaigns;", new CampaignMapper());
+        List<Campaign> campaigns = jdbcTemplate.query("select * from campaigns;", new CampaignMapper());
+
+        for(Campaign campaign : campaigns){
+            campaign.setPlayerIds(findPlayersByCampaignId(campaign.getCampaignId()));
+        }
+
+        return campaigns;
     }
 
     @Override

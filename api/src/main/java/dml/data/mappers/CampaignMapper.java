@@ -5,6 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CampaignMapper implements RowMapper<Campaign> {
@@ -12,7 +13,7 @@ public class CampaignMapper implements RowMapper<Campaign> {
     List<Integer> playerIds;
 
     public CampaignMapper() {
-        playerIds = null;
+        playerIds = new ArrayList<>();
     }
 
     public CampaignMapper(List<Integer> playerIds) {

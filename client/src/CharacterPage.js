@@ -7,15 +7,27 @@ function CharacterPage() {
     const [user, setUser] = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/character/user/" + user.user.sub, {
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        })
-        .then(response => response.json())
-        .then(jsonData => setCharacters(jsonData))
-        .catch(rejection => console.log(rejection));
+        if(user.user.authorities.includes("ADMIN")){
+            fetch("http://localhost:8080/api/character", {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
+            .then(response => response.json())
+            .then(jsonData => setCharacters(jsonData))
+            .catch(rejection => console.log(rejection));
+        } else {
+            fetch("http://localhost:8080/api/character/user/" + user.user.sub, {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                }
+            })
+            .then(response => response.json())
+            .then(jsonData => setCharacters(jsonData))
+            .catch(rejection => console.log(rejection));
+        }
     }, []);
 
     function characterFactory() {

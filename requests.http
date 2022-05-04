@@ -2,11 +2,11 @@ POST http://localhost:8080/api/security/login
 Content-Type: application/json
 
 {
-    "username": "marisha@ray.com",
+    "username": "tyler@litz.com",
     "password": "P@ssw0rd!"
 }
 
 ###
 
-GET http://localhost:8080/api/character/user/marisha@ray.com HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkbWwtYXBwIiwic3ViIjoibWFyaXNoYUByYXkuY29tIiwiYXV0aG9yaXRpZXMiOiJST0xFX1BMQVlFUiIsImV4cCI6MTY1MTcwMjM2OH0.ROfwf1aQrQ4LhJuleqylE41114aWQTe45x_WG4ALPm8
+GET http://localhost:8080/api/campaign/user/matthew@mercer.com HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkbWwtYXBwIiwic3ViIjoidHlsZXJAbGl0ei5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJleHAiOjE2NTE3MTYwMTZ9.laik3g_3gzqe8A5KEXKE0m2mBFHlrNtGDrRs3SWXs74
