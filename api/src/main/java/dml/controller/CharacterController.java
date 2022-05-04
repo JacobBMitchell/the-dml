@@ -64,7 +64,7 @@ public class CharacterController {
         }
         Result<PlayerCharacter> result = service.addPC(character, user.getName());
         if (result.isSuccess()){
-            return ResponseEntity.ok(result.getPayload());
+            return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED);
         }
         if (result.getType() == ResultType.INVALID){
             return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
@@ -82,7 +82,7 @@ public class CharacterController {
         }
         Result<PlayerCharacter> result = service.update(character, user.getName());
         if (result.isSuccess()){
-            return ResponseEntity.ok(result.getPayload());
+            return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED);
         }
         if (result.getType() == ResultType.INVALID){
             return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
