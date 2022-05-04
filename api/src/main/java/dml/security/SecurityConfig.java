@@ -19,8 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        //TODO: use http to set up antMatchers to control
-        //  access per endpoint
         http.csrf().disable();
         http.cors();
         http.authorizeRequests()
