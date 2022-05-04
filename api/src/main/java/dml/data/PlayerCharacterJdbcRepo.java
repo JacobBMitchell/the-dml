@@ -27,6 +27,11 @@ public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
     }
 
     @Override
+    public List<PlayerCharacter> findAll() {
+        return jdbcTemplate.query("select * from characters;", new PlayerCharacterMapper());
+    }
+
+    @Override
     public PlayerCharacter findById(int characterId) {
 
         final String sql = "select * from characters where characterId = ?;";

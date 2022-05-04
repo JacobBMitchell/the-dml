@@ -20,6 +20,9 @@ public class CharacterController {
     @Autowired
     PlayerCharacterService service;
 
+    @GetMapping
+    public List<PlayerCharacter> findAll() { return service.findAll(); }
+
     @GetMapping("/{id}")
     public ResponseEntity getCharacterById(@PathVariable Integer id, Principal user){
         Result<PlayerCharacter> result = service.findById(id, user.getName());
