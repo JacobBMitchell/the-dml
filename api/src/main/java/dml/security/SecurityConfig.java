@@ -19,15 +19,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception{
-        //TODO: use http to set up antMatchers to control
-        //  access per endpoint
         http.csrf().disable();
         http.cors();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/security/login").permitAll()
                 .antMatchers( HttpMethod.GET, "/api/character/*" ).authenticated()
+                .antMatchers( HttpMethod.POST, "/api/character" ).authenticated()
+                .antMatchers( HttpMethod.PUT, "/api/character/*" ).authenticated()
+                .antMatchers( HttpMethod.DELETE, "/api/character/*" ).authenticated()
                 .antMatchers( HttpMethod.GET, "/api/character/user/*" ).authenticated()
                 .antMatchers( HttpMethod.GET, "/api/character/campaign/*" ).authenticated()
+                .antMatchers(HttpMethod.GET,"/api/campaign/*").authenticated()
+                .antMatchers(HttpMethod.POST,"/api/campaign").authenticated()
+                .antMatchers(HttpMethod.PUT,"/api/campaign/*").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/api/campaign/*").authenticated()
                 .antMatchers( HttpMethod.GET, "/api/user/*").authenticated()
                 .antMatchers("/**").denyAll()
                 .and()
