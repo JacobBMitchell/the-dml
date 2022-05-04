@@ -21,7 +21,9 @@ public class PlayerCharacterService {
     @Autowired
     private CampaignRepo campRepo;
 
-
+    public List<PlayerCharacter> findAll() {
+        return repo.findAll();
+    }
 
     public Result<PlayerCharacter> findById(Integer id, String username) {
         Result<PlayerCharacter> result = new Result<>();
