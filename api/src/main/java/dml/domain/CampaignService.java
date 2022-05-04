@@ -17,6 +17,8 @@ public class CampaignService {
     @Autowired
     UserRepo userRepo;
 
+    public List<Campaign> findAll() { return repo.findAll(); }
+
     public Result<Campaign> getCampaignById(Integer id, String username){
         Result<Campaign> result = new Result<>();
 
