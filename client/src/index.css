@@ -2,3 +2,11 @@
     margin-top: -5px;
     font-size: 25px;
 }
+
+@font-face {
+    font-family: draconic;
+    src: url(design/draconis-font/Draconis-JRw6B.ttf);
+}
+.homepage h1 {
+    font-family: draconic;
+}

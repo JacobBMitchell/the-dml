@@ -1,6 +1,6 @@
 function HomePage() {
-    return (<>
-        <h1>HomePage</h1>
-    </>)
+    return (<div className="homepage">
+        <h1>Welcome to the DUNGEON MASTER'S LAIR</h1>
+    </div>)
 }
 export default HomePage;
