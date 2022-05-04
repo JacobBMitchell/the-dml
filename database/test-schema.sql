@@ -102,13 +102,13 @@ begin
     
     	-- passwords are their first name (ex: 'Matthew')
 	insert into users (firstName, lastName, email, password_hash) values
-		('Matthew', 'Mercer', 'matthew@mercer.com', '$2a$12$FIBjdgcIFhDMrDv1prxKh.YNHRCi7rrUu4Hl/.CuGCpp1IiQ5pXrW'),
-		('Marisha', 'Ray', 'marisha@ray.com', '$2a$12$wavM41roYWyNGU0hop7RBu8LQTxYd4I.5TLIF1ETNahf5VnhXFC4u'),
-		('Sam', 'Riegel', 'sam@riegel.com', '$2a$12$XoKVrsIGj6LYxMypBeBbcOTus3gDDz6.wNLHJeS65cEwUniqslhC2'),
-		('Travis', 'Willingham', 'travis@willingham.com', '$2a$12$EnFO/PefJW8XdKJqtO0w7.ixGnn0ZgAfWVfccY//DZpnYJJJvhskG'),
-		('Laura', 'Bailey', 'laura@bailey.com', '$2a$12$4QlUZ6Ce85O59Pj3fPRrJ.UeGS8lvHiHCt2a2xgilpWBqbMT4j9sC'),
-		('Jacob', 'Mitchell', 'jacob@mitchell.com', '$2a$12$EesJBFiDeI2Qoer1BkDzq.IChVQchyFnZpa5GZqZNZ5H0lTIVyTZO'),
-		('Tyler', 'Litz', 'tyler@litz.com', '$2a$12$Ny8Grucg/zR63BQtCcEOWuFC.Z3EdAc0LbqYashfK58wFDVoRl5/G');
+		('Matthew', 'Mercer', 'matthew@mercer.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa'),
+		('Marisha', 'Ray', 'marisha@ray.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa'),
+		('Sam', 'Riegel', 'sam@riegel.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa'),
+		('Travis', 'Willingham', 'travis@willingham.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa'),
+		('Laura', 'Bailey', 'laura@bailey.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa'),
+		('Jacob', 'Mitchell', 'jacob@mitchell.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa'),
+		('Tyler', 'Litz', 'tyler@litz.com', '$2a$10$ntB7CsRKQzuLoKY3rfoAQen5nNyiC/U60wBsWnnYrtQQi8Z3IZzQa');
 		
 	insert into user_role (userId, roleId) values
 		( 1, 2),
@@ -142,3 +142,5 @@ insert into roles (roleName) values
 	('PLAYER'),
     ('DM'),
     ('ADMIN');
+
+-- call set_known_good_state();

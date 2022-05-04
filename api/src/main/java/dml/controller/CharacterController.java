@@ -28,14 +28,13 @@ public class CharacterController {
         if (result.getType() == ResultType.INVALID){
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
-        if (result.getType() == ResultType.NOT_FOUND){
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
+
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity getCharactersByUserId(@PathVariable Integer id, Principal user){
-        return ResponseEntity.ok(service.findByUser(id, user.getName()));
+    @GetMapping("/user/{username}")
+    public ResponseEntity getCharactersByUser(@PathVariable String username, Principal user){
+        return ResponseEntity.ok(service.findByUser(username, user.getName()));
     }
 
     @GetMapping("/campaign/{id}")

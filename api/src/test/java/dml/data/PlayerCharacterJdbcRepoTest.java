@@ -42,7 +42,7 @@ class PlayerCharacterJdbcRepoTest {
 
     @Test
     void shouldFindByPlayer() {
-        List<PlayerCharacter> characters = repo.findByPlayer(2);
+        List<PlayerCharacter> characters = repo.findByPlayer("marisha@ray.com");
         assertNotNull(characters);
         assertEquals(2, characters.size());
     }
@@ -50,11 +50,11 @@ class PlayerCharacterJdbcRepoTest {
     @Test
     void shouldNotFindByPlayer() {
         //Player exists but has not characters
-        List<PlayerCharacter> characters = repo.findByPlayer(1);
+        List<PlayerCharacter> characters = repo.findByPlayer("matthew@mercer.com");
         assertEquals(0, characters.size());
 
         //Player doesn't exist
-        characters = repo.findByPlayer(100);
+        characters = repo.findByPlayer("fake@email.com");
         assertEquals(0, characters.size());
     }
 

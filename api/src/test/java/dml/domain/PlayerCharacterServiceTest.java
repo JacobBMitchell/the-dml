@@ -109,9 +109,12 @@ class PlayerCharacterServiceTest {
     void findByUser() {
         AppUser user = makeUser();
         PlayerCharacter character = makeCharacter();
+        List<PlayerCharacter> characters = new ArrayList<>();
+        characters.add(character);
         when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
-        when(charRepo.findById(character.getId())).thenReturn(character);
-        Result<List<PlayerCharacter>> result = service.findByUser(user.getUserId(), user.getUsername());
+        when(charRepo.findByPlayer(user.getUsername())).thenReturn(characters);
+        when(userRepo.findById(user.getUserId())).thenReturn(user);
+        Result<List<PlayerCharacter>> result = service.findByUser(user.getUsername(), user.getUsername());
         assertTrue(result.isSuccess());
 
         Set<String> adminRoles = new HashSet<>();
@@ -121,31 +124,32 @@ class PlayerCharacterServiceTest {
         admin.setUserId(3);
         admin.setEmail("admin");
         when(userRepo.findByUsername(admin.getEmail())).thenReturn(admin);
-        result = service.findByUser(1, admin.getEmail());
+        result = service.findByUser(user.getEmail(), admin.getEmail());
         assertTrue(result.isSuccess());
     }
 
     @Test
     void shouldNotAllowFindByUser() {
-        Result<List<PlayerCharacter>> result = service.findByUser(1, null);
+        Result<List<PlayerCharacter>> result = service.findByUser("Player", null);
         assertFalse(result.isSuccess());
 
-        //invalid id
+        //invalid user
         AppUser user = makeUser();
         when(userRepo.findByUsername(user.getUsername())).thenReturn(user);
-        result = service.findByUser(0, user.getUsername());
+        result = service.findByUser(null, user.getUsername());
         assertFalse(result.isSuccess());
 
         //character not found
-        when(charRepo.findById(100)).thenReturn(null);
-        result = service.findByUser(100, user.getUsername());
+        when(charRepo.findByPlayer("fake")).thenReturn(null);
+        result = service.findByUser("fake", user.getUsername());
         assertFalse(result.isSuccess());
 
         //access denied
-        PlayerCharacter character = makeCharacter();
-        character.setUserId(2);
-        when(charRepo.findById(2)).thenReturn(character);
-        result = service.findByUser(2, user.getUsername());
+        AppUser user2 = makeUser();
+        user2.setUserId(2);
+        user2.setEmail("second@user.com");
+        when(userRepo.findByUsername(user2.getEmail())).thenReturn(user2);
+        result = service.findByUser(user2.getEmail(), user.getUsername());
         assertFalse(result.isSuccess());
 
     }

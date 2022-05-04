@@ -61,7 +61,7 @@ public class PlayerCharacterService {
         return result;
     }
 
-    public Result<List<PlayerCharacter>> findByUser(Integer userId , String username){
+    public Result<List<PlayerCharacter>> findByUser(String player, String username){
         Result<List<PlayerCharacter>> result = new Result<>();
 
         AppUser requester = userRepo.findByUsername(username);
@@ -70,6 +70,20 @@ public class PlayerCharacterService {
             result.addMessage("Need to login", ResultType.INVALID);
             return result;
         }
+
+        if(player == null || player.isBlank()){
+            result.addMessage("Needs valid username", ResultType.INVALID);
+            return result;
+        }
+
+        AppUser user = userRepo.findByUsername(player);
+
+        if(user == null ){
+            result.addMessage("User not found", ResultType.INVALID);
+            return result;
+        }
+
+        Integer userId = user.getUserId();
 
         if (userId == null || userId <= 0){
             result.addMessage("Needs valid id", ResultType.INVALID);
@@ -81,8 +95,7 @@ public class PlayerCharacterService {
             return result;
         }
 
-        List<PlayerCharacter> characters = repo.findByPlayer(userId);
-
+        List<PlayerCharacter> characters = repo.findByPlayer(player);
 
         if (characters == null){
             result.addMessage("Character not found", ResultType.NOT_FOUND);
