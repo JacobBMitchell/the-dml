@@ -14,14 +14,7 @@ function CharacterPage() {
             }
         })
         .then(response => response.json())
-        .then(jsonData => {
-            if(jsonData.payload != null){
-                setCharacters(jsonData.payload);
-            }
-            else {
-                console.log(jsonData);
-            }
-        })
+        .then(jsonData => setCharacters(jsonData))
         .catch(rejection => console.log(rejection));
     }, []);
 
