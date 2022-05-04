@@ -1,0 +1,23 @@
+.character {
+    border: 1px black solid;
+    margin: 10px;
+}
+
+.character div {
+    display: inline-block;
+    padding-left: 20px;
+    vertical-align: top;
+    width: 40%;
+}
+
+.campaign {
+    border: 1px black solid;
+    margin: 10px;
+}
+
+.campaign div {
+    display: inline-block;
+    padding-left: 20px;
+    vertical-align: top;
+    width: 40%;
+}
