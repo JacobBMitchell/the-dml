@@ -8,7 +8,7 @@ public class Campaign {
     private String dmNotes;
     private List<Integer> playerIds;
 
-    public int getCampaignId() {
+    public Integer getCampaignId() {
         return campaignId;
     }
 
