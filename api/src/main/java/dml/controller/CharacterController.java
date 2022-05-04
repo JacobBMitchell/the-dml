@@ -27,15 +27,15 @@ public class CharacterController {
             return ResponseEntity.ok(result.getPayload());
         }
         if (result.getType() == ResultType.INVALID){
-            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>(result.getMessages(),HttpStatus.NOT_FOUND);
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity getCharactersByUserId(@PathVariable Integer id, Principal user){
-        Result<List<PlayerCharacter>> result = service.findByUser(id, user.getName());
+    @GetMapping("/user/{username}")
+    public ResponseEntity getCharactersByUser(@PathVariable String username, Principal user){
+        Result<List<PlayerCharacter>> result = service.findByUser(username, user.getName());
         if (result.isSuccess()){
             return ResponseEntity.ok(result.getPayload());
         }

@@ -34,29 +34,13 @@ function Login(){
                 navigate("/");
             })
             .catch(rejection => alert(rejection));
-        
-        fetch("http://localhost:8080/api/user/" + username,{
-            method: "GET",
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem("token")
-            }
-        }).then(response => {
-            if (response.status === 200) {
-                return response.json();
-            }
-            else {
-                alert("User wasn't found.");
-            }
-        }).then(data => {
-            localStorage.setItem("userId", data.userId);
-        }).catch(rejection => console.log(rejection));
     }
 
     return(<>
         <form onSubmit={submitHandler}>
-            <label for="username">Username: </label><br></br>
+            <label htmlFor="username">Username: </label><br></br>
             <input id="username" onChange={event => setUsername(event.target.value)}></input><br></br><br></br>
-            <label for="password">Password: </label><br></br>
+            <label htmlFor="password">Password: </label><br></br>
             <input id="password" type="password" onChange={event => setPassword(event.target.value)}></input><br></br><br></br>
             <button>Submit</button>
         </form>

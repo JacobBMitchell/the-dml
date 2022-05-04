@@ -9,7 +9,7 @@ public interface PlayerCharacterRepo {
 
     PlayerCharacter findById(int characterId);
 
-    List<PlayerCharacter> findByPlayer(int userId);
+    List<PlayerCharacter> findByPlayer(String username);
 
     List<PlayerCharacter> findByCampaign(int campaignId);
 

@@ -38,11 +38,13 @@ public class PlayerCharacterJdbcRepo implements PlayerCharacterRepo{
     }
 
     @Override
-    public List<PlayerCharacter> findByPlayer(int userId) {
+    public List<PlayerCharacter> findByPlayer(String username) {
 
-        final String sql = "select * from characters where userId = ?;";
+        final String sql = "select c.* from characters c " +
+                            "inner join users u on c.userId = u.userId " +
+                            "where u.email = ?;";
 
-        List<PlayerCharacter> characters = jdbcTemplate.query(sql, new PlayerCharacterMapper(), userId)
+        List<PlayerCharacter> characters = jdbcTemplate.query(sql, new PlayerCharacterMapper(), username)
                 .stream().collect(Collectors.toList());
 
         return characters;

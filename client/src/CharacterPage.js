@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Character from './Character';
+import AuthContext from './AuthContext';
 
 function CharacterPage() {
     const [characters, setCharacters] = useState([]);
+    const [user, setUser] = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8080/api/character/user/" + localStorage.getItem("userId"), {
+        fetch("http://localhost:8080/api/character/user/" + user.user.sub, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")
