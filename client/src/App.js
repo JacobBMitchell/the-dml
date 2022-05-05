@@ -10,6 +10,7 @@ import UsefulLinks from "./UsefulLinks";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [errors, setErrors] = useState([]);
   return (
     <BrowserRouter>
       <AuthContext.Provider value={[user, setUser]}>
@@ -17,7 +18,7 @@ function App() {
           <Nav />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<Login/>}/>
+            <Route path="/login" element={<Login errors={errors} setErrors={setErrors}/>}/>
             <Route path="/characters" element={<CharacterPage/>}/>
             <Route path="/campaigns" element={<CampaignPage/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>

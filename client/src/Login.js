@@ -1,13 +1,16 @@
-import { useState , useContext } from "react";
+import { useState, useContext } from "react";
 import AuthContext from "./AuthContext";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import Alert from "./Alert";
 
-function Login(){
+function Login({ errors, setErrors }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useContext(AuthContext);
     const navigate = useNavigate();
+    const [showErrors, setShowErrors] = useState(false);
+
 
     function submitHandler(ev) {
         ev.preventDefault();
@@ -15,7 +18,7 @@ function Login(){
             {
                 method: "POST",
                 headers: {
-                    "Content-Type":"application/json"
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     username, password
@@ -25,18 +28,28 @@ function Login(){
                     return response.json();
                 }
                 else {
-                    alert("Something bad happened");
+                    setErrors([...errors, "Username or password is incorrect"]);
+                    console.log(errors);
+                    setShowErrors(true);
                 }
             }).then(tokenContainer => {
                 const { jwt_token } = tokenContainer;
                 localStorage.setItem("token", jwt_token);
-                setUser({user: jwtDecode(jwt_token)});
+                setUser({ user: jwtDecode(jwt_token) });
                 navigate("/");
             })
-            .catch(rejection => alert(rejection));
+            .catch(a =>  {
+                setErrors([...errors, "Server is down"]);
+                console.log(errors);
+                setShowErrors(true);
+            }
+            );
     }
 
-    return(<>
+    return (<>
+        <div className={showErrors ? "" : "hidden"}>
+            <Alert errors={errors} />
+        </div>
         <form onSubmit={submitHandler}>
             <label htmlFor="username">Username: </label><br></br>
             <input id="username" onChange={event => setUsername(event.target.value)}></input><br></br><br></br>
