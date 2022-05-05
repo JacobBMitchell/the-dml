@@ -143,4 +143,4 @@ insert into roles (roleName) values
     ('DM'),
     ('ADMIN');
 
--- call set_known_good_state();
+call set_known_good_state();

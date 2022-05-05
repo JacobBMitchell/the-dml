@@ -22,6 +22,7 @@ function App() {
             <Route path="/campaigns" element={<CampaignPage/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>
           </Routes>
+          {/* Insert here Dice */}
         </div>
       </AuthContext.Provider>
     </BrowserRouter>

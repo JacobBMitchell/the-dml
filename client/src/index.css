@@ -40,13 +40,12 @@
     font-family: draconic;
     src: url(design/draconis-font/Draconis-JRw6B.ttf);
 }
-.homepage h1 {
+h1 {
     font-family: draconic;
     font-weight: normal;
     font-size: 300%;
     color: #f71735;
     background-color: #1d1818;
-    border: 0px;
     padding: 10px;
 }
 
