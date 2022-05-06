@@ -7,6 +7,7 @@ import Login from "./Login";
 import CharacterPage from "./CharacterPage";
 import CampaignPage from "./CampaignPage";
 import UsefulLinks from "./UsefulLinks";
+import Dice from "./Dice";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -23,7 +24,7 @@ function App() {
             <Route path="/campaigns" element={<CampaignPage/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>
           </Routes>
-          {/* Insert here Dice */}
+          <Dice/>
         </div>
       </AuthContext.Provider>
     </BrowserRouter>

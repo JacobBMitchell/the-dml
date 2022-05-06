@@ -43,6 +43,9 @@
     font-family: draconic;
     src: url(design/draconis-font/Draconis-JRw6B.ttf);
 }
+
+
+
 h1 {
     font-family: draconic;
     font-weight: normal;
@@ -50,6 +53,12 @@ h1 {
     color: #f71735;
     background-color: #1d1818;
     padding: 10px;
+}
+
+.dice {
+    position: absolute;
+    object-position: bottom 30px;
+    max-width: 85px;
 }
 
 .homepage h2 {
