@@ -25,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/security/login").permitAll()
                 .antMatchers( HttpMethod.GET, "/api/character" ).hasAuthority("ROLE_ADMIN")
                 .antMatchers( HttpMethod.GET, "/api/character/*" ).hasAnyAuthority("ROLE_PLAYER","ROLE_ADMIN")
-                .antMatchers( HttpMethod.POST, "/api/character" ).hasAnyAuthority("ROLE_PLAYER","ROLE_ADMIN")
+                .antMatchers( HttpMethod.POST, "/api/character" ).hasAnyAuthority("ROLE_PLAYER")
                 .antMatchers( HttpMethod.PUT, "/api/character/*" ).hasAnyAuthority("ROLE_PLAYER","ROLE_ADMIN")
                 .antMatchers( HttpMethod.DELETE, "/api/character/*" ).hasAnyAuthority("ROLE_PLAYER","ROLE_ADMIN")
                 .antMatchers( HttpMethod.GET, "/api/character/user/*" ).hasAnyAuthority("ROLE_PLAYER","ROLE_ADMIN")

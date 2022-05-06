@@ -7,6 +7,7 @@ import Login from "./Login";
 import CharacterPage from "./CharacterPage";
 import CampaignPage from "./CampaignPage";
 import UsefulLinks from "./UsefulLinks";
+import AddCharacter from "./AddCharacter";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/characters" element={<CharacterPage/>}/>
             <Route path="/campaigns" element={<CampaignPage/>}/>
+            <Route path="/create" element={<AddCharacter/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>
           </Routes>
         </div>

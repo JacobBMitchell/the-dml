@@ -40,6 +40,13 @@ function Nav() {
                         <Link to="/campaigns">Campaigns</Link>
                     </li>
                 ) : <></>}
+
+                {user?.user ? (
+                    <li>
+                        <Link to="/create">Add a Character</Link>
+                    </li>
+                ) : <></>}
+
                 <li>
                     <Link to="/resources">Resources</Link>
                 </li>
