@@ -6,6 +6,9 @@
 * {
     background-color: #d4d6d8;
 }
+.hidden {
+    display: none;
+}
 
 .character {
     border: 1px black solid;
