@@ -193,68 +193,76 @@ function AddCharacter() {
 
     return (
         <>
-            <h1>Add a Character</h1>
+        
+        <div className="row">
+            <div className="col"></div>
+            <div className="col-6">
+                <div className="semi-opaque form-card"></div>
+                    <h1 className="form-title">Add a Character</h1>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <label className="form-label" htmlFor="name">Name:</label>
-                {errors.name && <span> This field is required</span>}<br/>
-                <input className="form-control" id="name" {...register("characterName")}></input><br/><br/>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                        <label className="form-label" htmlFor="name">Name:</label>
+                        {errors.name && <span> This field is required</span>}<br/>
+                        <input className="form-control" id="name" {...register("characterName")}></input><br/><br/>
 
-                <label className="form-label" htmlFor="dndClass">Class: </label>
-                <select className="form-select" {...register("dndClass")}>
-                    <option value="barbarian">Barbarian</option>
-                    <option value="bard">Bard</option>
-                    <option value="cleric">Cleric</option>
-                    <option value="druid">Druid</option>
-                    <option value="fighter">Fighter</option>
-                    <option value="monk">Monk</option>
-                    <option value="paladin">Paladin</option>
-                    <option value="ranger">Ranger</option>
-                    <option value="rogue">Rogue</option>
-                    <option value="sorcerer">Sorcerer</option>
-                    <option value="warlock">Warlock</option>
-                    <option value="wizard">Wizard</option>
-                </select><br/><br/>
+                        <label className="form-label" htmlFor="dndClass">Class: </label>
+                        <select className="form-select" {...register("dndClass")}>
+                            <option value="barbarian">Barbarian</option>
+                            <option value="bard">Bard</option>
+                            <option value="cleric">Cleric</option>
+                            <option value="druid">Druid</option>
+                            <option value="fighter">Fighter</option>
+                            <option value="monk">Monk</option>
+                            <option value="paladin">Paladin</option>
+                            <option value="ranger">Ranger</option>
+                            <option value="rogue">Rogue</option>
+                            <option value="sorcerer">Sorcerer</option>
+                            <option value="warlock">Warlock</option>
+                            <option value="wizard">Wizard</option>
+                        </select><br/><br/>
 
-                <label className="form-label" htmlFor="race">Race: </label>
-                <select className="form-select" {...register("race")}>
-                    <option value="dwarf">Dwarf</option>
-                    <option value="elf">Elf</option>
-                    <option value="halfling">Halfling</option>
-                    <option value="human">Human</option>
-                    <option value="dragonborn">Dragonborn</option>
-                    <option value="half-elf">Half-Elf</option>
-                    <option value="half-orc">Half-Orc</option>
-                    <option value="tiefling">Tiefling</option>
-                </select><br/><br/>
+                        <label className="form-label" htmlFor="race">Race: </label>
+                        <select className="form-select" {...register("race")}>
+                            <option value="dwarf">Dwarf</option>
+                            <option value="elf">Elf</option>
+                            <option value="halfling">Halfling</option>
+                            <option value="human">Human</option>
+                            <option value="dragonborn">Dragonborn</option>
+                            <option value="half-elf">Half-Elf</option>
+                            <option value="half-orc">Half-Orc</option>
+                            <option value="tiefling">Tiefling</option>
+                        </select><br/><br/>
 
-                <label className="form-label" htmlFor="characterLevel">Level: </label>
-                <input type="number" id="characterLevel" min="1" max="20" {...register("characterLevel", {min: 1, max: 20} )}></input><br/><br/>
-                
-                <label className="form-label" htmlFor="armorClass">Armor Class: </label>
-                <input type="number" id="armorClass" min="1" max="30" {...register("armorClass", {min: 1, max: 30} )}></input><br/><br/>
-                
-                <label className="form-label" htmlFor="gold">Gold: </label>
-                <input type="number" id="gold" min="0" {...register("gold", {min: 0} )}></input><br/><br/>
+                        <label className="form-label" htmlFor="characterLevel">Level: </label>
+                        <input type="number" class="form-control" id="characterLevel" min="1" max="20" {...register("characterLevel", {min: 1, max: 20} )}></input><br/><br/>
+                        
+                        <label className="form-label" htmlFor="armorClass">Armor Class: </label>
+                        <input type="number" class="form-control" id="armorClass" min="1" max="30" {...register("armorClass", {min: 1, max: 30} )}></input><br/><br/>
+                        
+                        <label className="form-label" htmlFor="gold">Gold: </label>
+                        <input type="number" class="form-control" id="gold" min="0" {...register("gold", {min: 0} )}></input><br/><br/>
 
-                <label className="form-label" htmlFor="speed">Speed: </label>
-                <input type="number" id="speed" min="1" max="30" defaultValue={speed} {...register("speed", {min: 1, max: 30} )}></input><br/><br/>
-                
-                <label className="form-label" htmlFor="str">Str: </label>
-                <input type="number" id="str" min="1" max="20" {...register("str", {min: 1, max: 20} )}></input><br/><br/>
-                <label className="form-label" htmlFor="dex">Dex: </label>
-                <input type="number" id="dex" min="1" max="20" {...register("dex", {min: 1, max: 20} )}></input><br/><br/>
-                <label className="form-label" htmlFor="con">Con: </label>
-                <input type="number" id="con" min="1" max="20" {...register("con", {min: 1, max: 20} )}></input><br/><br/>
-                <label className="form-label" htmlFor="intel">Intel: </label>
-                <input type="number" id="intel" min="1" max="20" {...register("intel", {min: 1, max: 20} )}></input><br/><br/>
-                <label className="form-label" htmlFor="str">Wis: </label>
-                <input type="number" id="wis" min="1" max="20" {...register("wis", {min: 1, max: 20} )}></input><br/><br/>
-                <label className="form-label" htmlFor="str">Cha: </label>
-                <input type="number" id="cha" min="1" max="20" {...register("cha", {min: 1, max: 20} )}></input><br/><br/>
+                        <label className="form-label" htmlFor="speed">Speed: </label>
+                        <input type="number" class="form-control" id="speed" min="1" max="30" defaultValue={speed} {...register("speed", {min: 1, max: 30} )}></input><br/><br/>
+                        
+                        <label className="form-label" htmlFor="str">Str: </label>
+                        <input type="number" class="form-control" id="str" min="1" max="20" {...register("str", {min: 1, max: 20} )}></input><br/><br/>
+                        <label className="form-label" htmlFor="dex">Dex: </label>
+                        <input type="number" class="form-control" id="dex" min="1" max="20" {...register("dex", {min: 1, max: 20} )}></input><br/><br/>
+                        <label className="form-label" htmlFor="con">Con: </label>
+                        <input type="number" class="form-control" id="con" min="1" max="20" {...register("con", {min: 1, max: 20} )}></input><br/><br/>
+                        <label className="form-label" htmlFor="intel">Intel: </label>
+                        <input type="number" class="form-control" id="intel" min="1" max="20" {...register("intel", {min: 1, max: 20} )}></input><br/><br/>
+                        <label className="form-label" htmlFor="str">Wis: </label>
+                        <input type="number" class="form-control" id="wis" min="1" max="20" {...register("wis", {min: 1, max: 20} )}></input><br/><br/>
+                        <label className="form-label" htmlFor="str">Cha: </label>
+                        <input type="number" class="form-control" id="cha" min="1" max="20" {...register("cha", {min: 1, max: 20} )}></input><br/><br/>
 
-                <input type="submit" />
-            </form>
+                        <input type="submit" class="btn btn-primary"/>
+                    </form>
+            </div>
+            <div className="col"></div>
+        </div>
         </>
     )
 }
