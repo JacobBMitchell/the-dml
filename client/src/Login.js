@@ -33,6 +33,9 @@ function Login({ errors, setErrors }) {
                     setShowErrors(true);
                 }
             }).then(tokenContainer => {
+                if (tokenContainer == null){
+                    return;
+                }
                 const { jwt_token } = tokenContainer;
                 localStorage.setItem("token", jwt_token);
                 setUser({ user: jwtDecode(jwt_token) });
@@ -48,7 +51,7 @@ function Login({ errors, setErrors }) {
 
     return (<>
         <div className={showErrors ? "" : "hidden"}>
-            <Alert errors={errors} />
+            <Alert errors={errors} setErrors={setErrors} setShowErrors={setShowErrors} />
         </div>
         <form onSubmit={submitHandler}>
             <label htmlFor="username">Username: </label><br></br>
