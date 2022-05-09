@@ -53,13 +53,16 @@ function Registration({ errors, setErrors }) {
     function submitHandler(ev) {
         ev.preventDefault();
         let newUser = {
+            username: email,
             firstName: firstName,
             lastName: lastName,
             email: email,
+            userId: 0,
             password: password,
             roles: (dm ? ["PLAYER","DM"] : ["PLAYER"])
         }
         console.log(newUser);
+        console.log(JSON.stringify(newUser));
 
         fetch("http://localhost:8080/api/user/register",
             {
@@ -67,14 +70,14 @@ function Registration({ errors, setErrors }) {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: newUser
+                body: JSON.stringify(newUser)
             }).then(response => {
-                if (response.status === 200) {
+                if (response.status === 201) {
                     return response.json();
                 }
                 else {
+                    console.log(response);
                     setErrors([...errors, "Registration Failed"]);
-                    console.log(errors);
                     setShowErrors(true);
                 }
             })

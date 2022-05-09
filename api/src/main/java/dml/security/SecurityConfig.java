@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/security/login").permitAll() //login
-                .antMatchers(HttpMethod.POST, "/api/user").permitAll() //register
+                .antMatchers(HttpMethod.POST, "/api/user/register").permitAll() //register
                 .antMatchers( HttpMethod.GET, "/api/character" ).hasAuthority("ROLE_ADMIN")
                 .antMatchers( HttpMethod.GET, "/api/character/*" ).hasAnyAuthority("ROLE_PLAYER","ROLE_ADMIN")
                 .antMatchers( HttpMethod.POST, "/api/character" ).hasAnyAuthority("ROLE_PLAYER")
