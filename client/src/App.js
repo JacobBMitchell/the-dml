@@ -8,9 +8,12 @@ import CharacterPage from "./CharacterPage";
 import CampaignPage from "./CampaignPage";
 import UsefulLinks from "./UsefulLinks";
 import AddCharacter from "./AddCharacter";
+import NotFound from "./NotFound";
+import Dice from "./Dice";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [errors, setErrors] = useState([]);
   return (
     <BrowserRouter>
       <AuthContext.Provider value={[user, setUser]}>
@@ -18,12 +21,14 @@ function App() {
           <Nav />
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<Login/>}/>
+            <Route path="/login" element={<Login errors={errors} setErrors={setErrors}/>}/>
             <Route path="/characters" element={<CharacterPage/>}/>
             <Route path="/campaigns" element={<CampaignPage/>}/>
             <Route path="/create" element={<AddCharacter/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
+          <Dice/>
         </div>
       </AuthContext.Provider>
     </BrowserRouter>

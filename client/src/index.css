@@ -6,6 +6,9 @@
 * {
     background-color: #d4d6d8;
 }
+.hidden {
+    display: none;
+}
 
 .character {
     border: 1px black solid;
@@ -40,14 +43,31 @@
     font-family: draconic;
     src: url(design/draconis-font/Draconis-JRw6B.ttf);
 }
-.homepage h1 {
+
+
+
+h1 {
     font-family: draconic;
     font-weight: normal;
     font-size: 300%;
     color: #f71735;
     background-color: #1d1818;
-    border: 0px;
     padding: 10px;
+}
+
+.dice {
+    position: absolute;
+    object-position: bottom 30px;
+    
+}
+.blank {
+    max-width: 85px;
+    background: none !important; 
+}
+
+.roll {
+    margin-left: -50px;
+    align-items: center;
 }
 
 .homepage h2 {
