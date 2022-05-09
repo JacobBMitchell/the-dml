@@ -7,6 +7,7 @@ import Login from "./Login";
 import CharacterPage from "./CharacterPage";
 import CampaignPage from "./CampaignPage";
 import UsefulLinks from "./UsefulLinks";
+import NotFound from "./NotFound";
 import Dice from "./Dice";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/characters" element={<CharacterPage/>}/>
             <Route path="/campaigns" element={<CampaignPage/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>
+            <Route path="*" element={<NotFound/>}/>
           </Routes>
           <Dice/>
         </div>
