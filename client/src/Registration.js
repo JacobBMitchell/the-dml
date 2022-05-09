@@ -3,16 +3,19 @@ import AuthContext from "./AuthContext";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import bcrypt from "bcryptjs";
+
 
 function Registration({ errors, setErrors }) {
     const [firstName,setFirstName] = useState("");
     const [lastName,setLastName] = useState("");
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const [crypted, setCryted] = useState("");
     const [dm, setDM] = useState(false);
     const [user, setUser] = useContext(AuthContext);
     const nav = useNavigate();
-    const [showErrors, setShowErrors] = useState(false);
+    const [showErrors, setShowErrors] = useState(false); 
 
     function login(createdUser) {
         fetch("http://localhost:8080/api/security/login",
@@ -52,13 +55,18 @@ function Registration({ errors, setErrors }) {
 
     function submitHandler(ev) {
         ev.preventDefault();
+        bcrypt.genSalt(12, function(err, salt) {
+            bcrypt.hash(password, salt, function(err, hash) {
+                setCryted(hash);
+            });
+        });
         let newUser = {
             username: email,
             firstName: firstName,
             lastName: lastName,
             email: email,
             userId: 0,
-            password: password,
+            password: crypted,
             roles: (dm ? ["PLAYER","DM"] : ["PLAYER"])
         }
         console.log(newUser);

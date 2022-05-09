@@ -41,6 +41,7 @@ public class UserService implements UserDetailsService {
             result.addMessage("Missing credentails", ResultType.INVALID);
             return result;
         }
+
         if (repo.findByUsername(user.getEmail()) != null){
             result.addMessage("User already exists", ResultType.INVALID);
         }
