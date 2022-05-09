@@ -62,13 +62,12 @@ h1 {
 }
 .blank {
     max-width: 85px;
-    z-index: -1;
+    background: none !important; 
 }
 
 .roll {
     margin-left: -50px;
     align-items: center;
-    z-index: 5;
 }
 
 .homepage h2 {
