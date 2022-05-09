@@ -26,4 +26,5 @@ public enum DndClass {
         }
         return null;
     }
+
 }

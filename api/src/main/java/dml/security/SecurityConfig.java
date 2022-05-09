@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( HttpMethod.DELETE, "/api/character/*" ).hasAnyAuthority("ROLE_PLAYER","ROLE_ADMIN")
                 .antMatchers( HttpMethod.GET, "/api/character/user/*" ).hasAnyAuthority("ROLE_PLAYER","ROLE_ADMIN")
                 .antMatchers( HttpMethod.GET, "/api/character/campaign/*" ).hasAnyAuthority("ROLE_DM","ROLE_ADMIN")
-                .antMatchers( HttpMethod.GET, "/api/campaign" ).hasAuthority("ROLE_ADMIN")
+                .antMatchers( HttpMethod.GET, "/api/campaign" ).authenticated()
                 .antMatchers(HttpMethod.GET,"/api/campaign/*").hasAnyAuthority("ROLE_DM","ROLE_ADMIN")
                 .antMatchers(HttpMethod.GET,"/api/campaign/user/*").hasAnyAuthority("ROLE_DM","ROLE_ADMIN")
                 .antMatchers(HttpMethod.POST,"/api/campaign").hasAnyAuthority("ROLE_DM","ROLE_ADMIN")

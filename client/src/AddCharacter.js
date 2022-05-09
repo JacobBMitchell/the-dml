@@ -1,177 +1,63 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 function AddCharacter() {
 
+    const [campaigns, setCampaigns] = useState([]);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
 
-    const [name, setName] = useState("");
-    const [campaign, setCampaign] = useState(null);
-    const [health, setHealth] = useState(0);
-    const [dndClass, setDndClass] = useState("");
-    const [race, setRace] = useState("");
-    const [level, setLevel] = useState(1);
-    const [armorClass, setArmorClass] = useState(0);
-    const [gold, setGold] = useState(0);
-    const [speed, setSpeed] = useState(30);
-    const [str, setStr] = useState(0);
-    const [dex, setDex] = useState(0);
-    const [con, setCon] = useState(0);
-    const [intel, setIntel] = useState(0);
-    const [wis, setWis] = useState(0);
-    const [cha, setCha] = useState(0);
-    const [savingStr, setSavingStr] = useState(false);
-    const [savingDex, setSavingDex] = useState(false);
-    const [savingCon, setSavingCon] = useState(false);
-    const [savingIntel, setSavingIntel] = useState(false);
-    const [savingWis, setSavingWis] = useState(false);
-    const [savingCha, setSavingCha] = useState(false);
+        data.savingStr = false;
+        data.savingDex = false;
+        data.savingCon = false;
+        data.savingIntel = false;
+        data.savingWis = false;
+        data.savingCha = false;
 
-    function handleName(e) {
-        setName(e.target.value);
-    }
+        fetch("https://www.dnd5eapi.co/api/classes/" + data.dndClass)
+        .then(response => response.json())
+        .then(jsonData =>jsonData.saving_throws)
+        .then(throws => {
+            throws.map(t => {
+                switch(t.name){
+                    case "STR":
+                        data.savingStr = true;
+                        break;
+                    case "DEX":
+                        data.savingDex = true;
+                        break;
+                    case "CON":
+                        data.savingCon = true;
+                        break;
+                    case "INT":
+                        data.savingIntel = true;
+                        break;
+                    case "WIS":
+                        data.savingWis = true;
+                        break;
+                    case "CHA":
+                        data.savingCha = true;
+                        break;
+                }
+            })
+        })
+        .catch(rejection => console.log(rejection));
 
-    function handleCampaign(e) {
-        setCampaign(e.target.value);
-    }
+        data.dndClass = data.dndClass.toUpperCase();
+        data.race = data.race.toUpperCase();
+        data.race = data.race.replace("-","_");
+        data.currentHealth = data.maxHealth;
+        console.log(data)
 
-    function handleHealth(e) {
-        setHealth(e.target.value);
-    }
-
-    function handleDndClass(e) {
-        setDndClass(e.target.value);
-    }
-
-    function handleRace(e) {
-        setRace(e.target.value);
-    }
-
-    function handleLevel(e) {
-        setLevel(e.target.value);
-    }
-
-    function handleArmorClass(e) {
-        setArmorClass(e.target.value);
-    }
-
-    function handleGold(e) {
-        setGold(e.target.value);
-    }
-
-    function handleSpeed(e) {
-        setSpeed(e.target.value);
-    }
-
-    function handleStr(e) {
-        setStr(e.target.value);
-    }
-
-    function handleDex(e) {
-        setDex(e.target.value);
-    }
-
-    function handleCon(e) {
-        setCon(e.target.value);
-    }
-
-    function handleIntel(e) {
-        setIntel(e.target.value);
-    }
-
-    function handleWis(e) {
-        setWis(e.target.value);
-    }
-
-    function handleCha(e) {
-        setCha(e.target.value);
-    }
-
-    function handleSavingStr(e) {
-        setSavingStr(e.target.value);
-    }
-
-    function handleSavingDex(e) {
-        setSavingDex(e.target.value);
-    }
-
-    function handleSavingCon(e) {
-        setSavingCon(e.target.value);
-    }
-
-    function handleSavingIntel(e) {
-        setSavingIntel(e.target.value);
-    }
-
-    function handleSavingWis(e) {
-        setSavingWis(e.target.valeu);
-    }
-
-    function handleSavingCha(e) {
-        setSavingCha(e.target.value);
-    }
-
-    function handleCancel() {
-        setName("");
-        setCampaign(null);
-        setHealth(0);
-        setDndClass("");
-        setRace("");
-        setLevel(1);
-        setArmorClass(0);
-        setGold(0);
-        setSpeed(30);
-        setStr(0);
-        setDex(0);
-        setCon(0);
-        setIntel(0);
-        setWis(0);
-        setCha(0);
-        setSavingStr(false);
-        setSavingDex(false);
-        setSavingCon(false);
-        setSavingIntel(false);
-        setSavingWis(false);
-        setSavingCha(false);
-    }
-
-    function handSubmit(e) {
-        e.preventDefault();
-
-        const newCharacter = {
-            name: name,
-            //TODO: userId
-            campaignId: campaign,
-            currentHealth: health,
-            maxHealth: health,
-            dndClass: dndClass,
-            race: race,
-            characterLevel: level,
-            armorClass: armorClass,
-            gold: gold,
-            speed: speed,
-            str: str,
-            dex: dex,
-            con: con,
-            intel: intel,
-            wis: wis,
-            cha: cha,
-            savingStr: savingStr,
-            savingDex: savingDex,
-            savingCon: savingCon,
-            savingIntel: savingIntel,
-            savingWis: savingWis,
-            savingCha: savingCha
-        }
-
+        //post to api
+        data.userId = 0;
         fetch("http://localhost:8080/api/character", {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(newCharacter)
+            body: JSON.stringify(data)
         })
         .then(response => {
             if(response.status == 201){
@@ -189,7 +75,20 @@ function AddCharacter() {
             }
         })
         .catch( rejection => console.log("Failed to add character. ", rejection));
-    }
+    };
+
+    //get campaigns
+    useEffect(() => {
+        fetch("http://localhost:8080/api/campaign", {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        })
+        .then(response => response.json())
+        .then(jsonData => setCampaigns(jsonData))
+        .catch(rejection => console.log(rejection));
+    }, []);
 
     return (
         <>
@@ -203,7 +102,15 @@ function AddCharacter() {
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label className="form-label" htmlFor="name">Name:</label>
                         {errors.name && <span> This field is required</span>}<br/>
-                        <input className="form-control" id="name" {...register("characterName")}></input><br/><br/>
+                        <input className="form-control" id="name" {...register("name")}></input><br/><br/>
+
+                        <label className="form-label" htmlFor="campaign">Campaign: </label>
+                        <select className="form-select" {...register("campaignId")}>
+                            {campaigns.map(c => (<option value={c.campaignId}>{c.campaignName}</option>))}
+                        </select><br/><br/>
+
+                        <label className="form-label" htmlFor="health">Health: </label>
+                        <input type="number" class="form-control" id="health" min="0" {...register("maxHealth", {min: 0} )}></input><br/><br/>
 
                         <label className="form-label" htmlFor="dndClass">Class: </label>
                         <select className="form-select" {...register("dndClass")}>
@@ -243,7 +150,7 @@ function AddCharacter() {
                         <input type="number" class="form-control" id="gold" min="0" {...register("gold", {min: 0} )}></input><br/><br/>
 
                         <label className="form-label" htmlFor="speed">Speed: </label>
-                        <input type="number" class="form-control" id="speed" min="1" max="30" defaultValue={speed} {...register("speed", {min: 1, max: 30} )}></input><br/><br/>
+                        <input type="number" class="form-control" id="speed" min="1" max="30" defaultValue={30} {...register("speed", {min: 1, max: 30} )}></input><br/><br/>
                         
                         <label className="form-label" htmlFor="str">Str: </label>
                         <input type="number" class="form-control" id="str" min="1" max="20" {...register("str", {min: 1, max: 20} )}></input><br/><br/>
@@ -258,7 +165,7 @@ function AddCharacter() {
                         <label className="form-label" htmlFor="str">Cha: </label>
                         <input type="number" class="form-control" id="cha" min="1" max="20" {...register("cha", {min: 1, max: 20} )}></input><br/><br/>
 
-                        <input type="submit" class="btn btn-primary"/>
+                        <input type="submit" className="btn btn-primary"/>
                     </form>
             </div>
             <div className="col"></div>

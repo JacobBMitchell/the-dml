@@ -31,6 +31,7 @@ create table user_role (
 create table campaigns (
 	campaignId int primary key auto_increment,
     dmId int not null,
+    campaignName varchar(50) null,
     notes text null,
     constraint fk_campaigns_dmId
 		foreign key (dmId)
