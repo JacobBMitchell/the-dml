@@ -1,4 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+
 function Character(props) {
+    
+    const navigate = useNavigate();
     const { character } = props;
 
     return (<div class="character">
@@ -16,6 +20,9 @@ function Character(props) {
             <p>INT: {character.intel}</p>
             <p>WIS: {character.wis}</p>
             <p>CHA: {character.cha}</p>
+        </div>
+        <div>
+            <button onClick={() => navigate("/characters/edit/" + character.id)}>📝</button>
         </div>
         
     </div>)
