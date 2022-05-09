@@ -55,10 +55,13 @@ h1 {
     padding: 10px;
 }
 
+.regForm {
+    padding-left: 10px;
+}
+
 .dice {
     position: absolute;
-    object-position: bottom 30px;
-    
+    bottom: 20px;  
 }
 .blank {
     max-width: 85px;
@@ -66,8 +69,8 @@ h1 {
 }
 
 .roll {
-    margin-left: -50px;
-    align-items: center;
+    margin-left: -52px;
+    text-align: center;
 }
 
 .homepage h2 {

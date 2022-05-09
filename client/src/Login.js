@@ -3,6 +3,7 @@ import AuthContext from "./AuthContext";
 import jwtDecode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import Alert from "./Alert";
+import { Link } from "react-router-dom";
 
 function Login({ errors, setErrors }) {
     const [username, setUsername] = useState("");
@@ -60,6 +61,8 @@ function Login({ errors, setErrors }) {
             <input id="password" type="password" onChange={event => setPassword(event.target.value)}></input><br></br><br></br>
             <button>Submit</button>
         </form>
+
+        <Link to="/register">new user</Link>
     </>)
 }
 export default Login;

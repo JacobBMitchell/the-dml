@@ -1,5 +1,6 @@
 package dml.controller;
 
+import dml.domain.Result;
 import dml.domain.UserService;
 import dml.models.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity createNewUser(@RequestBody AppUser user){
-
+        Result result = service.create(user);
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }

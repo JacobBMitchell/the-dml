@@ -31,7 +31,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public AppUser create(String username, String password){
+    public Result<AppUser> create(AppUser user){
         return null;
     }
 }

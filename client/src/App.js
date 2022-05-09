@@ -9,6 +9,7 @@ import CampaignPage from "./CampaignPage";
 import UsefulLinks from "./UsefulLinks";
 import NotFound from "./NotFound";
 import Dice from "./Dice";
+import Registration from "./Registration";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,6 +25,7 @@ function App() {
             <Route path="/characters" element={<CharacterPage/>}/>
             <Route path="/campaigns" element={<CampaignPage/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>
+            <Route path="/register" element={<Registration/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Routes>
           <Dice/>

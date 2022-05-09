@@ -1,37 +1,24 @@
 import blank from "./design/d20Blank.png";
 function Dice() {
-    function sleep(miliseconds) {
-        var currentTime = new Date().getTime();
-     
-        while (currentTime + miliseconds >= new Date().getTime()) {
-        }
-     }
 
     function roll(num) {
         let outcome = Math.floor(Math.random() * (num) + 1);
         let die = document.getElementById("roll");
         die.innerHTML = "";
-        
+
         let blankSpinning = [];
         const blankTiming = {
             duration: 2000,
             iterations: 1
         }
-        
-        for (let index = -5; index < Math.floor(Math.random()*15); index++) {
-            blankSpinning.push({transform: "rotate(" + Math.floor(Math.random()*360) + "deg)"});
 
-            // blank.setAttribute("style", "transform: rotate(" + Math.floor(Math.random()*360) + "deg)"); //does not work here
-            // sleep(150); //this works
-            // console.log(index);
+        for (let index = -10; index < Math.floor(Math.random() * 15); index++) {
+            blankSpinning.push({ transform: "rotate(" + Math.floor(Math.random() * 360) + "deg)" });
         }
-        console.log(blankSpinning);
-        console.log(blankTiming);
         let blank = document.getElementById("blank");
-        blank.animate(blankSpinning,blankTiming);
-        // blank.setAttribute("style", "transform: rotate(" + 20 + "deg)"); //works here
-        
-        die.innerHTML = outcome;
+        blank.animate(blankSpinning, blankTiming);
+        setTimeout(() => { die.innerHTML = outcome }, 2000);
+
     }
 
     return (<div className="dice">
