@@ -31,6 +31,7 @@ create table user_role (
 create table campaigns (
 	campaignId int primary key auto_increment,
     dmId int not null,
+    campaignName varchar(50) null,
     notes text null,
     constraint fk_campaigns_dmId
 		foreign key (dmId)
@@ -120,9 +121,9 @@ begin
 		( 7, 3),
 		( 5, 2);
     
-    insert into campaigns (dmId, notes) values
-		(1, 'Vox Machina'),
-        (5, null);
+    insert into campaigns (dmId, campaignName, notes) values
+		(1, 'Vox Machina', 'List of Notes'),
+        (5, 'Second campaign', null);
 	
     insert into characters (characterName, userId, campaignId, currentHealth, maxHealth, dndClass, race, characterLevel, armorClass, gold, speed,
 							str, dex, con, intel, wis, cha, savingStr, savingDex, savingCon, savingIntel, savingWis, savingCha)

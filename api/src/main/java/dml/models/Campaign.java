@@ -5,6 +5,7 @@ import java.util.List;
 public class Campaign {
     private Integer campaignId;
     private Integer dmId; //owner of campaign
+    private String campaignName;
     private String dmNotes;
     private List<Integer> playerIds;
 
@@ -22,6 +23,14 @@ public class Campaign {
 
     public void setDmId(Integer dmId) {
         this.dmId = dmId;
+    }
+
+    public String getCampaignName() {
+        return campaignName;
+    }
+
+    public void setCampaignName(String campaignName) {
+        this.campaignName = campaignName;
     }
 
     public String getDmNotes() {

@@ -163,6 +163,8 @@ public class PlayerCharacterService {
             return result;
         }
 
+        pc.setUserId(requester.getUserId());
+
         result = validate(pc);
 
         if (result.isSuccess()){

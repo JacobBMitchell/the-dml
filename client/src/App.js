@@ -7,6 +7,7 @@ import Login from "./Login";
 import CharacterPage from "./CharacterPage";
 import CampaignPage from "./CampaignPage";
 import UsefulLinks from "./UsefulLinks";
+import AddCharacter from "./AddCharacter";
 import NotFound from "./NotFound";
 import Dice from "./Dice";
 import Registration from "./Registration";
@@ -24,6 +25,7 @@ function App() {
             <Route path="/login" element={<Login errors={errors} setErrors={setErrors}/>}/>
             <Route path="/characters" element={<CharacterPage/>}/>
             <Route path="/campaigns" element={<CampaignPage/>}/>
+            <Route path="/create" element={<AddCharacter/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>
             <Route path="/register" element={<Registration/>}/>
             <Route path="*" element={<NotFound/>}/>

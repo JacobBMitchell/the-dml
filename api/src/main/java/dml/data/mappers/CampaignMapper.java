@@ -25,6 +25,7 @@ public class CampaignMapper implements RowMapper<Campaign> {
         Campaign campaign = new Campaign();
         campaign.setCampaignId(resultSet.getInt("campaignId"));
         campaign.setDmId(resultSet.getInt("dmId"));
+        campaign.setCampaignName(resultSet.getString("campaignName"));
         campaign.setDmNotes(resultSet.getString("notes"));
         campaign.setPlayerIds(playerIds);
         return campaign;
