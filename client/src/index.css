@@ -58,7 +58,16 @@ h1 {
 .dice {
     position: absolute;
     object-position: bottom 30px;
+    
+}
+.blank {
     max-width: 85px;
+    background: none !important; 
+}
+
+.roll {
+    margin-left: -50px;
+    align-items: center;
 }
 
 .homepage h2 {

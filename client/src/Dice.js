@@ -1,11 +1,36 @@
 import blank from "./design/d20Blank.png";
 function Dice() {
+    function sleep(miliseconds) {
+        var currentTime = new Date().getTime();
+     
+        while (currentTime + miliseconds >= new Date().getTime()) {
+        }
+     }
 
     function roll(num) {
-        console.log("d" + num);
         let outcome = Math.floor(Math.random() * (num) + 1);
-        console.log(outcome);
-        let die = document.getElementById("die");
+        let die = document.getElementById("roll");
+        die.innerHTML = "";
+        
+        let blankSpinning = [];
+        const blankTiming = {
+            duration: 2000,
+            iterations: 1
+        }
+        
+        for (let index = -5; index < Math.floor(Math.random()*15); index++) {
+            blankSpinning.push({transform: "rotate(" + Math.floor(Math.random()*360) + "deg)"});
+
+            // blank.setAttribute("style", "transform: rotate(" + Math.floor(Math.random()*360) + "deg)"); //does not work here
+            // sleep(150); //this works
+            // console.log(index);
+        }
+        console.log(blankSpinning);
+        console.log(blankTiming);
+        let blank = document.getElementById("blank");
+        blank.animate(blankSpinning,blankTiming);
+        // blank.setAttribute("style", "transform: rotate(" + 20 + "deg)"); //works here
+        
         die.innerHTML = outcome;
     }
 
@@ -26,8 +51,8 @@ function Dice() {
         </div>
 
         <div className="diceImg">
-            <img className="blank" src={blank} alt="" />
-            <h2 className="roll" id="die"></h2>
+            <img className="blank" id="blank" src={blank} alt="" />
+            <span className="roll" id="roll"></span>
         </div>
     </div>)
 }
