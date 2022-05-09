@@ -6,6 +6,7 @@ function Campaign(props) {
         <div className="campaign">
         <div className="info">
             <h4>DM: {campaign.dmId}</h4>
+            <h4>Name: {campaign.campaignName}</h4>
             <h4>Notes:</h4>
             <p>{campaign.dmNotes}</p>
         </div>
