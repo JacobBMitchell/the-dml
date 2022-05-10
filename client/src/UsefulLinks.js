@@ -20,7 +20,7 @@ function UsefulLinks() {
         <h4>autorolltable: <a href="http://autorolltables.github.io/#">Roll Tables</a></h4>
         <h4>dm tools: <a href="https://dm.tools/tracker">Innitiative Tracker</a></h4>
 
-        <h2>A special thanks to dnd5eapi</h2><a className="api" href="https://www.dnd5eapi.co">api</a>
+        <h2>A special thanks to dnd5eapi</h2><a className="api" href="https://www.dnd5eapi.co"><b>API</b></a>
         
     </>)
 }

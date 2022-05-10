@@ -37,7 +37,7 @@
 
 .api {
     margin-top: -5px;
-    font-size: 25px;
+    font-size: 50px;
 }
 
 @font-face {
@@ -72,6 +72,7 @@ h1 {
 .dice {
     position: fixed;
     bottom: 20px;
+    right: 20px;
     background-color: none !important;
 }
 .diceImg {
