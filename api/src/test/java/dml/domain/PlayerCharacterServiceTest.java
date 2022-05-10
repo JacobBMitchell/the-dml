@@ -48,6 +48,7 @@ class PlayerCharacterServiceTest {
         when(charRepo.findById(character.getId())).thenReturn(character);
         Result<PlayerCharacter> result = service.findById(1, user.getUsername());
         assertTrue(result.isSuccess());
+        assertEquals(1, result.getPayload().getId());
 
         //when dm look for campaign's character
         Set<String> dmRoles = new HashSet<>();

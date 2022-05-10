@@ -8,5 +8,5 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/api/campaign/user/matthew@mercer.com HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkbWwtYXBwIiwic3ViIjoidHlsZXJAbGl0ei5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJleHAiOjE2NTE3MTYwMTZ9.laik3g_3gzqe8A5KEXKE0m2mBFHlrNtGDrRs3SWXs74
+GET "http://localhost:8080/api/campaign/1"
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkbWwtYXBwIiwic3ViIjoidHlsZXJAbGl0ei5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJleHAiOjE2NTIyMjA1MTJ9.DbiaG-aJghXj1UhEJg-TYB2XJFZcmNMwxb7L53qH3VI
