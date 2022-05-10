@@ -47,8 +47,4 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 
     }
-
-    //TODO: Postmapping where ("/register") or create etc
-    // create register ability
-
 }
