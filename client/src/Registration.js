@@ -7,15 +7,15 @@ import bcrypt from "bcryptjs";
 
 
 function Registration({ errors, setErrors }) {
-    const [firstName,setFirstName] = useState("");
-    const [lastName,setLastName] = useState("");
-    const [username,setUsername] = useState("");
-    const [password,setPassword] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [crypted, setCryted] = useState("");
     const [dm, setDM] = useState(false);
     const [user, setUser] = useContext(AuthContext);
     const nav = useNavigate();
-    const [showErrors, setShowErrors] = useState(false); 
+    const [showErrors, setShowErrors] = useState(false);
 
     function login() {
         fetch("http://localhost:8080/api/security/login",
@@ -33,11 +33,10 @@ function Registration({ errors, setErrors }) {
                 }
                 else {
                     setErrors([...errors, "Username or password is incorrect"]);
-                    console.log(errors);
                     setShowErrors(true);
                 }
             }).then(tokenContainer => {
-                if (tokenContainer == null){
+                if (tokenContainer == null) {
                     return;
                 }
                 const { jwt_token } = tokenContainer;
@@ -45,9 +44,8 @@ function Registration({ errors, setErrors }) {
                 setUser({ user: jwtDecode(jwt_token) });
                 nav("/");
             })
-            .catch(a =>  {
+            .catch(a => {
                 setErrors([...errors, "Server is down"]);
-                console.log(errors);
                 setShowErrors(true);
             }
             );
@@ -55,12 +53,7 @@ function Registration({ errors, setErrors }) {
 
     function submitHandler(ev) {
         ev.preventDefault();
-        bcrypt.genSalt(12, function(err, salt) {
-            bcrypt.hash(password, salt, function(err, hash) {
-                setCryted(hash);
-            });
-        });
-        setTimeout(() => console.log("Loading"), 1500);
+
         let newUser = {
             username: username,
             firstName: firstName,
@@ -68,10 +61,8 @@ function Registration({ errors, setErrors }) {
             email: username,
             userId: 0,
             password: crypted,
-            roles: (dm ? ["PLAYER","DM"] : ["PLAYER"])
+            roles: (dm ? ["PLAYER", "DM"] : ["PLAYER"])
         }
-        console.log(newUser);
-        console.log(JSON.stringify(newUser));
 
         fetch("http://localhost:8080/api/user/register",
             {
@@ -85,21 +76,19 @@ function Registration({ errors, setErrors }) {
                     return response.json();
                 }
                 else {
-                    console.log(response);
                     setErrors([...errors, "Registration Failed"]);
                     setShowErrors(true);
                 }
             })
             .then(createdUser => {
-                if (createdUser != null){
+                if (createdUser != null) {
                     login();
                 }
             })
-            .catch( a =>  {
-                    setErrors([...errors, "Server is down"]);
-                    console.log(errors);
-                    setShowErrors(true);
-                }
+            .catch(a => {
+                setErrors([...errors, "Server is down"]);
+                setShowErrors(true);
+            }
             )
 
         //todo: send fetch request to make new user using above details
@@ -119,7 +108,14 @@ function Registration({ errors, setErrors }) {
             <label className="col-2" htmlFor="email">Email: </label>
             <input onChange={change => setUsername(change.target.value)} className="col-2" id="email" type="text"></input><br></br>
             <label className="col-2" htmlFor="password">Password: </label>
-            <input onChange={change => setPassword(change.target.value)} className="col-2" id="password" type="password"></input><br></br>
+            <input onChange={change => {
+                setPassword(change.target.value);
+                bcrypt.genSalt(12, function (err, salt) {
+                    bcrypt.hash(change.target.value, salt, function (err, hash) {
+                        setCryted(hash);
+                    });
+                });
+            }} className="col-2" id="password" type="password"></input><br></br>
             <label className="col-2" htmlFor="dm">DM: </label>
             <input onClick={() => setDM(!dm)} type="checkbox" className="col-2" id="dm"></input><br></br>
             <button>Submit</button>
