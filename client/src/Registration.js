@@ -91,8 +91,6 @@ function Registration({ errors, setErrors }) {
             }
             )
 
-        //todo: send fetch request to make new user using above details
-        // return in fetch request a token if correct
     }
 
     return (<div>

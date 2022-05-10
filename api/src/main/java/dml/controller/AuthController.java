@@ -48,7 +48,4 @@ public class AuthController {
 
     }
 
-    //TODO: Postmapping where ("/register") or create etc
-    // create register ability
-
 }
