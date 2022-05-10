@@ -63,7 +63,7 @@ function AddCharacter() {
             if(response.status == 201){
                 alert("Character created.");
             } else {
-                alert("Agent couldn't be added.");
+                alert("Character couldn't be added.");
                 return response.json();
             }
         })
