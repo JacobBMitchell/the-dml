@@ -6,6 +6,7 @@
 * {
     background-color: #d4d6d8;
 }
+
 .hidden {
     display: none;
 }
@@ -34,7 +35,7 @@
     width: 40%;
 }
 
-.api{
+.api {
     margin-top: -5px;
     font-size: 25px;
 }
@@ -59,13 +60,27 @@ h1 {
     padding-left: 10px;
 }
 
-.dice {
-    position: absolute;
-    bottom: 20px;  
+.registerLink {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+
+.dice {
+    position: fixed;
+    bottom: 20px;
+    background-color: none !important;
+}
+.diceImg {
+    background-color: none !important;
+}
+
 .blank {
     max-width: 85px;
-    background: none !important; 
+    background: none !important;
 }
 
 .roll {
@@ -76,10 +91,10 @@ h1 {
 .homepage h2 {
     font-family: draconic;
     font-weight: normal;
-    text-align: center; 
+    text-align: center;
 }
 
-.nav li{
+.nav li {
     display: inline-block;
     padding: 5px;
 }

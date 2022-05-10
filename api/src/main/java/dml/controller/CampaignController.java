@@ -5,7 +5,6 @@ import dml.domain.CampaignService;
 import dml.domain.Result;
 import dml.domain.ResultType;
 import dml.models.Campaign;
-import dml.models.PlayerCharacter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

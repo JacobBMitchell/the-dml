@@ -92,16 +92,14 @@ function AddCharacter() {
 
     return (
         <>
-        
+        <h1>Add a Character</h1>
         <div className="row">
             <div className="col"></div>
-            <div className="col-6">
+            <div className="col-10">
                 <div className="semi-opaque form-card"></div>
-                    <h1 className="form-title">Add a Character</h1>
-
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <label className="form-label" htmlFor="name">Name:</label>
-                        {errors.name && <span> This field is required</span>}<br/>
+                        {errors.name && <span> This field is required</span>}
                         <input className="form-control" id="name" {...register("name")}></input><br/><br/>
 
                         <label className="form-label" htmlFor="campaign">Campaign: </label>
@@ -141,29 +139,29 @@ function AddCharacter() {
                         </select><br/><br/>
 
                         <label className="form-label" htmlFor="characterLevel">Level: </label>
-                        <input type="number" class="form-control" id="characterLevel" min="1" max="20" {...register("characterLevel", {min: 1, max: 20} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="characterLevel" min="1" max="20" {...register("characterLevel", {min: 1, max: 20} )}></input><br/><br/>
                         
                         <label className="form-label" htmlFor="armorClass">Armor Class: </label>
-                        <input type="number" class="form-control" id="armorClass" min="1" max="30" {...register("armorClass", {min: 1, max: 30} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="armorClass" min="1" max="30" {...register("armorClass", {min: 1, max: 30} )}></input><br/><br/>
                         
                         <label className="form-label" htmlFor="gold">Gold: </label>
-                        <input type="number" class="form-control" id="gold" min="0" {...register("gold", {min: 0} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="gold" min="0" {...register("gold", {min: 0} )}></input><br/><br/>
 
                         <label className="form-label" htmlFor="speed">Speed: </label>
-                        <input type="number" class="form-control" id="speed" min="1" max="30" defaultValue={30} {...register("speed", {min: 1, max: 30} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="speed" min="1" max="30" defaultValue={30} {...register("speed", {min: 1, max: 30} )}></input><br/><br/>
                         
                         <label className="form-label" htmlFor="str">Str: </label>
-                        <input type="number" class="form-control" id="str" min="1" max="20" {...register("str", {min: 1, max: 20} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="str" min="1" max="20" {...register("str", {min: 1, max: 20} )}></input><br/><br/>
                         <label className="form-label" htmlFor="dex">Dex: </label>
-                        <input type="number" class="form-control" id="dex" min="1" max="20" {...register("dex", {min: 1, max: 20} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="dex" min="1" max="20" {...register("dex", {min: 1, max: 20} )}></input><br/><br/>
                         <label className="form-label" htmlFor="con">Con: </label>
-                        <input type="number" class="form-control" id="con" min="1" max="20" {...register("con", {min: 1, max: 20} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="con" min="1" max="20" {...register("con", {min: 1, max: 20} )}></input><br/><br/>
                         <label className="form-label" htmlFor="intel">Intel: </label>
-                        <input type="number" class="form-control" id="intel" min="1" max="20" {...register("intel", {min: 1, max: 20} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="intel" min="1" max="20" {...register("intel", {min: 1, max: 20} )}></input><br/><br/>
                         <label className="form-label" htmlFor="str">Wis: </label>
-                        <input type="number" class="form-control" id="wis" min="1" max="20" {...register("wis", {min: 1, max: 20} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="wis" min="1" max="20" {...register("wis", {min: 1, max: 20} )}></input><br/><br/>
                         <label className="form-label" htmlFor="str">Cha: </label>
-                        <input type="number" class="form-control" id="cha" min="1" max="20" {...register("cha", {min: 1, max: 20} )}></input><br/><br/>
+                        <input type="number" className="form-control" id="cha" min="1" max="20" {...register("cha", {min: 1, max: 20} )}></input><br/><br/>
 
                         <input type="submit" className="btn btn-primary"/>
                     </form>

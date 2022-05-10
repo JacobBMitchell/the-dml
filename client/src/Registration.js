@@ -117,7 +117,7 @@ function Registration({ errors, setErrors }) {
                 });
             }} className="col-2" id="password" type="password"></input><br></br>
             <label className="col-2" htmlFor="dm">DM: </label>
-            <input onClick={() => setDM(!dm)} type="checkbox" className="col-2" id="dm"></input><br></br>
+            <input onClick={() => setDM(!dm)} type="checkbox" className="col-2" id="dm"></input><br></br><br></br>
             <button>Submit</button>
         </form>
     </div>)
