@@ -9,7 +9,7 @@ import bcrypt from "bcryptjs";
 function Registration({ errors, setErrors }) {
     const [firstName,setFirstName] = useState("");
     const [lastName,setLastName] = useState("");
-    const [email,setEmail] = useState("");
+    const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
     const [crypted, setCryted] = useState("");
     const [dm, setDM] = useState(false);
@@ -17,7 +17,7 @@ function Registration({ errors, setErrors }) {
     const nav = useNavigate();
     const [showErrors, setShowErrors] = useState(false); 
 
-    function login(createdUser) {
+    function login() {
         fetch("http://localhost:8080/api/security/login",
             {
                 method: "POST",
@@ -25,7 +25,7 @@ function Registration({ errors, setErrors }) {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    email, password
+                    username, password
                 })
             }).then(response => {
                 if (response.status === 200) {
@@ -60,11 +60,12 @@ function Registration({ errors, setErrors }) {
                 setCryted(hash);
             });
         });
+        setTimeout(() => console.log("Loading"), 1500);
         let newUser = {
-            username: email,
+            username: username,
             firstName: firstName,
             lastName: lastName,
-            email: email,
+            email: username,
             userId: 0,
             password: crypted,
             roles: (dm ? ["PLAYER","DM"] : ["PLAYER"])
@@ -91,7 +92,7 @@ function Registration({ errors, setErrors }) {
             })
             .then(createdUser => {
                 if (createdUser != null){
-                    login(createdUser);
+                    login();
                 }
             })
             .catch( a =>  {
@@ -116,7 +117,7 @@ function Registration({ errors, setErrors }) {
             <label className="col-2" htmlFor="lastName">LastName: </label>
             <input onChange={change => setLastName(change.target.value)} className="col-2" id="lastName" type="text"></input><br></br>
             <label className="col-2" htmlFor="email">Email: </label>
-            <input onChange={change => setEmail(change.target.value)} className="col-2" id="email" type="text"></input><br></br>
+            <input onChange={change => setUsername(change.target.value)} className="col-2" id="email" type="text"></input><br></br>
             <label className="col-2" htmlFor="password">Password: </label>
             <input onChange={change => setPassword(change.target.value)} className="col-2" id="password" type="password"></input><br></br>
             <label className="col-2" htmlFor="dm">DM: </label>
