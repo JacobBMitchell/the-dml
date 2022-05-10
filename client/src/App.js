@@ -28,8 +28,8 @@ function App() {
             <Route path="/campaigns" element={<CampaignPage/>}/>
             <Route path="/create" element={<AddCharacter/>}/>
             <Route path="/resources" element={<UsefulLinks/>}/>
-            <Route path="/register" element={<Registration/>}/>
             <Route path="/characters/edit/:characterId" element={<EditPage/>}/>
+            <Route path="/register" element={<Registration errors={errors} setErrors={setErrors}/>}/>
             <Route path="*" element={<NotFound/>}/>
           </Routes>
           <Dice/>

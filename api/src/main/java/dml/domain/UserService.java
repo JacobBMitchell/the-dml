@@ -32,6 +32,22 @@ public class UserService implements UserDetailsService {
     }
 
     public Result<AppUser> create(AppUser user){
-        return null;
+        Result<AppUser> result = new Result<>();
+        if (user == null){
+            result.addMessage("Need user details", ResultType.INVALID);
+            return result;
+        }
+        if (user.getEmail().isEmpty() || user.getRoles().isEmpty() || user.getFirstName().isEmpty() || user.getLastName().isEmpty()){
+            result.addMessage("Missing credentails", ResultType.INVALID);
+            return result;
+        }
+
+        if (repo.findByUsername(user.getEmail()) != null){
+            result.addMessage("User already exists", ResultType.INVALID);
+        }
+        if (result.isSuccess()){
+            result.setPayload(repo.create(user));
+        }
+        return result;
     }
 }

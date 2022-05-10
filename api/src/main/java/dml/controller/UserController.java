@@ -1,6 +1,8 @@
 package dml.controller;
 
+import dml.App;
 import dml.domain.Result;
+import dml.domain.ResultType;
 import dml.domain.UserService;
 import dml.models.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,12 @@ public class UserController {
         return ResponseEntity.ok(service.loadUserByUsername(username));
     }
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity createNewUser(@RequestBody AppUser user){
         Result result = service.create(user);
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        if (result.getType() == ResultType.INVALID){
+            return new ResponseEntity<>(result.getMessages(),HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result.getPayload(), HttpStatus.CREATED);
     }
 }

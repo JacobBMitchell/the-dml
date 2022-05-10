@@ -51,6 +51,7 @@ function Login({ errors, setErrors }) {
     }
 
     return (<>
+        <h1>Login</h1>
         <div className={showErrors ? "" : "hidden"}>
             <Alert errors={errors} setErrors={setErrors} setShowErrors={setShowErrors} />
         </div>
@@ -62,7 +63,7 @@ function Login({ errors, setErrors }) {
             <button>Submit</button>
         </form>
 
-        <Link to="/register">new user</Link>
+        <Link className="registerLink" to="/register">New User?</Link>
     </>)
 }
 export default Login;
