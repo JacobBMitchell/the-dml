@@ -67,13 +67,14 @@ public class CampaignJdbcRepo implements CampaignRepo{
     @Override
     public Campaign add(Campaign campaign) {
 
-        final String sql = "insert into campaigns (dmId, notes) values (?, ?);";
+        final String sql = "insert into campaigns (dmId, notes, campaignName) values (?, ?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         int rowsAffected = jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, campaign.getDmId());
             ps.setString(2, campaign.getDmNotes());
+            ps.setString(3, campaign.getCampaignName());
             return ps;
         }, keyHolder);
 
