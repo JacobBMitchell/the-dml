@@ -3,12 +3,14 @@ import Character from './Character';
 import AuthContext from './AuthContext';
 
 function CharacterPage() {
+    
+    const apiUrl = window.API_URL;
     const [characters, setCharacters] = useState([]);
     const [user, setUser] = useContext(AuthContext);
 
     useEffect(() => {
         if(user.user.authorities.includes("ADMIN")){
-            fetch("http://localhost:8080/api/character", {
+            fetch(apiUrl + "/api/character", {
                 method: "GET",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token")
@@ -18,7 +20,7 @@ function CharacterPage() {
             .then(jsonData => setCharacters(jsonData))
             .catch(rejection => console.log(rejection));
         } else {
-            fetch("http://localhost:8080/api/character/user/" + user.user.sub, {
+            fetch(apiUrl + "/api/character/user/" + user.user.sub, {
                 method: "GET",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token")

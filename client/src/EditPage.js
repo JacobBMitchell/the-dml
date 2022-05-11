@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 
 function EditPage() {
     
+    const apiUrl = window.API_URL;
     const [campaigns, setCampaigns] = useState([]);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [toEdit, setToEdit] = useState(null);
@@ -33,7 +34,7 @@ function EditPage() {
         toEdit.cha = document.getElementById("cha").valueAsNumber;
         console.log(toEdit);
 
-        fetch("http://localhost:8080/api/character/" + toEdit.id, {
+        fetch(apiUrl + "/api/character/" + toEdit.id, {
             method: "PUT",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -65,7 +66,7 @@ function EditPage() {
         const jwt = localStorage.getItem( "token" );
 
         if( jwt ){
-            fetch( "http://localhost:8080/api/character/" + characterId,
+            fetch(apiUrl + "/api/character/" + characterId,
                 {
                     method: "GET",
                     headers: {

@@ -6,6 +6,8 @@ import Alert from "./Alert";
 import { Link } from "react-router-dom";
 
 function Login({ errors, setErrors }) {
+
+    const apiUrl = window.API_URL;
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [user, setUser] = useContext(AuthContext);
@@ -15,7 +17,7 @@ function Login({ errors, setErrors }) {
 
     function submitHandler(ev) {
         ev.preventDefault();
-        fetch("http://localhost:8080/api/security/login",
+        fetch(apiUrl + "/api/security/login",
             {
                 method: "POST",
                 headers: {

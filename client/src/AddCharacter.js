@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 
 function AddCharacter() {
 
+    const apiUrl = window.API_URL;
     const [campaigns, setCampaigns] = useState([]);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -51,7 +52,7 @@ function AddCharacter() {
 
         //post to api
         data.userId = 0;
-        fetch("http://localhost:8080/api/character", {
+        fetch(apiUrl + "/api/character", {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -79,7 +80,7 @@ function AddCharacter() {
 
     //get campaigns
     useEffect(() => {
-        fetch("http://localhost:8080/api/campaign", {
+        fetch(apiUrl + "/api/campaign", {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token")

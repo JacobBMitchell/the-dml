@@ -4,12 +4,13 @@ import AuthContext from './AuthContext';
 
 function CampaignPage() {
     
+    const apiUrl = window.API_URL;
     const [campaigns, setCampaigns] = useState([]);
     const [user, setUser] = useContext(AuthContext);
 
     useEffect(() => {
         if(user.user.authorities.includes("ADMIN")){
-            fetch("http://localhost:8080/api/campaign", {
+            fetch(apiUrl + "/api/campaign", {
                 method: "GET",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token")
@@ -19,7 +20,7 @@ function CampaignPage() {
             .then(jsonData => setCampaigns(jsonData))
             .catch(rejection => console.log(rejection));
         } else {
-            fetch("http://localhost:8080/api/campaign/user/" + user.user.sub, {
+            fetch(apiUrl + "/api/campaign/user/" + user.user.sub, {
                 method: "GET",
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem("token")

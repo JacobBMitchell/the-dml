@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import AuthContext from "./AuthContext";
 
 function AddCampaign() {
+    const apiUrl = window.API_URL;
     const [user, setUser] = useContext(AuthContext);
     const [note, setNote] = useState("");
     const [name, setName] = useState("");
@@ -13,7 +14,7 @@ function AddCampaign() {
             dmNotes : note
         }
         console.log(campaign);
-        fetch("http://localhost:8080/api/campaign", {
+        fetch(apiUrl + "/api/campaign", {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function Campaign(props) {
 
+    const apiUrl = window.API_URL;
     const {campaign} = props;
     const [isHidden, setIsHidden] = useState(true);
 
@@ -22,7 +23,7 @@ function Campaign(props) {
     }
 
     const update = () => {
-        fetch("http://localhost:8080/api/campaign/" + campaign.campaignId, {
+        fetch(apiUrl + "/api/campaign/" + campaign.campaignId, {
             method: "PUT",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),

@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 
 
 function Registration({ errors, setErrors }) {
+    const apiUrl = window.API_URL;
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
@@ -18,7 +19,7 @@ function Registration({ errors, setErrors }) {
     const [showErrors, setShowErrors] = useState(false);
 
     function login() {
-        fetch("http://localhost:8080/api/security/login",
+        fetch(apiUrl + "/api/security/login",
             {
                 method: "POST",
                 headers: {
@@ -64,7 +65,7 @@ function Registration({ errors, setErrors }) {
             roles: (dm ? ["PLAYER", "DM"] : ["PLAYER"])
         }
 
-        fetch("http://localhost:8080/api/user/register",
+        fetch(apiUrl + "/api/user/register",
             {
                 method: "POST",
                 headers: {
