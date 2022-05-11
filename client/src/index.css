@@ -56,6 +56,11 @@ h1 {
     padding: 10px;
 }
 
+textarea {
+    width: 70%;
+    height: 200px;
+}
+
 .regForm {
     padding-left: 10px;
 }

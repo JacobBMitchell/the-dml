@@ -42,9 +42,9 @@ function AddCampaign() {
 
     return (<div>
         <form onSubmit={ev => saveNotes(ev)}>
-            <label htmlFor="name">Campaign Name</label>
-            <input onChange={change => setName(change.target.value)} id="name" type="text"></input><br></br>
-            <label htmlFor="notes">Innitial Notes</label>
+            <label htmlFor="name">Campaign Name: </label>
+            <input onChange={change => setName(change.target.value)} id="name" type="text"></input><br></br><br></br>
+            <label htmlFor="notes">Innitial Notes: </label>
             <textarea onChange={change => setNote(change.target.value)} id="notes"></textarea>
             <button>Save</button>
         </form>
