@@ -76,6 +76,7 @@ public class CampaignService {
 
     public Result<Campaign> addCampaign(Campaign campaign,  String username){
         AppUser requester = userRepo.findByUsername(username);
+        campaign.setDmId(requester.getUserId());
         Result<Campaign> result = validate(campaign, requester);
 
         if (result.isSuccess()){

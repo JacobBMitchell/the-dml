@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "./AuthContext";
 
 function AddCampaign() {
+    const [user, setUser] = useContext(AuthContext);
     const [note, setNote] = useState("");
     const [name, setName] = useState("");
 
     const saveNotes = (ev) => {
         ev.preventDefault();
-        //TODO set up a campaing object
-        fetch("http://localhost:8080/api/campaign/", {
+        let campaign = {
+            campaignName : name,
+            dmNotes : note
+        }
+        console.log(campaign);
+        fetch("http://localhost:8080/api/campaign", {
             method: "POST",
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem("token"),
@@ -19,7 +25,7 @@ function AddCampaign() {
             if(response.status == 201){
                 alert("saved")
             } else {
-                alert("Campaign couldn't be updated.");
+                alert("Campaign couldn't be created.");
                 return response.json();
             }
         })
@@ -37,9 +43,9 @@ function AddCampaign() {
     return (<div>
         <form onSubmit={ev => saveNotes(ev)}>
             <label htmlFor="name">Campaign Name</label>
-            <input id="name" type="text"></input>
+            <input onChange={change => setName(change.target.value)} id="name" type="text"></input><br></br>
             <label htmlFor="notes">Innitial Notes</label>
-            <textarea id="notes"></textarea>
+            <textarea onChange={change => setNote(change.target.value)} id="notes"></textarea>
             <button>Save</button>
         </form>
     </div>)

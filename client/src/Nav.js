@@ -43,9 +43,15 @@ function Nav() {
                         ) : <></>}
 
                         {user?.user ? (
+                            <>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/campaigns">Campaigns</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className='nav-link' to="/addcampaign">Add Campaign</Link>
+                            </li>
+                            </>
+
                         ) : <></>}
                          
                         {user?.user ? (

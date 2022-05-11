@@ -53,7 +53,7 @@ public class CampaignController {
     @PostMapping
     public ResponseEntity AddCampaign(@RequestBody Campaign campaign, Principal user){
         if (campaign == null){
-            return new ResponseEntity<>("Cannot have null character",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Cannot have null campaign",HttpStatus.BAD_REQUEST);
         }
         Result<Campaign> result = service.addCampaign(campaign, user.getName());
         if (result.isSuccess()){
