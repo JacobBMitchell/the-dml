@@ -36,13 +36,18 @@ function Nav() {
                             </li>
                         )}
 
-                        {user?.user ? (
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/characters">Characters</Link>
-                            </li>
+                        {(user?.user && (user.user.authorities.includes("PLAYER") || user.user.authorities.includes("ADMIN"))) ? (
+                            <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/characters">Characters</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/create">Add a Character</Link>
+                                </li>
+                            </>
                         ) : <></>}
 
-                        {user?.user ? (
+                        {(user?.user && (user.user.authorities.includes("DM") || user.user.authorities.includes("ADMIN"))) ? (
                             <>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/campaigns">Campaigns</Link>
@@ -53,12 +58,7 @@ function Nav() {
                             </>
 
                         ) : <></>}
-                         
-                        {user?.user ? (
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/create">Add a Character</Link>
-                            </li>
-                        ) : <></>}
+                        
                          
                         <li className="nav-item">
                             <Link className="nav-link" to="/resources">Resources</Link>
