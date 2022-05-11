@@ -1,4 +1,4 @@
-POST http://localhost:8080/api/security/login
+POST http://dndapi-env.eba-99nmyw6b.us-east-2.elasticbeanstalk.com/api/security/login
 Content-Type: application/json
 
 {
@@ -10,3 +10,7 @@ Content-Type: application/json
 
 GET "http://localhost:8080/api/campaign/1"
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkbWwtYXBwIiwic3ViIjoidHlsZXJAbGl0ei5jb20iLCJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4iLCJleHAiOjE2NTIyMjA1MTJ9.DbiaG-aJghXj1UhEJg-TYB2XJFZcmNMwxb7L53qH3VI
+
+###
+
+GET "http://localhost:8080" HTTP/1.1

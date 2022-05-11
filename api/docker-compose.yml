@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  dnd-api:
+    image: tlitz10/dnd-api:1.0
+    environment:
+      - DB_URL=jdbc:mysql://dnd-db.covkjtcx5erm.us-east-2.rds.amazonaws.com:3306/dnd_test
+      - DB_USERNAME=admin
+      - DB_PASSWORD=admin-password
+    ports:
+      - 8080:8080
