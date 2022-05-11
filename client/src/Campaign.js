@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function Campaign(props) {
 
     const apiUrl = window.API_URL;
     const {campaign} = props;
     const [isHidden, setIsHidden] = useState(true);
+    const [players, setPlayers] = useState([]);
+
+    useEffect(() => {
+        fetch(apiUrl + "/api/character/campaign/" + campaign.campaignId, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+            }
+        })
+        .then(response => response.json())
+        .then(jsonData => setPlayers(jsonData))
+        .catch(rejection => console.log(rejection));
+    }, []);
 
     const editNotes = (ev) => {
         setIsHidden(!isHidden);
@@ -62,7 +75,7 @@ function Campaign(props) {
         <div className="Players">
             <h4>Players:</h4>
             <ul>
-                {campaign.playerIds.map(player => <li>{player}</li>)}
+                {players?.map(player => <li>{player.name}</li>)}
             </ul>
         </div>
         
