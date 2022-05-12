@@ -59,11 +59,11 @@ function Login({ errors, setErrors }) {
         </div>
         <form onSubmit={submitHandler}>
             <label htmlFor="username">Username: </label><br></br>
-            <input id="username" onChange={event => setUsername(event.target.value)}></input><br></br><br></br>
+            <input className="form-control" id="username" onChange={event => setUsername(event.target.value)}></input><br></br><br></br>
             <label htmlFor="password">Password: </label><br></br>
-            <input id="password" type="password" onChange={event => setPassword(event.target.value)}></input><br></br><br></br>
-            <button>Submit</button>
-        </form>
+            <input className="form-control" id="password" type="password" onChange={event => setPassword(event.target.value)}></input><br></br><br></br>
+            <button className="btn btn-grey btn-secondary" >Submit</button>
+        </form><br/>
 
         <Link className="registerLink" to="/register">New User?</Link>
     </>)

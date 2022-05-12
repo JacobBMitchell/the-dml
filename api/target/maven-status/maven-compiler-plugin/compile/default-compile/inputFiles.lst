@@ -18,6 +18,7 @@ C:\COH18\Code\the-dml\api\src\main\java\dml\controller\CampaignController.java
 C:\COH18\Code\the-dml\api\src\main\java\dml\domain\InvalidUserException.java
 C:\COH18\Code\the-dml\api\src\main\java\dml\domain\ResultType.java
 C:\COH18\Code\the-dml\api\src\main\java\dml\security\JwtConverter.java
+C:\COH18\Code\the-dml\api\src\main\java\dml\controller\HealthCheckController.java
 C:\COH18\Code\the-dml\api\src\main\java\dml\domain\Result.java
 C:\COH18\Code\the-dml\api\src\main\java\dml\controller\CharacterController.java
 C:\COH18\Code\the-dml\api\src\main\java\dml\domain\PlayerCharacterService.java

@@ -41,14 +41,23 @@ function AddCampaign() {
 
     }
 
-    return (<div>
-        <form onSubmit={ev => saveNotes(ev)}>
-            <label htmlFor="name">Campaign Name: </label>
-            <input onChange={change => setName(change.target.value)} id="name" type="text"></input><br></br><br></br>
-            <label htmlFor="notes">Innitial Notes: </label>
-            <textarea onChange={change => setNote(change.target.value)} id="notes"></textarea>
-            <button>Save</button>
-        </form>
-    </div>)
+    return (<>
+        <h1>Add a Campaign</h1><br/>
+        <div className="row">
+            <div className="col"></div>
+                <div className="col-8">
+                    <form onSubmit={ev => saveNotes(ev)}>
+                        <div className="form-group">
+                            <label htmlFor="name">Campaign Name: </label>
+                            <input className="form-control" onChange={change => setName(change.target.value)} id="name" type="text"></input>
+                        </div><br/>
+                        <label htmlFor="notes">Initial Notes</label>
+                        <textarea className="form-control textbox" onChange={change => setNote(change.target.value)} id="notes"></textarea><br/>
+                        <button className="btn btn-grey btn-secondary">Save</button>
+                    </form>
+                </div>
+            <div className="col"></div>
+        </div>
+    </>)
 }
 export default AddCampaign;

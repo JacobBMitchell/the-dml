@@ -1,6 +1,7 @@
-/*  d4d6d8 dice grey
-    1d1818 eerie black
-    f71735 imperial red*/
+/*  #d4d6d8 dice grey
+    #1d1818 eerie black
+    #f71735 imperial red
+    #264c5e charcoal*/
 
 
 * {
@@ -12,24 +13,28 @@
 }
 
 .character {
-    border: 1px black solid;
+    border: 2px black solid;
+    border-radius: 1rem;
     margin: 10px;
 }
 
 .character div {
     display: inline-block;
+    margin: 10px;
     padding-left: 20px;
     vertical-align: top;
     width: 40%;
 }
 
 .campaign {
-    border: 1px black solid;
+    border: 2px black solid;
+    border-radius: 1rem;
     margin: 10px;
 }
 
 .campaign div {
     display: inline-block;
+    margin: 10px;
     padding-left: 20px;
     vertical-align: top;
     width: 40%;
@@ -44,8 +49,6 @@
     font-family: draconic;
     src: url(design/draconis-font/Draconis-JRw6B.ttf);
 }
-
-
 
 h1 {
     font-family: draconic;
@@ -76,7 +79,6 @@ textarea {
     justify-content: center;
     align-items: center;
 }
-
 
 .dice {
     position: fixed;
@@ -109,6 +111,10 @@ textarea {
     padding: 5px;
 }
 
+.nav-item {
+    align-items: left;
+}
+
 .form-card {
     border-radius: 50px;
     padding: 30px;
@@ -117,6 +123,13 @@ textarea {
 .form-control {
     display: inline-block;
     width: 40%;
+    margin: 10px;
+}
+
+.textbox {
+    display: block;
+    width: 100%;
+    margin: 10px;
 }
 
 input[type="number"] {
@@ -128,6 +141,7 @@ input[type="number"] {
 .form-select {
     display: inline-block;
     width: 40%;
+    margin-left: 10px;
 }
 
 .form-title {
@@ -136,4 +150,10 @@ input[type="number"] {
 
 form {
     text-align: center;
+}
+
+.btn-grey{
+    background-color: #264c5e;
+    border-radius: .25rem;
+    color: #ffffff;
 }
