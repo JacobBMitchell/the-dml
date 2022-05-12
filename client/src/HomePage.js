@@ -1,3 +1,5 @@
+import logo from "./design/ROAD_DOGS.png";
+
 function HomePage() {
     return (<div className="homepage">
         <h1>Welcome to the DUNGEON MASTER'S LAIR</h1>
@@ -7,6 +9,9 @@ function HomePage() {
         a game master you will have access to our campaign features which allow for collecting players and having notes 
         for your campaign as well as have your own characters! Are you ready to begin your adventure? </p>
         <a href="/login"><h2>Get Started</h2></a>
+        <div>
+            <img className="logo" id="logo" src={logo} alt="" />
+        </div>
     </div>)
 
 }
