@@ -18,12 +18,27 @@
     margin: 10px;
 }
 
+.char-row{
+    display: block !important;
+    padding-left: 0px !important;
+    width: 99% !important;
+}
+
 .character div {
     display: inline-block;
     margin: 10px;
     padding-left: 20px;
     vertical-align: top;
     width: 40%;
+}
+
+.edit-container{
+    width: 14% !important;
+    align-content: right;
+}
+
+.edit-container button{
+    float: right;
 }
 
 .campaign {
@@ -80,10 +95,10 @@ textarea {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: none !important;
+    background-color: transparent !important;
 }
 .diceImg {
-    background-color: none !important;
+    background-color: transparent !important;
 }
 
 .blank {

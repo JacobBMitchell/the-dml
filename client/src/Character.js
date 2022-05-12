@@ -6,7 +6,7 @@ function Character(props) {
     const { character } = props;
 
     return (<div className="character">
-        <div className='row'>
+        <div className='row char-row'>
             <div className='char-info'>
                 <h5>Name: {character.name}</h5>
                 <h5>Class: {character.dndClass}</h5>
@@ -23,7 +23,7 @@ function Character(props) {
                 <p>WIS: {character.wis}</p>
                 <p>CHA: {character.cha}</p>
             </div>
-            <div className='col-2'>
+            <div className='edit-container'>
                 <button className='btn btn-grey btn-secondary' onClick={() => navigate("/characters/edit/" + character.id)}>📝</button>
             </div>
         </div>
