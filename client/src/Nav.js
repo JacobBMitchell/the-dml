@@ -28,8 +28,7 @@ function Nav() {
                         </li>
 
                         {user?.user ? (
-                            <li className="nav-item"><button onClick={handleLogout}>Logout {user.user.sub}</button></li>
-                            // Update with real link later
+                            <li className="nav-item"><button className="btn btn-secondary" onClick={handleLogout}>Logout {user.user.sub}</button></li>
                         ) : (
                             <li className="nav-item">
                                 <Link className="nav-link" to="/login">Login</Link>
@@ -41,6 +40,11 @@ function Nav() {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/characters">Characters</Link>
                                 </li>
+                            </>
+                        ) : <></>}
+
+                        {(user?.user && user.user.authorities.includes("PLAYER")) ? (
+                            <>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/create">Add a Character</Link>
                                 </li>
@@ -52,13 +56,18 @@ function Nav() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/campaigns">Campaigns</Link>
                             </li>
+                            </>
+
+                        ) : <></>}
+                        
+                        {(user?.user && user.user.authorities.includes("DM")) ? (
+                            <>
                             <li className="nav-item">
                                 <Link className='nav-link' to="/addcampaign">Add Campaign</Link>
                             </li>
                             </>
 
                         ) : <></>}
-                        
                          
                         <li className="nav-item">
                             <Link className="nav-link" to="/resources">Resources</Link>

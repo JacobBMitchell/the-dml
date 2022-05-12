@@ -164,7 +164,7 @@ function AddCharacter() {
                         <label className="form-label" htmlFor="str">Cha: </label>
                         <input type="number" className="form-control" id="cha" min="1" max="20" {...register("cha", {min: 1, max: 20} )}></input><br/><br/>
 
-                        <input type="submit" className="btn btn-primary"/>
+                        <input type="submit" className="btn btn-grey btn-secondary"/>
                     </form>
             </div>
             <div className="col"></div>

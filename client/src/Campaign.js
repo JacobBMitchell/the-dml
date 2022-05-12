@@ -70,7 +70,7 @@ function Campaign(props) {
             <h4>Notes:</h4>
             <p>{campaign.dmNotes}</p>
             <textarea id="article-input" type="text" className={isHidden ? "hidden" : ""}>{campaign.dmNotes}</textarea>
-            <button onClick={(ev) => editNotes(ev)}>{isHidden ? "Edit Notes" : "Save and Close"}</button>
+            <button className="btn btn-grey btn-secondary" onClick={(ev) => editNotes(ev)}>{isHidden ? "Edit Notes" : "Save and Close"}</button>
         </div>
         <div className="Players">
             <h4>Players:</h4>
