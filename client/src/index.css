@@ -181,3 +181,11 @@ form {
     max-height: 350px;
     max-width: 350px;
 }
+
+.regForm input[type=text] {
+    width: 16.66666667%;
+}
+
+.regForm input[type=password] {
+    width: 16.66666667%;
+}

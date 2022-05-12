@@ -101,11 +101,11 @@ function Registration({ errors, setErrors }) {
         </div>
         <form className="regForm" onSubmit={(ev) => submitHandler(ev)}>
             <label className="col-2" htmlFor="firstName">FirstName: </label>
-            <input onChange={change => setFirstName(change.target.value)} className="col-2" id="firstName" type="text"></input> <br></br>
+            <input onChange={change => setFirstName(change.target.value)} className="col-2 form-control" id="firstName" type="text"></input> <br></br>
             <label className="col-2" htmlFor="lastName">LastName: </label>
-            <input onChange={change => setLastName(change.target.value)} className="col-2" id="lastName" type="text"></input><br></br>
+            <input onChange={change => setLastName(change.target.value)} className="col-2 form-control" id="lastName" type="text"></input><br></br>
             <label className="col-2" htmlFor="email">Email: </label>
-            <input onChange={change => setUsername(change.target.value)} className="col-2" id="email" type="text"></input><br></br>
+            <input onChange={change => setUsername(change.target.value)} className="col-2 form-control" id="email" type="text"></input><br></br>
             <label className="col-2" htmlFor="password">Password: </label>
             <input onChange={change => {
                 setPassword(change.target.value);
@@ -114,10 +114,10 @@ function Registration({ errors, setErrors }) {
                         setCryted(hash);
                     });
                 });
-            }} className="col-2" id="password" type="password"></input><br></br>
+            }} className="col-2 form-control" id="password" type="password"></input><br></br>
             <label className="col-2" htmlFor="dm">DM: </label>
-            <input onClick={() => setDM(!dm)} type="checkbox" className="col-2" id="dm"></input><br></br><br></br>
-            <button>Submit</button>
+            <input onClick={() => setDM(!dm)} type="checkbox" className="col-2 form-check-input" id="dm"></input><br></br><br></br>
+            <button className="btn btn-grey btn-secondary">Submit</button>
         </form>
     </div>)
 }
