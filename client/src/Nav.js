@@ -40,11 +40,6 @@ function Nav() {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/characters">Characters</Link>
                                 </li>
-                            </>
-                        ) : <></>}
-
-                        {(user?.user && user.user.authorities.includes("ROLE_PLAYER")) ? (
-                            <>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/create">Add a Character</Link>
                                 </li>
@@ -56,18 +51,13 @@ function Nav() {
                             <li className="nav-item">
                                 <Link className="nav-link" to="/campaigns">Campaigns</Link>
                             </li>
-                            </>
-
-                        ) : <></>}
-                        
-                        {(user?.user && user.user.authorities.includes("ROLE_DM")) ? (
-                            <>
                             <li className="nav-item">
                                 <Link className='nav-link' to="/addcampaign">Add Campaign</Link>
                             </li>
                             </>
 
                         ) : <></>}
+                        
                          
                         <li className="nav-item">
                             <Link className="nav-link" to="/resources">Resources</Link>
