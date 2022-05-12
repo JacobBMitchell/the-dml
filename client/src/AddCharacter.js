@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { Navigate } from 'react-router-dom';
 
 function AddCharacter() {
 
@@ -63,6 +64,7 @@ function AddCharacter() {
         .then(response => {
             if(response.status == 201){
                 alert("Character created.");
+                Navigate("/characters");
             } else {
                 alert("Character couldn't be added.");
                 return response.json();

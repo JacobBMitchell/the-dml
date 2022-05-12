@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from 'react';
+import AuthContext from './AuthContext';
 
 function Campaign(props) {
 
     const apiUrl = window.API_URL;
+    const [user, setUser] = useContext(AuthContext);
     const {campaign} = props;
     const [isHidden, setIsHidden] = useState(true);
     const [players, setPlayers] = useState([]);
@@ -65,7 +67,12 @@ function Campaign(props) {
     return (
         <div className="campaign">
         <div className="info">
-            <h4>DM: {campaign.dmId}</h4>
+        {(user?.user && user.user.authorities.includes("ROLE_ADMIN")) ? (
+                    <>
+                        <h4>DM: {campaign.dmId}</h4>
+                    </>
+                ) : <></>}
+            
             <h4>Name: {campaign.campaignName}</h4>
             <h4>Notes:</h4>
             <p>{campaign.dmNotes}</p>
