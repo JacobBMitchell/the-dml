@@ -29,11 +29,11 @@
     margin: 10px;
     padding-left: 20px;
     vertical-align: top;
-    width: 40%;
+    width: 27%;
 }
 
 .edit-container{
-    width: 14% !important;
+    width: 9% !important;
     align-content: right;
 }
 
@@ -71,7 +71,7 @@ h1 {
     font-size: 300%;
     color: #f71735;
     background-color: #1d1818;
-    padding: 10px;
+    padding-left: 50px;
 }
 
 textarea {
